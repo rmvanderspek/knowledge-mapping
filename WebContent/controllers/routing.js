@@ -5,8 +5,12 @@ function emailRouteConfig($routeProvider, $locationProvider){
 		{
 			templateUrl: "views/home.html",
 			controller: "HomeCtrl"
+		}	
+	).when('/persoonlijk-profiel',
+		{
+			templateUrl: "views/persoonlijk-profiel.html",
+			controller: "PersoonlijkProfielCtrl"
 		}
-	
 	).otherwise(
 		{
 			redirectTo: "/"
