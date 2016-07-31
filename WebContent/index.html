@@ -8,18 +8,33 @@
 		<!-- Bootstrap -->
     	<link href="stylesheets/bootstrap.min.css" rel="stylesheet">
 		
-		<base href="http://localhost:8080/knowledge-mapping/" />
+		<!--  Let's keep refreshing possible, so next line is disabled: 
+		<base href="http://localhost:8080/knowledge-mapping/" /> 
+		-->
+		
 	</head>
 	
 	<body>
-		<br />
-		<ng-view></ng-view>
+		<div class = "container">
+			<div class="header clearfix">
+		        <nav ng-controller="NavCtrl">
+		          <ul class="nav nav-pills pull-right">
+		            <li role="presentation" ng-class="link0" ng-click="activate(0)"><a href="#">Persoonlijk Profiel</a></li>
+		            <li role="presentation" ng-class="link1" ng-click="activate(1)"><a href="#">Kennisprofielen</a></li>
+		          </ul>
+		        </nav>
+		        <h3 class="text-muted">Knowledge Mapping</h3>
+		      </div>
+			<ng-view></ng-view>
+			
+		</div>
+		
 		<!--  Load scripts -->
 	 	<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js" ng:autobind></script>
 	 	<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.js"></script>
 	 	<script src = "controllers/routing.js"></script>
 	 	<script src = "controllers/home-controller.js"></script>
-	 	
+	 	<script src = "controllers/nav-controller.js"></script>
 	 	
     
    	 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

@@ -11,7 +11,8 @@ function emailRouteConfig($routeProvider, $locationProvider){
 		{
 			redirectTo: "/"
 		});
-	$locationProvider.html5Mode({enabled: true, requireBase: false});
+	// Let's keep refreshing possible, so next line disabled:
+	//$locationProvider.html5Mode({enabled: true, requireBase: false});
 };
 
 // Bind the route configuration to the app module
