@@ -1,6 +1,6 @@
 var app = angular.module("Knowl", ["ngRoute"]);
 
-function emailRouteConfig($routeProvider, $locationProvider){
+function routeConfig($routeProvider, $locationProvider){
 	$routeProvider.when('/', 
 		{
 			templateUrl: "views/home.html",
@@ -15,12 +15,12 @@ function emailRouteConfig($routeProvider, $locationProvider){
 		{
 			redirectTo: "/"
 		});
-	// Let's keep refreshing possible, so next line disabled:
-	//$locationProvider.html5Mode({enabled: true, requireBase: false});
+	
+	$locationProvider.html5Mode({enabled: true, requireBase: false});
 };
 
 // Bind the route configuration to the app module
-app.config(emailRouteConfig);
+app.config(routeConfig);
 
 
 

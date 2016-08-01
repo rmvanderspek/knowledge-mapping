@@ -2,6 +2,7 @@ angular.module("Knowl").controller("NavCtrl",
 	function($scope) {
 	$scope.link0 = "active";
 	$scope.link1 = "";
+	$scope.link2 = "";
 	
 		// Change class to active when clicked
 		$scope.activate = function(option) {
