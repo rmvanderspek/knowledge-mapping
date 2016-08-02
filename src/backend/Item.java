@@ -1,12 +1,14 @@
 package backend;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "item")
+@XmlAccessorType(XmlAccessType.FIELD)
+
 public class Item {
-	@Id
-	@GeneratedValue
 	private int id;
 	private String sender;
 	private String receiver;
@@ -36,7 +38,7 @@ public class Item {
 	}
 		
 	public int getId(){
-		return id;
+		return this.id;
 	}
 	
 	public void setId(int id){
@@ -44,7 +46,7 @@ public class Item {
 	}
 
 	public String getSender() {
-		return sender;
+		return this.sender;
 	}
 
 	public void setSender(String sender) {
@@ -52,7 +54,7 @@ public class Item {
 	}
 
 	public String getReceiver() {
-		return receiver;
+		return this.receiver;
 	}
 
 	public void setReceiver(String receiver) {
@@ -60,7 +62,7 @@ public class Item {
 	}
 
 	public String getSubject() {
-		return subject;
+		return this.subject;
 	}
 
 	public void setSubject(String subject) {
@@ -68,7 +70,7 @@ public class Item {
 	}
 
 	public Date getDate() {
-		return date;
+		return this.date;
 	}
 
 	public void setDate(Date date) {
@@ -85,9 +87,10 @@ public class Item {
 	}
 	
 	public String getMessage(){
-		return message;
+		return this.message;
 	}
 
 	
 	
 }
+

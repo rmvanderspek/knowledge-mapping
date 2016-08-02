@@ -14,7 +14,7 @@ angular.module("Knowl").controller("NavCtrl",
 		// Add navigation option if user is a manager
 		$scope.showIfManager = function() {
 			if($scope.$parent.isManager()) {
-				$scope.managerNavigation='<li role="presentation" ng-class="link2" ng-click="activate(2)"><a href="">Kennisprofielen</a></li>');
+				$scope.managerNavigation='<li role="presentation" ng-class="link2" ng-click="activate(2)"><a href="">Kennisprofielen</a></li>';
 			}
 		}
 	
