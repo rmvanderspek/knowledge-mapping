@@ -1,8 +1,14 @@
 angular.module("Knowl").controller("NavCtrl",
 	function($scope) {
-	$scope.link0 = "active";
-	$scope.link1 = "";
-	$scope.link2 = "";
+		$scope.link0 = "active";
+		$scope.link1 = "";
+		$scope.link2 = "";
+		
+		// Change rol defined in main-controller
+		$scope.changeRole = function(argument) {
+			$scope.$parent.role = argument;
+			console.log($scope.$parent.role);
+		}
 	
 		// Change class to active when clicked
 		$scope.activate = function(option) {
