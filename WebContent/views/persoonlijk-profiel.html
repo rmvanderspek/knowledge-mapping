@@ -1,18 +1,26 @@
 <div class="jumbotron">
-		        <h1>Persoonlijk Profiel</h1>
-		        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-		        
-		    </div>
+	<h1>Persoonlijk Profiel</h1>
+
+	<p class="lead">Beheer hier al je kennis en vaardigheden. Volg en
+		bevorder je eigen ontwikkeling in het kennisprofiel wat bij jouw
+		functie past. Ontwikkel jezelf in kennisprofielen waar je ambities
+		liggen.</p>
+
+</div>
+
+<div class="row marketing">
+	<div class="col-lg-6">
+		<h4>Mijn kennisprofielen</h4>
+		<ul>
+			<li ng-repeat="profile in profiles"><a href="./profile/{{profile.id}}">{{profile.name}}</a></li>
+			<li><a href="profile">Overige competenties</a></li>
+		</ul>
+
+		<h4>Toevoegen</h4>
+		<ul>
+			<li><a href="./toevoegen/competentie">Competentie</a></li>
+			<li><a href="./toevoegen/kennisprofiel">Kennisprofiel</a></li>
+		</ul>
 		
-	      <div class="row marketing">
-	        <div class="col-lg-6">
-	          <h4>Subheading</h4>
-	          <p><a href="kennisprofielen">Kennisprofielen</a> <-- werkt als het goed is niet als user geen manager is</p>
-	
-	          <h4>Subheading</h4>
-	          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-	
-	          <h4>Subheading</h4>
-	          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-	        </div>
-	      </div>
+	</div>
+</div>

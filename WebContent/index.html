@@ -11,17 +11,17 @@
 		<base href="http://localhost:8080/knowledge-mapping/" />
 		
 		
+		
 	</head>
 	
 	<body>
 		<div class = "container" ng-controller="MainCtrl">
 			<div class="header clearfix">
-		        <nav ng-controller="NavCtrl" ng-cloack>
-		        <span ng-click="refresh()">refresh</span>
+		        <nav ng-controller="NavCtrl">
 		          <ul class="nav nav-pills pull-right">
 		          	<li role="presentation" ng-class="link0" ng-click="activate(0)"><a href="./">Home</a></li>
 		            <li role="presentation" ng-class="link1" ng-click="activate(1)"><a href="./persoonlijk-profiel">Persoonlijk Profiel</a></li>
-		            <li role="presentation" ng-class="link2" ng-click="activate(2)" ng-show="$parent.isManager()")><a href="">{{managerNavigation}}</a></li>
+		            <li role="presentation" ng-class="link2" ng-click="activate(2)" ng-show="$parent.isManager()")><a href="./kennisprofielen"><span ng-bind="managerNavigation" /></a></li>
 		            <li class="dropdown">
 					  	<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 					    	<span ng-bind="$parent.role" />
@@ -52,6 +52,8 @@
 		<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js" ng:autobind></script>
 	 	<!-- <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js" ng:autobind></script> -->
 	 	<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.js"></script>
+	 	
+	 	<!--  Load controllers  -->
 	 	<script src = "controllers/routing.js"></script>
 	 	<script src = "controllers/main-controller.js"></script>
 	 	<script src = "controllers/nav-controller.js"></script>

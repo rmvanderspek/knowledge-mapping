@@ -1,5 +1,5 @@
-angular.module("Knowl").controller("MainCtrl", 
-	function($scope) {
+angular.module("Knowl").controller("MainCtrl", ["$scope", "$location", "$rootScope", "$window",
+	function($scope, $location, $rootScope, $window) {
 		$scope.role = "Medewerker";
 		
 		$scope.isManager = function() {
@@ -8,6 +8,8 @@ angular.module("Knowl").controller("MainCtrl",
 			} else {
 				return false;
 			}
-		}			
+		}	
+		
+		
 	}
-);
+]);
