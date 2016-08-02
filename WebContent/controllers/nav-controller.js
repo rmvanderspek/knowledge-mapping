@@ -1,8 +1,9 @@
-angular.module("Knowl").controller("NavCtrl",
-	function($scope) {
+angular.module("Knowl").controller("NavCtrl", ["$scope", "$timeout", 
+	function($scope, $timeout) {
 		$scope.link0 = "active";
 		$scope.link1 = "";
 		$scope.link2 = "";
+		
 		
 		$scope.managerNavigation = "";
 		
@@ -12,9 +13,12 @@ angular.module("Knowl").controller("NavCtrl",
 		}
 		
 		// Add navigation option if user is a manager
-		$scope.showIfManager = function() {
+		$scope.setManagerMenu = function() {
 			if($scope.$parent.isManager()) {
-				$scope.managerNavigation='<li role="presentation" ng-class="link2" ng-click="activate(2)"><a href="">Kennisprofielen</a></li>';
+				$scope.managerNavigation = 'Kennisprofielen';
+				
+			} else {
+				$scope.managerNavigation = "";
 			}
 		}
 	
@@ -31,6 +35,16 @@ angular.module("Knowl").controller("NavCtrl",
 			} else if(option === 2) {
 				$scope.link2 = "active";
 			}
+			$timeout(function() {
+				$scope.$apply();
+			});
+			console.log($scope.link0);
+			
 		}
+		
+		$scope.refresh = function() {
+			console.log($scope.link0);
+		}
+		
 	}
-);
+]);

@@ -11,6 +11,11 @@ function routeConfig($routeProvider, $locationProvider){
 			templateUrl: "views/persoonlijk-profiel.html",
 			controller: "PersoonlijkProfielCtrl"
 		}
+	).when('/kennisprofielen',
+		{
+			templateUrl: "views/kennisprofielen.html",
+			controller: "KennisProfielenCtrl"
+		}
 	).otherwise(
 		{
 			redirectTo: "/"
