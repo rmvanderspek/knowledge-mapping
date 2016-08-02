@@ -4,10 +4,18 @@ angular.module("Knowl").controller("NavCtrl",
 		$scope.link1 = "";
 		$scope.link2 = "";
 		
+		$scope.managerNavigation = "";
+		
 		// Change rol defined in main-controller
 		$scope.changeRole = function(argument) {
 			$scope.$parent.role = argument;
-			console.log($scope.$parent.role);
+		}
+		
+		// Add navigation option if user is a manager
+		$scope.showIfManager = function() {
+			if($scope.$parent.isManager()) {
+				$scope.managerNavigation='<li role="presentation" ng-class="link2" ng-click="activate(2)"><a href="">Kennisprofielen</a></li>');
+			}
 		}
 	
 		// Change class to active when clicked

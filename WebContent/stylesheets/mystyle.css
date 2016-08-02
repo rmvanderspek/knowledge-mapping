@@ -1,5 +1,9 @@
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+[ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important;
+}
+
+.nav > li > a {
+  display: block;
 }
 
 /* Space out content a bit */

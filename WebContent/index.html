@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="Knowl" ng-cloack>
+<html ng-app="Knowl">
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Knowledge Mapping</title>
@@ -16,15 +16,14 @@
 	<body>
 		<div class = "container" ng-controller="MainCtrl">
 			<div class="header clearfix">
-		        <nav ng-controller="NavCtrl">
+		        <nav ng-controller="NavCtrl" ng-cloack>
 		          <ul class="nav nav-pills pull-right">
 		          	<li role="presentation" ng-class="link0" ng-click="activate(0)"><a href="./">Home</a></li>
+		            {{managerNavigation}}
 		            <li role="presentation" ng-class="link1" ng-click="activate(1)"><a href="./persoonlijk-profiel">Persoonlijk Profiel</a></li>
-		            <li role="presentation" ng-class="link2" ng-click="activate(2)"><a href="">Kennisprofielen</a></li>
-		            
 		            <li class="dropdown">
 					  	<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-					    	{{$parent.role}}
+					    	<span ng-bind="$parent.role" />
 					    	<span class="caret"></span>
 					  	</button>
 					  	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
