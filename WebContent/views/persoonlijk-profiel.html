@@ -11,7 +11,7 @@
 <div class="row marketing">
 	<div>
 		<h4>Mijn kennisprofielen</h4>
-		<ul>
+		<ul ng-init="getProfiles()">
 			<li ng-repeat="profile in profiles"><a href="./profiel/{{profile.id}}">{{profile.name}}</a></li>
 			<li><a href="profiel">Overige competenties</a></li>
 		</ul>
