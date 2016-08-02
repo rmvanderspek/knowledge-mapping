@@ -1,5 +1,5 @@
-angular.module("Knowl").controller("NavCtrl", ["$scope", "$timeout", 
-	function($scope, $timeout) {
+angular.module("Knowl").controller("NavCtrl", ["$scope", "$rootScope", 
+	function($scope, $rootScope) {
 		$scope.link0 = "active";
 		$scope.link1 = "";
 		$scope.link2 = "";
@@ -23,7 +23,7 @@ angular.module("Knowl").controller("NavCtrl", ["$scope", "$timeout",
 		}
 	
 		// Change class to active when clicked
-		$scope.activate = function(option) {
+		$rootScope.activate = function(option) {
 			$scope.link0 = "";
 			$scope.link1 = "";
 			$scope.link2 = "";
@@ -35,15 +35,8 @@ angular.module("Knowl").controller("NavCtrl", ["$scope", "$timeout",
 			} else if(option === 2) {
 				$scope.link2 = "active";
 			}
-			$timeout(function() {
-				$scope.$apply();
-			});
-			console.log($scope.link0);
 			
-		}
-		
-		$scope.refresh = function() {
-			console.log($scope.link0);
+			
 		}
 		
 	}

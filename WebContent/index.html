@@ -20,8 +20,8 @@
 		        <span ng-click="refresh()">refresh</span>
 		          <ul class="nav nav-pills pull-right">
 		          	<li role="presentation" ng-class="link0" ng-click="activate(0)"><a href="./">Home</a></li>
-		            <li role="presentation" ng-class="link2" ng-click="activate(2)" ng-show="$parent.isManager()")><a href="">{{managerNavigation}}</a></li>
 		            <li role="presentation" ng-class="link1" ng-click="activate(1)"><a href="./persoonlijk-profiel">Persoonlijk Profiel</a></li>
+		            <li role="presentation" ng-class="link2" ng-click="activate(2)" ng-show="$parent.isManager()")><a href="">{{managerNavigation}}</a></li>
 		            <li class="dropdown">
 					  	<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 					    	<span ng-bind="$parent.role" />
