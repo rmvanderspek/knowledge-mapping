@@ -3,6 +3,7 @@
 angular.module("Knowl").service("ProfilesService", ["$http", 
     function($http) {
 		var profiles = [];
+		var competences = [];
 		
 		// Mock array
 		if(profiles.length === 0) {
@@ -34,10 +35,59 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 			
 		}
 		
+		// Mock array part II
+		if(competences.length === 0) {
+			competences = [ {
+				name : "OCA",
+				description: "Het behalen van OCA certificering.",
+				profile_id : 1
+			}, {
+				name : "OCP",
+				description: "Het behalen van OCP certificering.",
+				profile_id : 1
+			}, {
+				name : "REST",
+				description: "Kunnen werken met REST.",
+				profile_id : 1
+			}, {
+				name : "XML",
+				description: "Kunnen werken met XML.",
+				profile_id : 1
+			}, {
+				name : "Leiderschap",
+				description: "Het kunnen geven van leiding aan groepen.",
+				id : 8
+			}, {
+				name : "SCRUM/Agile",
+				description: "Het kunnen werken met SCRUM.",
+				profile_id : 1
+			} ];
+			
+	//		 As long as this doesn't work return a mock-array
+	//		 $http({method : 'GET', url : "resources/personalcompetences?userid=3333"})
+	//		 .success(function(data, status) {
+	//		 return data;
+	//		 })
+	//		 .error(function(data, status) {
+	//		 alert("Error");
+	//		 });
+			
+			
+		}
+		
 		return {
 	        getProfiles: function() {
 	        	return profiles;
-	        }
+	        },
+			getCompetences: function(profile_id) {
+				var newArray = [];
+				for(var i = 0; i < competences.length; i++) {
+					if(competences[i].profile_id === profile_id) {
+						newArray.push(competences[i]);
+					}
+				}
+				return newArray;
+			}
 	    };
 	}
 ]);
