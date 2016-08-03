@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 
 import backend.Competence;
 import backend.DatabaseConnector;
+import backend.PersonalCompetenceLevel;
 import backend.Profile;
 
 @Path("getusercompetences")
@@ -19,10 +20,10 @@ public class GetCompetencesFromUser{
     
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<Competence> getUserCompetences() {
+	public ArrayList<PersonalCompetenceLevel> getUserCompetences() {
 		DatabaseConnector db = new DatabaseConnector();
 		System.out.println("De db connector: " + db);
-		ArrayList<Competence> competences = db.getUserCompentences(userId);
+		ArrayList<PersonalCompetenceLevel> competences = db.getUserCompetences(userId);
 		System.out.println("dit is het: "+ competences);
 		return competences;
 	}
