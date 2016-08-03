@@ -9,18 +9,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class PersonalCompetenceLevel {
 	private int id;
 	private int competenceId;
-	private int level;
+	private int competenceLevel;
 	private int personId;
 	
 	public PersonalCompetenceLevel(){
 		
 	}
 	
-	public PersonalCompetenceLevel(int id, int competenceId, int level, int personId){
+	public PersonalCompetenceLevel(int id, int competenceId, int competenceLevel, int personId){
 		
 	}
 	
-	public PersonalCompetenceLevel(int competenceId, int level, int personId){
+	public PersonalCompetenceLevel(int competenceId, int competenceLevel, int personId){
 		
 	}
 
@@ -40,12 +40,12 @@ public class PersonalCompetenceLevel {
 		this.competenceId = competenceId;
 	}
 
-	public int getLevel() {
-		return level;
+	public int getCompetenceLevel() {
+		return competenceLevel;
 	}
 
-	public void setLevel(int level) {
-		this.level = level;
+	public void setCompetenceLevel(int competenceLevel) {
+		this.competenceLevel = competenceLevel;
 	}
 
 	public int getPersonId() {
