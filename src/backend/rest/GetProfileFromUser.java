@@ -1,7 +1,6 @@
 package backend.rest;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
