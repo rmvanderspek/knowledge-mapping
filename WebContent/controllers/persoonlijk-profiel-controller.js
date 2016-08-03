@@ -22,6 +22,5 @@ angular.module("Knowl").controller("PersoonlijkProfielCtrl", ["$scope", "$routeP
 			}
 		}
 		
-
 	} 
 ]);

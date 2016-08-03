@@ -4,12 +4,14 @@ angular.module("Knowl").service("ProfilesService", ["$http",
     function($http) {
 		var profiles = [];
 		var competences = [];
+		var loaded = false;
 		
 		
 			 $http({method : 'GET', url : "resources/profiles"})
 			 	.success(function(data, status) {
 			 		profiles = data.profile;
 			 		console.log(profiles);
+			 		loaded = true;
 			 		return data;
 			 })
 			 	.error(function(data, status) {
