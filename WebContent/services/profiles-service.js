@@ -6,7 +6,6 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 		var user = "hli24213";
 
 		var competences = [];
-		var loaded = false;
 		
 		
 			 $http({
@@ -15,8 +14,6 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 				 params: {"userid" : user }})
 			 	.success(function(data, status) {
 			 		profiles = data.profile;
-			 		
-			 		loaded = true;
 			 		return data;
 			 })
 			 	.error(function(data, status) {
@@ -82,10 +79,11 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 				var newArray = [];
 				for(var i = 0; i < competences.length; i++) {
 					
-					if(competences[i].profile_id === profile_id) {
+					if(competences[i].profile_id === parseInt(profile_id)) {
 						newArray.push(competences[i]);
 					}
 				}
+				
 				return newArray;
 			}
 	    };
