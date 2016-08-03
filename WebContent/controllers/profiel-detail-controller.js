@@ -5,6 +5,7 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 		$scope.profileDetails = [];
 		$scope.competences = ProfilesService.getCompetences($scope.id);
 		
+		console.log($scope.profiles);
 		for(var i = 0; i < $scope.profiles.length; i++) {
 			if($scope.profiles[i].id == $scope.id) {
 				$scope.profileDetails = $scope.profiles[i];
