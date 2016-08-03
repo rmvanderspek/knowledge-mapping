@@ -121,7 +121,7 @@ public class DatabaseConnector {
     	PersonalProfile personalProfile = null;
     	
     	PreparedStatement pstmt = null;
-    	String query = ""
+    	String query = "";
     	
     	return personalProfile;
     }
