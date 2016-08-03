@@ -9,18 +9,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class PersonalProfile {
 	private int id;
 	private int profileId;
+	private String userId;
 	
 	public PersonalProfile(){
 		
 	}
 	
-	public PersonalProfile(int id, int profileId){
+	public PersonalProfile(int id, int profileId, String userId){
 		this.id = id;
 		this.profileId = profileId;
+		this.userId = userId;
 	}
 	
-	public PersonalProfile(int profileId){
+	public PersonalProfile(int profileId, String userId){
 		this.profileId = profileId;
+		this.userId = userId;
 	}
 
 	public int getId() {
@@ -37,6 +40,14 @@ public class PersonalProfile {
 
 	public void setProfileId(int profileId) {
 		this.profileId = profileId;
+	}
+	
+	public String getUserId(){
+		return userId;
+	}
+	
+	public void setUserId(String userId){
+		this.userId = userId;
 	}
 
 }

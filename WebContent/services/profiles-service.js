@@ -3,7 +3,7 @@
 angular.module("Knowl").service("ProfilesService", ["$http", 
     function($http) {
 		var profiles = [];
-		
+		var user = "hli24213";
 		// Mock array
 //		if(profiles.length === 0) {
 //			profiles = [ {
@@ -25,7 +25,10 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 //			 As long as this doesn't work return a mock-array
 		
 		
-			 $http({method : 'GET', url : "resources/profiles"})
+			 $http({
+				 method : 'GET', 
+				 url : "resources/getuserprofile/",
+				 params: {"userid" : user }})
 			 	.success(function(data, status) {
 			 		profiles = data.profile;
 			 		console.log(profiles);

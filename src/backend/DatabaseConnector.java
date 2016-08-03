@@ -118,30 +118,31 @@ public class DatabaseConnector {
     	return person;
     }
     
-    //Method to get personal profile from table by id
-    public PersonalProfile getPersonalProfile(int id){
-    	PersonalProfile personalProfile = null;
+    //Method to get personal profiles from table
+    public ArrayList<PersonalProfile> getPersonalProfiles(){
+    	ArrayList<PersonalProfile> personalProfiles = new ArrayList<PersonalProfile>();
     	
     	PreparedStatement pstmt = null;
-    	String query = "SELECT * FROM Personal_profile WHERE id = ?";
+    	String query = "SELECT * FROM Personal_profile";
     	ResultSet rs = null;
     	
     	try {
     		pstmt = conn.prepareStatement(query);
-    		pstmt.setInt(1, id);
     		rs = pstmt.executeQuery();
     		
     		while (rs.next()){
+    			int id = rs.getInt(1);
     			int profileId = rs.getInt(2);
+    			String userId = rs.getString(3);
     			
-    			personalProfile = new PersonalProfile(id, profileId);
+    			personalProfiles.add(new PersonalProfile(id, profileId, userId));
     		}
     	} 
     	catch(SQLException e){
     		e.printStackTrace();
-    		return personalProfile;
+    		return personalProfiles;
     	}
-    	return personalProfile;
+    	return personalProfiles;
     }
     
     //Method to get Profile from table by id
@@ -149,7 +150,7 @@ public class DatabaseConnector {
     	Profile profile = null;
     	
     	PreparedStatement pstmt = null;
-    	String query = "SELECT * FROM Profiles WHERE id = ?";
+    	String query = "SELECT * FROM Profiles WHERE id LIKE ?";
     	ResultSet rs = null;
     	
     	try {
@@ -172,6 +173,20 @@ public class DatabaseConnector {
     	return profile;
     }
     
+    public ArrayList<Profile> getUserProfiles(String userId){
+    	ArrayList<PersonalProfile> personalProfiles = getPersonalProfiles();
+    	ArrayList<Profile> personProfiles = new ArrayList<Profile>();
+    	for(int i = 0; i < personalProfiles.size(); i++){
+    		PersonalProfile pp = personalProfiles.get(i);
+    		if(pp.getUserId().equals(userId)){
+    			System.out.println(pp.getUserId());
+    			personProfiles.add(getProfile(pp.getProfileId()));
+    		}
+    	}
+    	return personProfiles;
+    }
+    
+    //Method to get list of all Profiles
     public ArrayList<Profile> getProfiles(){
     	ArrayList<Profile> profiles = new ArrayList<Profile>();
     	
@@ -203,10 +218,7 @@ public class DatabaseConnector {
     
     public static void main(String[] args) throws SQLException{
     	DatabaseConnector dbc = new DatabaseConnector();
-    	System.out.println(dbc.getPerson("hli24213"));
-    	System.out.println(dbc.getPersonalProfile(1));
-    	System.out.println(dbc.getProfile(1));
-    	System.out.println(dbc.getProfiles());
+    	System.out.println(dbc.getUserProfiles("hli24213"));
     }
     
 }
