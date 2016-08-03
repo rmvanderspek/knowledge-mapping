@@ -30,31 +30,37 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 				name : "OCA",
 				description: "Het behalen van OCA certificering.",
 				profile_id : 1,
+				id : 0,
 				level : 100
 			}, {
 				name : "OCP",
 				description: "Het behalen van OCP certificering.",
 				profile_id : 1,
+				id : 1,
 				level : 100
 			}, {
 				name : "REST",
 				description: "Kunnen werken met REST.",
 				profile_id : 1,
+				id : 2,
 				level : 60
 			}, {
 				name : "XML",
 				description: "Kunnen werken met XML.",
 				profile_id : 1,
+				id : 3,
 				level : 20
 			}, {
 				name : "Leiderschap",
 				description: "Het kunnen geven van leiding aan groepen.",
 				profile_id : 8,
+				id : 4,
 				level : 80
 			}, {
 				name : "SCRUM/Agile",
 				description: "Het kunnen werken met SCRUM.",
 				profile_id : 1,
+				id : 5,
 				level : 40
 			} ];
 			
