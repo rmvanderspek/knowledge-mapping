@@ -66,7 +66,7 @@ public class DatabaseConnector {
     //Method to add person to persons table
     public boolean addPerson(Person person){
     	
-    	int userId = person.getUserId();
+    	String userId = person.getUserId();
     	String firstName = person.getFirstName();
     	String lastName = person.getLastName();
     	int personalProfileId = person.getPersonalProfileId();
@@ -76,7 +76,7 @@ public class DatabaseConnector {
     	
     	try {
     		pstmt = conn.prepareStatement(query);
-    		pstmt.setInt(1, userId);
+    		pstmt.setString(1, userId);
     		pstmt.setString(2, firstName);
     		pstmt.setString(3, lastName);
     		pstmt.setInt(4, personalProfileId);
@@ -89,9 +89,37 @@ public class DatabaseConnector {
     	return true;
     }
 
+    public Person getPerson(String userId){
+    	Person person = null;
+    	
+    	PreparedStatement pstmt = null;
+    	String query = "SELECT * FROM Persons WHERE userId LIKE ?";
+    	ResultSet rs = null;
+    	try {
+    		pstmt = conn.prepareStatement(query);
+    		pstmt.setString(1,  userId);
+    		rs = pstmt.executeQuery();
+    		
+    		while(rs.next()){
+    			int id = rs.getInt(1);
+    			String firstname = rs.getString(2);
+    			String lastname = rs.getString(3);
+    			String userid = rs.getString(4);
+    			int profileId = rs.getInt(5);
+    			
+    			person = new Person(id, firstname, lastname, userid, profileId);
+    		}
+    	}
+    	catch(SQLException e){
+    		e.printStackTrace();
+    		return person;
+    	}
+    	return person;
+    }
+    
     public static void main(String[] args) throws SQLException{
     	DatabaseConnector dbc = new DatabaseConnector();
-
+    	System.out.println(dbc.getPerson("hli24123"));
     	
     }
     

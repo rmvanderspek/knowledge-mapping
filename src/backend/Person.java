@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 public class Person {
 	private int id;
-	private int userId;
+	private String userId;
 	private String firstName;
 	private String lastName;
 	private int personalProfileId;
@@ -17,11 +17,11 @@ public class Person {
 		
 	}
 	
-	public Person(int id, int userId, String firstName, String lastName, int personalProfileId){
+	public Person(int id, String userId, String firstName, String lastName, int personalProfileId){
 		
 	}
 	
-	public Person(int userId, String firstName, String lastName, int personalProfileId){
+	public Person(String userId, String firstName, String lastName, int personalProfileId){
 		
 	}
 	
@@ -33,11 +33,11 @@ public class Person {
 		this.id = id;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
