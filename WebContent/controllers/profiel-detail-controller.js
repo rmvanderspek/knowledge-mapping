@@ -1,16 +1,14 @@
 angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams", "ProfilesService",
     function($scope, $routeParams, ProfilesService) {
 		$scope.profiles = ProfilesService.getProfiles();
-		$scope.id = $routeParams.id;
+		$scope.id = parseInt($routeParams.id);
 		
 		$scope.competences = ProfilesService.getCompetences($scope.id);
 		
 		$scope.getProfileDetails = function() {
 			for(var i = 0; i < $scope.profiles.length; i++) {
-	
-				if($scope.profiles[i].id == $scope.id) {
-					$scope.profileDetails = $scope.profiles[i];
-					return;
+				if(parseInt($scope.profiles[i].id) === $scope.id) {
+					return $scope.profiles[i];;
 				}
 			}
 		}
