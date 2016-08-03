@@ -117,6 +117,15 @@ public class DatabaseConnector {
     	return person;
     }
     
+    public PersonalProfile getPersonalProfile(int id){
+    	PersonalProfile personalProfile = null;
+    	
+    	PreparedStatement pstmt = null;
+    	String query = ""
+    	
+    	return personalProfile;
+    }
+    
     public static void main(String[] args) throws SQLException{
     	DatabaseConnector dbc = new DatabaseConnector();
     	System.out.println(dbc.getPerson("hli24123"));
