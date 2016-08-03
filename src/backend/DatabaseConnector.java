@@ -173,6 +173,7 @@ public class DatabaseConnector {
     	return profile;
     }
     
+    //Method to get profiles from user
     public ArrayList<Profile> getUserProfiles(String userId){
     	ArrayList<PersonalProfile> personalProfiles = getPersonalProfiles();
     	ArrayList<Profile> personProfiles = new ArrayList<Profile>();
@@ -216,9 +217,91 @@ public class DatabaseConnector {
     	return profiles;
     }
     
+    //Method to get competences from user
+    public ArrayList<PersonalCompetenceLevel> getUserCompetences(String userId){
+    	ArrayList<PersonalCompetenceLevel> competences = new ArrayList<PersonalCompetenceLevel>();
+    	
+    	PreparedStatement pstmt = null;
+    	String query = "SELECT * FROM Personal_competence_level where person_id = ?";
+    	ResultSet rs = null;
+    	
+    	try {
+    		pstmt = conn.prepareStatement(query);
+    		rs = pstmt.executeQuery();
+    		
+    		while (rs.next()){
+    			int id = rs.getInt(1);
+    			int competenceId = rs.getInt(2);
+    			int competenceLevel = rs.getInt(3);
+    			int personId = rs.getInt(4);
+    			
+    			competences.add(new PersonalCompetenceLevel(id, competenceId, competenceLevel, personId));
+    		}
+    	}
+    	catch(SQLException e){
+    		e.printStackTrace();
+    		return competences;
+    	}
+    	return competences;
+    }
+    
+    //Method to get all profile competences
+    public ArrayList<ProfileCompetences> getProfileCompetences(){
+    	ArrayList<ProfileCompetences> profileCompetences = new ArrayList<ProfileCompetences>();
+    	
+    	PreparedStatement pstmt = null;
+    	String query = "SELECT * FROM Profile_competence_table";
+    	ResultSet rs = null;
+    	
+    	try {
+    		pstmt = conn.prepareStatement(query);
+    		rs = pstmt.executeQuery();
+    		
+    		while (rs.next()){
+    			int id = rs.getInt(1);
+    			int profileId = rs.getInt(2);
+    			int competence = rs.getInt(3);
+    			
+    			profileCompetences.add(new ProfileCompetences(id, profileId, competence));
+    		}
+    	} 
+    	catch(SQLException e){
+    		e.printStackTrace();
+    		return profileCompetences;
+    	}
+    	return profileCompetences;
+    }
+    
+    //Method to get all competences
+    public ArrayList<Competence> getCompetences(){
+    	ArrayList<Competence> competences = new ArrayList<Competence>();
+    	
+    	PreparedStatement pstmt = null;
+    	String query = "SELECT * FROM Competences";
+    	ResultSet rs = null;
+    	
+    	try {
+    		pstmt = conn.prepareStatement(query);
+    		rs = pstmt.executeQuery();
+    		
+    		while (rs.next()){
+    			int id = rs.getInt(1);
+    			String name = rs.getString(2);
+    			
+    			competences.add(new Competence(id, name));
+    		}
+    	}
+    	catch(SQLException e){
+    		e.printStackTrace();
+    		return competences;
+    	}
+    	return competences;
+    }
+    
     public static void main(String[] args) throws SQLException{
     	DatabaseConnector dbc = new DatabaseConnector();
     	System.out.println(dbc.getUserProfiles("hli24213"));
+    	
     }
     
 }
