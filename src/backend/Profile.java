@@ -10,20 +10,23 @@ public class Profile {
 	private int id;
 	private String name;
 	private int profileCompetenceTableId;
+	private String description;
 	
 	public Profile(){
 		
 	}
 	
-	public Profile(int id, String name, int profileCompetenceTableId){
+	public Profile(int id, String name, int profileCompetenceTableId, String description){
 		this.id = id;
 		this.name = name;
 		this.profileCompetenceTableId = profileCompetenceTableId;
+		this.description = description;
 	}
 	
-	public Profile(String name, int profileCompetenceTableId){
+	public Profile(String name, int profileCompetenceTableId, String description){
 		this.name = name;
 		this.profileCompetenceTableId = profileCompetenceTableId;
+		this.description = description;
 	}
 
 	public int getId() {
@@ -50,6 +53,13 @@ public class Profile {
 		this.profileCompetenceTableId = profileCompetenceTableId;
 	}
 
+	public String getDescription(){
+		return description;
+	}
+	
+	public void setDescription(String description){
+		this.description = description;
+	}
 
 	
 }
