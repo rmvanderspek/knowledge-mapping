@@ -29,7 +29,7 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 			 	.success(function(data, status) {
 			 		profiles = data.profile;
 			 		console.log(profiles);
-			 		//return data;
+			 		return data;
 			 })
 			 	.error(function(data, status) {
 			 		alert("Error");

@@ -1,7 +1,7 @@
 package backend;
 
 import java.sql.*;
-
+import java.util.ArrayList;
 import java.util.Properties;
 
 
@@ -172,11 +172,41 @@ public class DatabaseConnector {
     	return profile;
     }
     
+    public ArrayList<Profile> getProfiles(){
+    	ArrayList<Profile> profiles = new ArrayList<Profile>();
+    	
+    	PreparedStatement pstmt = null;
+    	String query = "SELECT * FROM Profiles";
+    	ResultSet rs = null;
+    	
+    	try {
+    		pstmt = conn.prepareStatement(query);
+    		rs = pstmt.executeQuery();
+    		
+    		while (rs.next()){
+    			int id = rs.getInt(1);
+    			String name = rs.getString(2);
+    			int profileCompetenceId = rs.getInt(3);
+    			String description = rs.getString(4);
+    			
+    			profiles.add(new Profile(id, name, profileCompetenceId, description));
+    			System.out.println(profiles);
+    			
+    		}
+    	}
+    	catch(SQLException e){
+    		e.printStackTrace();
+    		return profiles;
+    	}
+    	return profiles;
+    }
+    
     public static void main(String[] args) throws SQLException{
     	DatabaseConnector dbc = new DatabaseConnector();
-    	System.out.println(dbc.getPerson("hli24123"));
+    	System.out.println(dbc.getPerson("hli24213"));
     	System.out.println(dbc.getPersonalProfile(1));
     	System.out.println(dbc.getProfile(1));
+    	System.out.println(dbc.getProfiles());
     }
     
 }
