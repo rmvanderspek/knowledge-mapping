@@ -2,13 +2,12 @@
 	<h1>{{profileDetails.name}}</h1>
 
 	<p class="lead">{{profileDetails.description}}</p>
-
 </div>
 
 <div class="row marketing">
 	<div>
 		<h4>Competenties</h4>
-		<div ng-repeat="competence in getCompetences(profileDetails.id)" >
+		<div ng-repeat="competence in competences" >
 			
 			<div class="progress">
 				

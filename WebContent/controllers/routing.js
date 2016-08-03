@@ -13,8 +13,8 @@ function routeConfig($routeProvider, $locationProvider){
 		}
 	).when('/profiel/:id', 
 		{
-			templateUrl: "views/profiel.html",
-			controller: "PersoonlijkProfielCtrl"
+			templateUrl: "views/profiel-detail.html",
+			controller: "ProfielDetailCtrl"
 		}
 	).when('/kennisprofielen',
 		{

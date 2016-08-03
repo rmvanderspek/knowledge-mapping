@@ -6,7 +6,6 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 		var user = "hli24213";
 
 		var competences = [];
-		var loaded = false;
 		
 		
 			 $http({
@@ -15,8 +14,6 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 				 params: {"userid" : user }})
 			 	.success(function(data, status) {
 			 		profiles = data.profile;
-			 		console.log(profiles);
-			 		loaded = true;
 			 		return data;
 			 })
 			 	.error(function(data, status) {
@@ -32,22 +29,22 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 			competences = [ {
 				name : "OCA",
 				description: "Het behalen van OCA certificering.",
-				profile_id : 0,
+				profile_id : 1,
 				level : 100
 			}, {
 				name : "OCP",
 				description: "Het behalen van OCP certificering.",
-				profile_id : 0,
+				profile_id : 1,
 				level : 100
 			}, {
 				name : "REST",
 				description: "Kunnen werken met REST.",
-				profile_id : 0,
+				profile_id : 1,
 				level : 60
 			}, {
 				name : "XML",
 				description: "Kunnen werken met XML.",
-				profile_id : 0,
+				profile_id : 1,
 				level : 20
 			}, {
 				name : "Leiderschap",
@@ -57,7 +54,7 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 			}, {
 				name : "SCRUM/Agile",
 				description: "Het kunnen werken met SCRUM.",
-				profile_id : 0,
+				profile_id : 1,
 				level : 40
 			} ];
 			
@@ -78,12 +75,15 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 	        	return profiles;
 	        },
 			getCompetences: function(profile_id) {
+				
 				var newArray = [];
 				for(var i = 0; i < competences.length; i++) {
-					if(competences[i].profile_id === profile_id) {
+					
+					if(competences[i].profile_id === parseInt(profile_id)) {
 						newArray.push(competences[i]);
 					}
 				}
+				
 				return newArray;
 			}
 	    };
