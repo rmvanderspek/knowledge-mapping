@@ -2,7 +2,7 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
     function($scope, $routeParams, ProfilesService) {
 		$scope.profiles = ProfilesService.getProfiles();
 		$scope.id = $routeParams.id;
-		$scope.profileDetails = [];
+		$scope.profileDetails = $scope.getProfileDetails();
 		$scope.competences = ProfilesService.getCompetences($scope.id);
 		
 		console.log($scope.profiles);
@@ -11,6 +11,14 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 				$scope.profileDetails = $scope.profiles[i];
 				return;
 			}
+		$scope.getProfileDetails = function() {
+//			for(var i = 0; i < $scope.profiles.length; i++) {
+//	
+//				if($scope.profiles[i].id == $scope.id) {
+//					$scope.profileDetails = $scope.profiles[i];
+//					return;
+//				}
+//			}
 		}
 		
 		$scope.getBarClass = function(level) {
