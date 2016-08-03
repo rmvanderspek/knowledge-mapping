@@ -89,6 +89,7 @@ public class DatabaseConnector {
     	return true;
     }
 
+    //Method to get Person from table by user id
     public Person getPerson(String userId){
     	Person person = null;
     	
@@ -117,19 +118,65 @@ public class DatabaseConnector {
     	return person;
     }
     
+    //Method to get personal profile from table by id
     public PersonalProfile getPersonalProfile(int id){
     	PersonalProfile personalProfile = null;
     	
     	PreparedStatement pstmt = null;
-    	String query = "";
+    	String query = "SELECT * FROM Personal_profile WHERE id = ?";
+    	ResultSet rs = null;
     	
+    	try {
+    		pstmt = conn.prepareStatement(query);
+    		pstmt.setInt(1, id);
+    		rs = pstmt.executeQuery();
+    		
+    		while (rs.next()){
+    			int profileId = rs.getInt(2);
+    			
+    			personalProfile = new PersonalProfile(id, profileId);
+    		}
+    	} 
+    	catch(SQLException e){
+    		e.printStackTrace();
+    		return personalProfile;
+    	}
     	return personalProfile;
+    }
+    
+    //Method to get Profile from table by id
+    public Profile getProfile(int id){
+    	Profile profile = null;
+    	
+    	PreparedStatement pstmt = null;
+    	String query = "SELECT * FROM Profiles WHERE id = ?";
+    	ResultSet rs = null;
+    	
+    	try {
+    		pstmt = conn.prepareStatement(query);
+    		pstmt.setInt(1, id);
+    		rs = pstmt.executeQuery();
+    		
+    		while (rs.next()){
+    			String name = rs.getString(2);
+    			int profileCompetenceId = rs.getInt(3);
+    			String description = rs.getString(4);
+    			
+    			profile = new Profile(id, name, profileCompetenceId, description);
+    		}
+    	}
+    	catch(SQLException e){
+    		e.printStackTrace();
+    		return profile;
+    	}
+    	return profile;
     }
     
     public static void main(String[] args) throws SQLException{
     	DatabaseConnector dbc = new DatabaseConnector();
     	System.out.println(dbc.getPerson("hli24123"));
-    	
+    	System.out.println(dbc.getPersonalProfile(1));
+    	System.out.println(dbc.getProfile(1));
     }
     
 }
