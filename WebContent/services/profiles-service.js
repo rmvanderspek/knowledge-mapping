@@ -3,6 +3,7 @@
 angular.module("Knowl").service("ProfilesService", ["$http", 
     function($http) {
 		var profiles = [];
+		var allProfiles = [];
 		var user = "rsp21473";
 
 		var competences = [];
@@ -11,7 +12,18 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 		
 		
 		connect = function(username){
-			 $http({
+			$http({
+				 method : 'GET', 
+				 url : "resources/profiles/"})
+			 	.success(function(data, status) {
+			 		allProfiles = data.profile;
+			 		return data;
+			 })
+			 	.error(function(data, status) {
+			 		alert("Error");
+			 });
+			
+			$http({
 				 method : 'GET', 
 				 url : "resources/getuserprofile/",
 				 params: {"userid" : username }})
@@ -147,6 +159,9 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 			},
 			getUserCompetences: function() {
 				return usercompetences;
+			},
+			getAllProfiles: function() {
+				return allProfiles;
 			}
 	    };
 	}

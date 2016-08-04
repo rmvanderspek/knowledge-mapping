@@ -43,7 +43,26 @@
 					<hr></hr>
 				</div>
 			</li>
-			<li><a href="./toevoegen/kennisprofiel">Kennisprofiel</a></li>
+			<li><a href="" ng-click="showAddKnowledgeProfile()">Kennisprofiel</a>
+				<div ng-show="popAddKnowledgeProfile">
+					<hr></hr>
+					<div class="row form-margin" ng-init="select(0)">
+						<div class="btn-group col-sm-12">
+							<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    {{selected}} <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li ng-repeat="profile in allProfiles"><a href="" ng-click="select($index)">{{profile.name}}</a></li>
+							    
+							</ul>
+						</div>
+					</div>
+					<div class="row form-margin">
+						<div class="col-sm-12"><button class="btn btn-sm btn-warning" ng-click="add()">Toevoegen</button></div>
+					</div>
+					<hr></hr>
+				</div>
+			</li>
 		</ul>
 		
 	</div>
