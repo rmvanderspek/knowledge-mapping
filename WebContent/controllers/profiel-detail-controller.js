@@ -28,7 +28,7 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 					return $scope.competences[i];
 				}
 			}
-		}
+		};
 		
 		$scope.getCompetences = function(){
 			var showcompetences = [];
@@ -43,15 +43,15 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 						 showcompetences.push({
 							 name : competence.name,
 							 description : competence.description,
-							 level : $scope.userCompetences[i].competenceLevel,
-							 id : $scope.userCompetences[i].competenceId
+							 level : parseInt($scope.userCompetences[i].competenceLevel),
+							 id : parseInt($scope.userCompetences[i].competenceId)
 							 });
 						 console.log(showcompetences);
 					 }
 				 }
 			 }
 			 return showcompetences;
-		}
+		};
 		
 		$scope.showCompetences = $scope.getCompetences();
 	
@@ -69,7 +69,7 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 				return "progress-bar progress-bar-success progress-bar-striped";
 			}
 
-		}
+		};
 		
 		$scope.decrease = function(id) {
 			for(var i = 0; i < $scope.competences.length; i++) {
@@ -79,7 +79,7 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 					return;
 				}
 			}
-		}
+		};
 		
 		$scope.increase = function(id) {
 			for(var i = 0; i < $scope.competences.length; i++) {
@@ -89,6 +89,6 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 					return;
 				}
 			}
-		}
+		};
 	} 
 ]);
