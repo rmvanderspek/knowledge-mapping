@@ -22,4 +22,4 @@ public class GetCompetences{
 		System.out.println("dit is het: "+ competences);
 		return competences;
 	}
-}
+}	

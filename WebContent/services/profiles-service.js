@@ -6,6 +6,9 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 		var user = "hli24213";
 
 		var competences = [];
+		var profilecompetences = [];
+		var usercompetences = [];
+		
 		
 		
 			 $http({
@@ -20,10 +23,46 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 			 		alert("Error");
 			 });
 			
-
+			 $http({
+				 method : 'GET', 
+				 url : "resources/getcompetences/"})
+			 	.success(function(data, status) {
+			 		competences = data.profile;
+			 		console.log(competences);
+			 		return data;
+			 })
+			 	.error(function(data, status) {
+			 		alert("Error");
+			 });
 			
-		
-		
+			 $http({
+				 method : 'GET', 
+				 url : "resources/getprofilecompetences/"})
+			 	.success(function(data, status) {
+			 		profilecompetences = data.profile;
+			 		console.log(profilecompetences);
+			 		return data;
+			 })
+			 	.error(function(data, status) {
+			 		alert("Error");
+			 });
+			 
+			 $http({
+				 method : 'GET', 
+				 url : "resources/getusercompetences/",
+				 params: {"userid" : user }})
+			 	.success(function(data, status) {
+			 		usercompetences = data.profile;
+			 		console.log(usercompetences);
+			 		return data;
+			 })
+			 	.error(function(data, status) {
+			 		alert("Error");
+			 });
+
+			 
+
+			 
 		// Mock array part II
 		if(competences.length === 0) {
 			competences = [ {
@@ -75,16 +114,13 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 	        	return profiles;
 	        },
 			getCompetences: function(profile_id) {
-				
-				var newArray = [];
-				for(var i = 0; i < competences.length; i++) {
-					
-					if(competences[i].profile_id === parseInt(profile_id)) {
-						newArray.push(competences[i]);
-					}
-				}
-				
-				return newArray;
+				return competences;
+			},
+			getProfileCompetences: function() {
+				return profilecompetences;
+			},
+			getUserCompetences: function() {
+				return usercompetences;
 			}
 	    };
 	}

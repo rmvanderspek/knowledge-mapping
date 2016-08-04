@@ -10,18 +10,23 @@ public class PersonalCompetenceLevel {
 	private int id;
 	private int competenceId;
 	private int competenceLevel;
-	private int personId;
+	private String personId;
 	
 	public PersonalCompetenceLevel(){
 		
 	}
 	
-	public PersonalCompetenceLevel(int id, int competenceId, int competenceLevel, int personId){
-		
+	public PersonalCompetenceLevel(int id, int competenceId, int competenceLevel, String personId){
+		this.id = id;
+		this.competenceId = competenceId;
+		this.competenceLevel = competenceLevel;
+		this.personId = personId;
 	}
 	
-	public PersonalCompetenceLevel(int competenceId, int competenceLevel, int personId){
-		
+	public PersonalCompetenceLevel(int competenceId, int competenceLevel, String personId){
+		this.competenceId = competenceId;
+		this.competenceLevel = competenceLevel;
+		this.personId = personId;
 	}
 
 	public int getId() {
@@ -48,11 +53,11 @@ public class PersonalCompetenceLevel {
 		this.competenceLevel = competenceLevel;
 	}
 
-	public int getPersonId() {
+	public String getPersonId() {
 		return personId;
 	}
 
-	public void setPersonId(int personId) {
+	public void setPersonId(String personId) {
 		this.personId = personId;
 	}
 	
