@@ -75,16 +75,15 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 		};
 
 		save = function(array, username){
-			var jsonArray = angular.toJson(array);
-			console.log(jsonArray);
+			console.log(array);
 			 $http({
 				 method : 'POST', 
 				 url : "resources/saveusercompetences/",
 				 dataType : "json",
-				 contentType : "application/json",
-				 //contentType : "application/json; charset=utf-8",
-				// "params" : {"userid" : username },
-				 data : jsonArray,
+				 //contentType : "application/json",
+				 contentType : "application/json; charset=utf-8",
+				 params : {"userid" : username },
+				 data : {data : array}
 				    })
 			 	.success(function(data, status) {
 			 		console.log(data);

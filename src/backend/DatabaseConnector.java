@@ -300,6 +300,13 @@ public class DatabaseConnector {
     	return competences;
     }
     
+    public boolean updateCompetences(ArrayList<SaveCompetences> list){
+    	PreparedStatement pstmt = null;
+    	String query = "UPDATE Personal_comp_level (comp_id, comp_level) VALUES (?,?) WHERE user_id LIKE ?";
+    	//TODO add logic for everything update
+    	return true;
+    }
+    
     public static void main(String[] args) throws SQLException{
     	DatabaseConnector dbc = new DatabaseConnector();
     	//System.out.println(dbc.getUserProfiles("hli24213"));
