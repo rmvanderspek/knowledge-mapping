@@ -9,18 +9,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Competence {
 	private int id;
 	private String name;
+	private String description;
 	
 	public Competence(){
 		
 	}
 	
-	public Competence(int id, String name){
+	public Competence(int id, String name, String description){
 		this.id = id;
 		this.name = name;
+		this.description = description;
 	}
 	
-	public Competence(String name){
+	public Competence(String name, String description){
 		this.name = name;
+		this.description = description;
 	}
 	
 	public int getId() {
@@ -37,5 +40,13 @@ public class Competence {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getDescription(){
+		return description;
+	}
+	
+	public void setDescription(String description){
+		this.description = description;
 	}
 }

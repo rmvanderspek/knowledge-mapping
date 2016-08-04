@@ -7,28 +7,26 @@
 <div class="row marketing">
 	<div>
 		<h4>Competenties</h4>
-		<div ng-repeat="competence in competences" >
+		<div ng-repeat="competence in showCompetences" >
 			<div class="frame">
-				<div class="progress progress-color">
+				<div class="progress">
 					
-					<div class="input-group content">
+					<div class="input-group">
 					    <span class="input-group-btn">
-					        <button ng-click="decrease(competence.comp_id)" class="btn btn-xs btn-default" type="button"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+					        <button ng-click="decrease(competence.id)" class="btn btn-xs btn-default" type="button"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
 					    </span>
 					    
-			  			<div title="{{competence.name}}" ng-class="getBarClass(competence.level)" role="progressbar" aria-valuenow="{{competence.level}}" aria-valuemin="0" aria-valuemax="100" ng-attr-style="width: {{competence.level}}%;min-width: 0;">
-			    			&#160;
+			  			<div ng-class="getBarClass(competence.level)" role="progressbar" aria-valuenow="{{competence.level}}" aria-valuemin="0" aria-valuemax="100" ng-attr-style="width: {{competence.level}}%;">
+			    			{{competence.name}}: {{competence.level}}%
 			  			</div>
 			  			
 			  			<span class="input-group-btn">
-					        <button ng-click="increase(competence.comp_id)" class="btn btn-xs btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></button>
+					        <button ng-click="increase(competence.id)" class="btn btn-xs btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></button>
 					    </span>
-			  		</div>
-			  			
+		  			</div>
+		  			<div class="title"><span class="title-white">{{competence.name}}: {{competence.level}}%</span></div>
 		  		</div>
-		  		<div class="title"><span class="title-white">{{competence.name}}: {{competence.level}}%</span></div>
 		  	</div>
-		  	
 	  		
 		</div>
 		<div align="center"><button class="btn btn-sm btn-warning" ng-click="navigate.back()">Back</button></div>

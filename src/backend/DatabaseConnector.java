@@ -222,18 +222,19 @@ public class DatabaseConnector {
     	ArrayList<PersonalCompetenceLevel> competences = new ArrayList<PersonalCompetenceLevel>();
     	
     	PreparedStatement pstmt = null;
-    	String query = "SELECT * FROM Personal_competence_level where person_id = ?";
+    	String query = "SELECT * FROM Personal_comp_level where user_id LIKE ?";
     	ResultSet rs = null;
     	
     	try {
     		pstmt = conn.prepareStatement(query);
+    		pstmt.setString(1, userId);
     		rs = pstmt.executeQuery();
     		
     		while (rs.next()){
     			int id = rs.getInt(1);
     			int competenceId = rs.getInt(2);
     			int competenceLevel = rs.getInt(3);
-    			int personId = rs.getInt(4);
+    			String personId = rs.getString(4);
     			
     			competences.add(new PersonalCompetenceLevel(id, competenceId, competenceLevel, personId));
     		}
@@ -287,8 +288,9 @@ public class DatabaseConnector {
     		while (rs.next()){
     			int id = rs.getInt(1);
     			String name = rs.getString(2);
-    			
-    			competences.add(new Competence(id, name));
+    			String description = rs.getString(3);
+    			System.out.println(description + name);
+    			competences.add(new Competence(id, name, description));
     		}
     	}
     	catch(SQLException e){
@@ -300,10 +302,14 @@ public class DatabaseConnector {
     
     public static void main(String[] args) throws SQLException{
     	DatabaseConnector dbc = new DatabaseConnector();
-    	System.out.println(dbc.getUserProfiles("hli24213"));
-    	System.out.println(dbc.getProfileCompetences());
-    	System.out.println(dbc.getCompetences());
-    	
+    	//System.out.println(dbc.getUserProfiles("hli24213"));
+    	//System.out.println(dbc.getProfileCompetences());
+    	//System.out.println(dbc.getCompetences());
+    	System.out.println(dbc.getUserCompetences("hli24213"));
+    	ArrayList<PersonalCompetenceLevel> arr = dbc.getUserCompetences("hli24213");
+    	for (int i = 0; i < arr.size(); i++){
+    		System.out.println(arr.get(i).getCompetenceLevel() + arr.get(i).getPersonId() + arr.get(i).getCompetenceId());
+    	}
     }
     
 }
