@@ -111,3 +111,7 @@ body {
 	font-weight: bold;
 	font-variant: small-caps;
 }
+
+.form-margin{
+	margin-bottom: 5px;
+}

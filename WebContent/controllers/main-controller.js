@@ -1,5 +1,5 @@
-angular.module("Knowl").controller("MainCtrl", ["$scope", "$location", "$rootScope", "$window", "ProfilesService",
-	function($scope, $location, $rootScope, $window, ProfilesService) {
+angular.module("Knowl").controller("MainCtrl", ["$scope", "$location", "$rootScope", "$window",
+	function($scope, $location, $rootScope, $window) {
 		$scope.role = "Medewerker";
 		$scope.username = "rsp21473";
 		$scope.isManager = function() {
