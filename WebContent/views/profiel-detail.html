@@ -8,25 +8,28 @@
 	<div>
 		<h4>Competenties</h4>
 		<div ng-repeat="competence in showCompetences" >
-			
-			<div class="progress">
-				
-				<div class="input-group">
-				    <span class="input-group-btn">
-				        <button ng-click="decrease(competence.id)" class="btn btn-xs btn-default" type="button"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
-				    </span>
-				    
-		  			<div ng-class="getBarClass(competence.level)" role="progressbar" aria-valuenow="{{competence.level}}" aria-valuemin="0" aria-valuemax="100" ng-attr-style="width: {{competence.level}}%;">
-		    			{{competence.name}}: {{competence.level}}%
+			<div class="frame">
+				<div class="progress">
+					
+					<div class="input-group">
+					    <span class="input-group-btn">
+					        <button ng-click="decrease(competence.id)" class="btn btn-xs btn-default" type="button"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+					    </span>
+					    
+			  			<div ng-class="getBarClass(competence.level)" role="progressbar" aria-valuenow="{{competence.level}}" aria-valuemin="0" aria-valuemax="100" ng-attr-style="width: {{competence.level}}%;">
+			    			&#160;
+			  			</div>
+			  			
+			  			<span class="input-group-btn">
+					        <button ng-click="increase(competence.id)" class="btn btn-xs btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></button>
+					    </span>
 		  			</div>
-		  			
-		  			<span class="input-group-btn">
-				        <button ng-click="increase(competence.id)" class="btn btn-xs btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></button>
-				    </span>
+		  			<div class="title"><span class="title-white">{{competence.name}}: {{competence.level}}%</span></div>
 		  		</div>
-	  		</div>
+		  	</div>
 	  		
 		</div>
+		<div align="center"><button class="btn btn-sm btn-warning" ng-click="navigate.back()">Back</button></div>
 
 		<h4>Toevoegen</h4>
 		<ul>

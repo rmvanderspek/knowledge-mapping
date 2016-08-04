@@ -1,6 +1,6 @@
-angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams", "ProfilesService",
-    function($scope, $routeParams, ProfilesService) {
-		
+angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams", "ProfilesService", "$location",
+    function($scope, $routeParams, ProfilesService, $location) {
+		$scope.profiles = ProfilesService.getProfiles();
 		$scope.id = parseInt($routeParams.id);
 		
 		$scope.profiles = ProfilesService.getProfiles();
@@ -71,11 +71,28 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 
 		};
 		
+		$scope.showName = function(name, level) {
+			if(level > 30) {
+				return name + ":";
+			} else {
+				return "";
+			}
+		};
+		
+		$scope.showHeadingTitle = function(name, level) {
+			if(level <= 30) {
+				return name;
+			} else {
+				return "";
+			}
+		};
+		
 		$scope.decrease = function(id) {
 			for(var i = 0; i < $scope.competences.length; i++) {
-				if(parseInt(id) === $scope.competences[i].id) {
-					$scope.competences[i].level -= 5;
-					
+				if(parseInt(id) === $scope.competences[i].comp_id) {
+					if($scope.competences[i].level >= 5) {
+						$scope.competences[i].level -= 5;
+					}
 					return;
 				}
 			}
@@ -83,12 +100,21 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 		
 		$scope.increase = function(id) {
 			for(var i = 0; i < $scope.competences.length; i++) {
-				if(parseInt(id) === $scope.competences[i].id) {
-					$scope.competences[i].level += 5;
-					
+				if(parseInt(id) === $scope.competences[i].comp_id) {
+					if($scope.competences[i].level <= 95) {
+						$scope.competences[i].level += 5;
+					}
 					return;
 				}
 			}
+		};
+
+		
+		// Navigation
+		$scope.navigate = {};
+		
+		$scope.navigate.back = function() {
+			$location.path("persoonlijk-profiel");
 		};
 	} 
 ]);
