@@ -8,7 +8,7 @@
 	<div>
 		<h4>Competenties</h4>
 		<div ng-repeat="competence in showCompetences" >
-			<div class="frame">
+			<div class="frame" title="{{competence.description}}">
 				<div class="progress progress-color">
 					
 					<div class="input-group">
@@ -21,7 +21,7 @@
 			  			</div>
 			  			
 			  			<span class="input-group-btn">
-					        <button ng-click="increase(competence.id)" class="btn btn-xs btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></button>
+					        <button ng-click="increase(competence.id)" class="btn btn-xs btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
 					    </span>
 		  			</div>
 		  			<div class="title"><span class="title-white">{{competence.name}}: {{competence.level}}%</span></div>
@@ -29,13 +29,7 @@
 		  	</div>
 	  		
 		</div>
-		<div align="center"><button class="btn btn-sm btn-warning" ng-click="navigate.back()">Back</button> <button ng-class="isDirty()" ng-click="save()">Save</button></div>
+		<div align="center"><button class="btn btn-sm btn-warning" ng-click="navigate.back()">Back</button> <button class="btn btn-sm btn-warning" ng-click="reset()">Reset</button> <button ng-class="isDirty()" ng-click="save()">Save</button></div>
 
-		<h4>Toevoegen</h4>
-		<ul>
-			<li><a href="./toevoegen/competentie">Competentie</a></li>
-			<li><a href="./toevoegen/kennisprofiel">Kennisprofiel</a></li>
-		</ul>
-		
 	</div>
 </div>

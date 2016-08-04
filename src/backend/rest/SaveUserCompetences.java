@@ -25,6 +25,7 @@ public class SaveUserCompetences{
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
+<<<<<<< HEAD
 	public Response saveUserCompetences(String jseon) {
 		System.out.println(jseon);
 		JSONObject obj;
@@ -63,5 +64,14 @@ public class SaveUserCompetences{
 		return Response.status(200)
 				.entity("email was successfully added!")
 				.build();
+=======
+	public SaveCompetences[] saveUserCompetences(SaveCompetences[] saveCompetences) {
+		DatabaseConnector db = new DatabaseConnector();
+		System.out.println("De db connector: " + db);
+		System.out.println(saveCompetences);
+	//	ArrayList<Profile> list = db.getProfiles();
+	//	System.out.println("dit is het: "+list);
+		return null;
+>>>>>>> 8a7a9b8dc1724fb1cd7babb2ae4a08b6911f6f7e
 	}
 }

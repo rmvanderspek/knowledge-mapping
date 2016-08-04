@@ -139,7 +139,7 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 	        	return profiles;
 	        },
 			getCompetences: function(profile_id) {
-				return competences;
+				return competences; 
 			},
 			getProfileCompetences: function() {
 				return profilecompetences;
