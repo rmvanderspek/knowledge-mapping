@@ -25,53 +25,36 @@ public class SaveUserCompetences{
 	@POST
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-
 	public Response saveUserCompetences(String jseon) {
-		System.out.println(jseon);
 		JSONObject obj;
+		
 		try {
 			obj = new JSONObject(jseon);
 		
 			ArrayList<JSONObject> list = new ArrayList<JSONObject>();     
 			ArrayList<SaveCompetences> saveList = new ArrayList<SaveCompetences>();
-			JSONArray jsonArray = obj.getJSONArray("data"); 
 			
-			   int len = jsonArray.length();
-			   
-			   for (int i=0;i<len;i++){ 
+			JSONArray jsonArray = obj.getJSONArray("data"); 
+						   
+			for (int i=0;i<jsonArray.length();i++){ 
 				   
 			    list.add(new JSONObject(jsonArray.get(i).toString()));
-			    
-			    System.out.println(list.get(i));
-			    System.out.println(list.get(i).getString("name"));
-			    saveList.add(new SaveCompetences(list.get(i).getString("name"), 
+			    saveList.add(new SaveCompetences(
+			    		list.get(i).getString("name"), 
 			    		list.get(i).getString("description"), 
 			    		list.get(i).getInt("level"), 
-			    		list.get(i).getInt("id")));
-			   };
-			   
-			System.out.println(saveList); 
-			
+			    		list.get(i).getInt("id"))
+			    		);
+				};
+			   			
 			DatabaseConnector dbc = new DatabaseConnector();
 			dbc.updateCompetences(saveList, userId);
-			
-			
-			System.out.println(jseon);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (JSONException e) {
 			e.printStackTrace();
 		}
 		return Response.status(200)
 				.entity("email was successfully added!")
 				.build();
-
-//	public SaveCompetences[] saveUserCompetences(SaveCompetences[] saveCompetences) {
-//		DatabaseConnector db = new DatabaseConnector();
-//		System.out.println("De db connector: " + db);
-//		System.out.println(saveCompetences);
-//	//	ArrayList<Profile> list = db.getProfiles();
-//	//	System.out.println("dit is het: "+list);
-//		return null;
-
 	}
 }
