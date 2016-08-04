@@ -132,5 +132,9 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 			}
 			save($scope.showCompetences, $scope.username);
 		};
+		
+		$scope.reset = function() {
+			$scope.showCompetences = $scope.getCompetences();
+		}
 	} 
 ]);

@@ -1,7 +1,7 @@
 angular.module("Knowl").controller("MainCtrl", ["$scope", "$location", "$rootScope", "$window", "ProfilesService",
 	function($scope, $location, $rootScope, $window, ProfilesService) {
 		$scope.role = "Medewerker";
-		$scope.username = "";
+		$scope.username = "rsp21473";
 		$scope.isManager = function() {
 			if($scope.role === "Manager") {
 				return true;
@@ -11,7 +11,6 @@ angular.module("Knowl").controller("MainCtrl", ["$scope", "$location", "$rootSco
 		};
 		
 		$scope.connect = function(){
-			console.log($scope.username);
 			connect($scope.username);
 		};
 		
