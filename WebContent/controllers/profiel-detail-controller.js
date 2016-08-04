@@ -130,6 +130,7 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 			if($scope.unsaved) {
 				$scope.unsaved = false;
 			}
+			save($scope.showCompetences, $scope.username);
 		};
 	} 
 ]);
