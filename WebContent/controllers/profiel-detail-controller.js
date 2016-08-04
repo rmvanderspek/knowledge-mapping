@@ -17,7 +17,7 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 		$scope.getProfileDetails = function() {
 			for(var i = 0; i < $scope.profiles.length; i++) {
 				if(parseInt($scope.profiles[i].id) === $scope.id) {
-					return $scope.profiles[i];;
+					return $scope.profiles[i];
 				}
 			}
 		};
@@ -68,6 +68,27 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 			} else {
 				return "progress-bar progress-bar-success progress-bar-striped";
 			}
-		};
+
+		}
+		
+		$scope.decrease = function(id) {
+			for(var i = 0; i < $scope.competences.length; i++) {
+				if(parseInt(id) === $scope.competences[i].id) {
+					$scope.competences[i].level -= 5;
+					
+					return;
+				}
+			}
+		}
+		
+		$scope.increase = function(id) {
+			for(var i = 0; i < $scope.competences.length; i++) {
+				if(parseInt(id) === $scope.competences[i].id) {
+					$scope.competences[i].level += 5;
+					
+					return;
+				}
+			}
+		}
 	} 
 ]);

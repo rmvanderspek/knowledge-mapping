@@ -13,7 +13,7 @@
 				
 				<div class="input-group">
 				    <span class="input-group-btn">
-				        <button class="btn btn-default" type="button" style="height: 20px">-</button>
+				        <button ng-click="decrease(competence.id)" class="btn btn-xs btn-default" type="button"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
 				    </span>
 				    
 		  			<div ng-class="getBarClass(competence.level)" role="progressbar" aria-valuenow="{{competence.level}}" aria-valuemin="0" aria-valuemax="100" ng-attr-style="width: {{competence.level}}%;">
@@ -21,7 +21,7 @@
 		  			</div>
 		  			
 		  			<span class="input-group-btn">
-				        <button class="btn btn-default" type="button" style="height: 20px">+</button>
+				        <button ng-click="increase(competence.id)" class="btn btn-xs btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></button>
 				    </span>
 		  		</div>
 	  		</div>
