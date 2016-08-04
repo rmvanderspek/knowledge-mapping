@@ -3,18 +3,18 @@
 angular.module("Knowl").service("ProfilesService", ["$http", 
     function($http) {
 		var profiles = [];
-		var user = "hli24213";
+		var user = "rsp21473";
 
 		var competences = [];
 		var profilecompetences = [];
 		var usercompetences = [];
 		
 		
-		
+		connect = function(username){
 			 $http({
 				 method : 'GET', 
 				 url : "resources/getuserprofile/",
-				 params: {"userid" : user }})
+				 params: {"userid" : username }})
 			 	.success(function(data, status) {
 			 		profiles = data.profile;
 			 		return data;
@@ -50,7 +50,7 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 			 $http({
 				 method : 'GET', 
 				 url : "resources/getusercompetences/",
-				 params: {"userid" : user }})
+				 params: {"userid" : username }})
 			 	.success(function(data, status) {
 			 		usercompetences = data.profile;
 			 		
@@ -60,7 +60,7 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 			 		alert("Error");
 			 });
 
-			 
+		};
 
 			 
 		// Mock array part II
