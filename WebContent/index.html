@@ -41,8 +41,10 @@
 			<ng-view></ng-view>
 			
 		    <footer class="footer">
-		    <div align = "right"><p>Username: <input type="text" ng-model = "username"/> <button class = "btn btn-sm btn-warning" id = "goUser" ng-click="connect()">Load data</button></div>
-		        <p>&copy; 2016 Fletcher Boys, Inc.</p>
+		    	<div class="row">
+		    		<div class="col-sm-6"><p>&copy; 2016 Fletcher Boys, Inc.</p></div>
+			    	<div class="col-sm-6" align = "right"><p>Username: <input type="text" ng-model = "username"/> <button class = "btn btn-sm btn-warning" id = "goUser" ng-click="connect()">Load data</button></div>
+			     </div> 
 		    </footer>
 
 			
