@@ -21,14 +21,14 @@
 		          <ul class="nav nav-pills pull-right">
 		          	<li role="presentation" ng-class="link0" ng-click="activate(0)"><a href="./">Home</a></li>
 		            <li role="presentation" ng-class="link1" ng-click="activate(1)"><a href="./persoonlijk-profiel">Persoonlijk Profiel</a></li>
-		            <li role="presentation" ng-class="link2" ng-click="activate(2)" ng-show="$parent.isManager()")><a href="./kennisprofielen"><span ng-bind="managerNavigation" /></a></li>
+		            <li role="presentation" ng-class="link2" ng-click="activate(2)" ng-show="$parent.isManager()"><a href="./kennisprofielen"><span ng-bind="managerNavigation"></span></a></li>
 		            <li class="dropdown">
 					  	<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-					    	<span ng-bind="$parent.role" />
+					    	<span ng-bind="$parent.role"></span>
 					    	<span class="caret"></span>
 					  	</button>
 					  	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						    <li ng-click="changeRole('Medewerker'); setManagerMenu()")><a href="#">Medewerker</a></li>
+						    <li ng-click="changeRole('Medewerker'); setManagerMenu()"><a href="#">Medewerker</a></li>
 						    <li ng-click="changeRole('Manager'); setManagerMenu()"><a href="#">Manager</a></li>
 					  	</ul>
 					</li>
@@ -41,7 +41,7 @@
 			<ng-view></ng-view>
 			
 		    <footer class="footer">
-		    <div align = "right"><p>Username: <input type="text" ng-model = "username"></> <button class = "btn btn-sm btn-warning" id = "goUser" ng-click="connect()">Load data</button></div></p>
+		    <div align = "right"><p>Username: <input type="text" ng-model = "username"/> <button class = "btn btn-sm btn-warning" id = "goUser" ng-click="connect()">Load data</button></div>
 		        <p>&copy; 2016 Fletcher Boys, Inc.</p>
 		    </footer>
 

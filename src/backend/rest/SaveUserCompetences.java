@@ -27,6 +27,6 @@ public class SaveUserCompetences{
 		System.out.println(saveCompetences);
 	//	ArrayList<Profile> list = db.getProfiles();
 	//	System.out.println("dit is het: "+list);
-		return saveCompetences;
+		return null;
 	}
 }
