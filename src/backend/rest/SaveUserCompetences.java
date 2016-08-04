@@ -52,10 +52,10 @@ public class SaveUserCompetences{
 			   
 			System.out.println(saveList); 
 			
+			DatabaseConnector dbc = new DatabaseConnector();
+			dbc.updateCompetences(saveList, userId);
 			
 			
-			DatabaseConnector db = new DatabaseConnector();
-			System.out.println("De db connector: " + db);
 			System.out.println(jseon);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

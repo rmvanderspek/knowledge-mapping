@@ -300,9 +300,26 @@ public class DatabaseConnector {
     	return competences;
     }
     
-    public boolean updateCompetences(ArrayList<SaveCompetences> list){
+    public boolean updateCompetences(ArrayList<SaveCompetences> list, String userid){
     	PreparedStatement pstmt = null;
-    	String query = "UPDATE Personal_comp_level (comp_id, comp_level) VALUES (?,?) WHERE user_id LIKE ?";
+    	String query = "UPDATE Personal_comp_level SET comp_level = ? WHERE user_id LIKE ? and comp_id = ?";
+    	
+    	for(int i = 0; i < list.size(); i++){
+    		SaveCompetences sc = list.get(i);
+    		try {
+    			pstmt = conn.prepareStatement(query);
+    			pstmt.setInt(1, sc.getLevel());
+    			pstmt.setString(2, userid);
+    			pstmt.setInt(3, sc.getId());
+    			
+    			int updated = pstmt.executeUpdate();
+    			System.out.println(updated);
+    		}
+    		catch(SQLException e){
+    			e.printStackTrace();
+    			return false;
+    		}
+       	}
     	//TODO add logic for everything update
     	return true;
     }
