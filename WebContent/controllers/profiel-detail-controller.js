@@ -7,12 +7,6 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 		$scope.competences = ProfilesService.getCompetences();
 		$scope.profileCompetences = ProfilesService.getProfileCompetences();
 		$scope.userCompetences = ProfilesService.getUserCompetences();
-		
-		console.log($scope.profileCompetences);
-		console.log($scope.competences);
-		console.log($scope.userCompetences);
-		
-		console.log($scope.profiles );
 
 		$scope.getProfileDetails = function() {
 			for(var i = 0; i < $scope.profiles.length; i++) {
@@ -32,21 +26,21 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 		
 		$scope.getCompetences = function(){
 			var showcompetences = [];
-			 console.log($scope.userCompetences.length);
+			 
 			 for(var i = 0; i < $scope.userCompetences.length; i++){
-				 console.log("i step " + i);
+				 
 				 for(var j = 0; j < $scope.profileCompetences.length; j++){
-					 console.log("j step " + j);
+					 
 					 if(parseInt($scope.userCompetences[i].competenceId) === parseInt($scope.profileCompetences[j].competenceId)){
 						 var competence = $scope.selectCompetence($scope.userCompetences[i].competenceId);
-						 console.log("EQUAL");
+						 
 						 showcompetences.push({
 							 name : competence.name,
 							 description : competence.description,
 							 level : parseInt($scope.userCompetences[i].competenceLevel),
 							 id : parseInt($scope.userCompetences[i].competenceId)
 							 });
-						 console.log(showcompetences);
+						 
 					 }
 				 }
 			 }
