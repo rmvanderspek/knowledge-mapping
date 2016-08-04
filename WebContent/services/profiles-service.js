@@ -63,45 +63,45 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 			 
 
 			 
-		// Mock array part II
-		if(competences.length === 0) {
-			competences = [ {
-				name : "OCA",
-				description: "Het behalen van OCA certificering.",
-				profile_id : 1,
-				comp_id : 0,
-				level : 100
-			}, {
-				name : "OCP",
-				description: "Het behalen van OCP certificering.",
-				profile_id : 1,
-				comp_id : 1,
-				level : 100
-			}, {
-				name : "REST",
-				description: "Kunnen werken met REST.",
-				profile_id : 1,
-				comp_id : 2,
-				level : 60
-			}, {
-				name : "XML",
-				description: "Kunnen werken met XML.",
-				profile_id : 1,
-				comp_id : 3,
-				level : 20
-			}, {
-				name : "Leiderschap",
-				description: "Het kunnen geven van leiding aan groepen.",
-				profile_id : 8,
-				comp_id : 4,
-				level : 80
-			}, {
-				name : "SCRUM/Agile",
-				description: "Het kunnen werken met SCRUM.",
-				profile_id : 1,
-				comp_id : 5,
-				level : 40
-			} ];
+//		// Mock array part II
+//		if(competences.length === 0) {
+//			competences = [ {
+//				name : "OCA",
+//				description: "Het behalen van OCA certificering.",
+//				profile_id : 1,
+//				comp_id : 0,
+//				level : 100
+//			}, {
+//				name : "OCP",
+//				description: "Het behalen van OCP certificering.",
+//				profile_id : 1,
+//				comp_id : 1,
+//				level : 100
+//			}, {
+//				name : "REST",
+//				description: "Kunnen werken met REST.",
+//				profile_id : 1,
+//				comp_id : 2,
+//				level : 60
+//			}, {
+//				name : "XML",
+//				description: "Kunnen werken met XML.",
+//				profile_id : 1,
+//				comp_id : 3,
+//				level : 20
+//			}, {
+//				name : "Leiderschap",
+//				description: "Het kunnen geven van leiding aan groepen.",
+//				profile_id : 8,
+//				comp_id : 4,
+//				level : 80
+//			}, {
+//				name : "SCRUM/Agile",
+//				description: "Het kunnen werken met SCRUM.",
+//				profile_id : 1,
+//				comp_id : 5,
+//				level : 40
+//			} ];
 			
 	//		 As long as this doesn't work return a mock-array
 	//		 $http({method : 'GET', url : "resources/personalcompetences?userid=3333"})
@@ -113,7 +113,7 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 	//		 });
 			
 			
-		}
+//		}
 		
 		return {
 	        getProfiles: function() {

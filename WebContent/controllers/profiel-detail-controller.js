@@ -37,7 +37,7 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 						 showcompetences.push({
 							 name : competence.name,
 							 description : competence.description,
-							 level : $scope.userCompetences[i].competenceLevel,
+							 level : parseInt($scope.userCompetences[i].competenceLevel),
 							 id : $scope.userCompetences[i].competenceId
 							 });
 						 
@@ -82,10 +82,11 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 		}
 		
 		$scope.decrease = function(id) {
-			for(var i = 0; i < $scope.competences.length; i++) {
-				if(parseInt(id) === $scope.competences[i].comp_id) {
-					if($scope.competences[i].level >= 5) {
-						$scope.competences[i].level -= 5;
+			for(var i = 0; i < $scope.showCompetences.length; i++) {
+				
+				if(parseInt(id) === parseInt($scope.showCompetences[i].id)) {
+					if( $scope.showCompetences[i].level >= 5) {
+						$scope.showCompetences[i].level -= 5;
 					}
 					return;
 				}
@@ -93,10 +94,11 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 		}
 		
 		$scope.increase = function(id) {
-			for(var i = 0; i < $scope.competences.length; i++) {
-				if(parseInt(id) === $scope.competences[i].comp_id) {
-					if($scope.competences[i].level <= 95) {
-						$scope.competences[i].level += 5;
+			for(var i = 0; i < $scope.showCompetences.length; i++) {
+				
+				if(parseInt(id) === parseInt($scope.showCompetences[i].id)) {
+					if( $scope.showCompetences[i].level <= 95) {
+						$scope.showCompetences[i].level += 5;
 					}
 					return;
 				}
