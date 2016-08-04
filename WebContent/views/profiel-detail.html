@@ -9,14 +9,14 @@
 		<h4>Competenties</h4>
 		<div ng-repeat="competence in showCompetences" >
 			<div class="frame">
-				<div class="progress">
+				<div class="progress progress-color">
 					
 					<div class="input-group">
 					    <span class="input-group-btn">
 					        <button ng-click="decrease(competence.id)" class="btn btn-xs btn-default" type="button"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
 					    </span>
 					    
-			  			<div ng-class="getBarClass(competence.level)" role="progressbar" aria-valuenow="{{competence.level}}" aria-valuemin="0" aria-valuemax="100" ng-attr-style="width: {{competence.level}}%;">
+			  			<div ng-class="getBarClass(competence.level)" role="progressbar" aria-valuenow="{{competence.level}}" aria-valuemin="0" aria-valuemax="100" ng-attr-style="min-width: 0; width: {{competence.level}}%;">
 			    			&#160;
 			  			</div>
 			  			
@@ -29,7 +29,7 @@
 		  	</div>
 	  		
 		</div>
-		<div align="center"><button class="btn btn-sm btn-warning" ng-click="navigate.back()">Back</button></div>
+		<div align="center"><button class="btn btn-sm btn-warning" ng-click="navigate.back()">Back</button> <button ng-class="isDirty()" ng-click="save()">Save</button></div>
 
 		<h4>Toevoegen</h4>
 		<ul>

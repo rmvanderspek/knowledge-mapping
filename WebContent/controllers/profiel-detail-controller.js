@@ -2,6 +2,7 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
     function($scope, $routeParams, ProfilesService, $location) {
 		$scope.profiles = ProfilesService.getProfiles();
 		$scope.id = parseInt($routeParams.id);
+		$scope.unsaved = false;
 		
 		$scope.profiles = ProfilesService.getProfiles();
 		$scope.competences = ProfilesService.getCompetences();
@@ -82,10 +83,12 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 		};
 		
 		$scope.decrease = function(id) {
-			for(var i = 0; i < $scope.competences.length; i++) {
-				if(parseInt(id) === $scope.competences[i].comp_id) {
-					if($scope.competences[i].level >= 5) {
-						$scope.competences[i].level -= 5;
+			for(var i = 0; i < $scope.showCompetences.length; i++) {
+				
+				if(parseInt(id) === parseInt($scope.showCompetences[i].id)) {
+					if( $scope.showCompetences[i].level >= 5) {
+						$scope.showCompetences[i].level -= 5;
+						$scope.unsaved = true;
 					}
 					return;
 				}
@@ -93,10 +96,12 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 		};
 		
 		$scope.increase = function(id) {
-			for(var i = 0; i < $scope.competences.length; i++) {
-				if(parseInt(id) === $scope.competences[i].comp_id) {
-					if($scope.competences[i].level <= 95) {
-						$scope.competences[i].level += 5;
+			for(var i = 0; i < $scope.showCompetences.length; i++) {
+				
+				if(parseInt(id) === parseInt($scope.showCompetences[i].id)) {
+					if( $scope.showCompetences[i].level <= 95) {
+						$scope.showCompetences[i].level += 5;
+						$scope.unsaved = true;
 					}
 					return;
 				}
@@ -109,6 +114,22 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 		
 		$scope.navigate.back = function() {
 			$location.path("persoonlijk-profiel");
+		};
+
+		$scope.isDirty = function() {
+			if($scope.unsaved == true) {
+				return "btn btn-sm btn-danger";
+			}
+			else {
+				return "btn btn-sm btn-warning";
+			}
+		};
+		
+		// Data opslaan (moet nog geimplementeerd
+		$scope.save = function() {
+			if($scope.unsaved) {
+				$scope.unsaved = false;
+			}
 		};
 	} 
 ]);
