@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import backend.Competence;
 import backend.DatabaseConnector;
 import backend.PersonalCompetenceLevel;
+import backend.ProfileCompetences;
 import backend.SaveCompetences;
 
 @Path("addcompetence")
@@ -43,7 +44,7 @@ public class AddCompetence{
 
 			db.addCompetenceToUser(new SaveCompetences(
 					name, description, 0, id), userId);
-
+			db.addCompetenceToProfile(new ProfileCompetences(999, id));
 		} 
 		catch (JSONException e) {
 			e.printStackTrace();

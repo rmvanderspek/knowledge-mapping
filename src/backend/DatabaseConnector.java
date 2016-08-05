@@ -152,7 +152,7 @@ public class DatabaseConnector {
     	Profile profile = null;
     	
     	PreparedStatement pstmt = null;
-    	String query = "SELECT * FROM Profiles WHERE id LIKE ?";
+    	String query = "SELECT * FROM Profiles WHERE prof_comp_table_id LIKE ?";
     	ResultSet rs = null;
     	
     	try {
@@ -346,6 +346,26 @@ public class DatabaseConnector {
     	}
     	return true;
     }
+    
+    //Method to set new competence to profile 'overige'
+    public boolean addCompetenceToProfile(ProfileCompetences pc){
+    	PreparedStatement pstmt = null;
+    	String query = "INSERT Profile_competence_table (profile_id, competences) VALUES (?,?)";
+    	
+    	try {
+    		pstmt = conn.prepareStatement(query);
+    		pstmt.setInt(1, pc.getProfileId());
+    		pstmt.setInt(2, pc.getCompetenceId());
+    		
+    		pstmt.executeUpdate();
+    	}
+    	catch(SQLException e){
+    		e.printStackTrace();
+    		return false;
+    	}
+    	return true;
+    }
+    
     
     public static void main(String[] args) throws SQLException{
     	DatabaseConnector dbc = new DatabaseConnector();

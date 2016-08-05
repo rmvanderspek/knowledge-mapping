@@ -7,7 +7,6 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 		// Get ProfilesService variables only when they are loaded:
 		if($rootScope.loaded) {
 			$scope.profiles = ProfilesService.getProfiles();
-			$scope.profiles = ProfilesService.getProfiles();
 			$scope.competences = ProfilesService.getCompetences();
 			$scope.profileCompetences = ProfilesService.getProfileCompetences();
 			$scope.userCompetences = ProfilesService.getUserCompetences();
@@ -15,7 +14,7 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 
 		$scope.getProfileDetails = function() {
 			for(var i = 0; i < $scope.profiles.length; i++) {
-				if(parseInt($scope.profiles[i].id) === $scope.id) {
+				if(parseInt($scope.profiles[i].profileCompetenceTableId) === $scope.id) {
 					return $scope.profiles[i];
 				}
 			}
