@@ -1,13 +1,37 @@
-angular.module("Knowl").controller("PersoonlijkProfielCtrl", ["$scope", "$routeParams", "ProfilesService",
-    function($scope, $routeParams, ProfilesService) {
-		$scope.profiles = ProfilesService.getProfiles();
+angular.module("Knowl").controller("PersoonlijkProfielCtrl", ["$scope", "$routeParams", "ProfilesService", "$rootScope", "$interval",
+    function($scope, $routeParams, ProfilesService, $rootScope, $interval) {
+		$scope.allProfiles;
+		$scope.profiles;
+		
+		// Load data
+		$scope.loadData = function() {
+			$scope.allProfiles = ProfilesService.getAllProfiles();
+			$scope.profiles = ProfilesService.getProfiles();
+		}
+		
+		// Check if the data is loaded otherwise keep checking until data is loaded
+		if($rootScope.loaded) {
+			$scope.loadData();
+		}else {
+			$rootScope.$on("loadedEvent", function(event, data) {
+				$interval(function() {
+					$scope.loadData();
+					
+				}, 100, 7);
+			});
+		}
+		
+		
+		
 		$scope.popAddCompetence = false;
 		$scope.popAddKnowledgeProfile = false;
-		$scope.allProfiles = ProfilesService.getAllProfiles();
+		
 		$scope.selected = "";
 		
 		$scope.select = function(index) {
-			$scope.selected = $scope.allProfiles[index].name;
+			if($scope.loaded) {
+				$scope.selected = $scope.allProfiles[index].name;
+			}
 		}
 		
 		$scope.showAddCompetence = function() {
@@ -26,6 +50,7 @@ angular.module("Knowl").controller("PersoonlijkProfielCtrl", ["$scope", "$routeP
 			$scope.newCompetenceDescription = "";
 			$scope.popAddCompetence = false;
 		};
+		
 		
 	} 
 ]);
