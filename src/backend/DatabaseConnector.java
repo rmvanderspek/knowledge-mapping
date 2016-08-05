@@ -23,10 +23,10 @@ public class DatabaseConnector {
     public DatabaseConnector() {
     	try {
     		conn = getConnection();
-    		System.out.println(conn);
+    		//System.out.println(conn);
     	} catch (SQLException ex) {
     		ex.printStackTrace();
-    		System.out.println("Connection is: " +conn);
+    		//System.out.println("Connection is: " +conn);
     	}
     }
     
@@ -39,7 +39,7 @@ public class DatabaseConnector {
 
             conn = DriverManager.getConnection(serverName);
 
-            System.out.println("Connected to database");
+            //System.out.println("Connected to database");
         }
         return conn;
     }
@@ -300,10 +300,11 @@ public class DatabaseConnector {
     	return competences;
     }
     
+    //Method for updating the copmetences in the database
     public boolean updateCompetences(ArrayList<SaveCompetences> list, String userid){
     	PreparedStatement pstmt = null;
     	String query = "UPDATE Personal_comp_level SET comp_level = ? WHERE user_id LIKE ? and comp_id = ?";
-    	
+    	int updated = 0;
     	for(int i = 0; i < list.size(); i++){
     		SaveCompetences sc = list.get(i);
     		try {
@@ -312,8 +313,7 @@ public class DatabaseConnector {
     			pstmt.setString(2, userid);
     			pstmt.setInt(3, sc.getId());
     			
-    			int updated = pstmt.executeUpdate();
-    			System.out.println(updated);
+    			updated = updated + pstmt.executeUpdate();
     		}
     		catch(SQLException e){
     			e.printStackTrace();
@@ -321,6 +321,7 @@ public class DatabaseConnector {
     		}
        	}
     	//TODO add logic for everything update
+    	System.out.println("Total of " + updated + " rows updated");
     	return true;
     }
     

@@ -18,9 +18,7 @@ public class GetProfiles{
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Profile> getProfiles() {
 		DatabaseConnector db = new DatabaseConnector();
-		System.out.println("De db connector: " + db);
 		ArrayList<Profile> list = db.getProfiles();
-		System.out.println("dit is het: "+list);
 		return list;
 	}
 }

@@ -17,9 +17,7 @@ public class GetCompetences{
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<Competence> getCompetences() {
 		DatabaseConnector db = new DatabaseConnector();
-		System.out.println("De db connector: " + db);
 		ArrayList<Competence> competences = db.getCompetences();
-		System.out.println("dit is het: "+ competences);
 		return competences;
 	}
 }	

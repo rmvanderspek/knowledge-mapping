@@ -19,9 +19,7 @@ public class GetCompetencesFromUser{
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<PersonalCompetenceLevel> getUserCompetences() {
 		DatabaseConnector db = new DatabaseConnector();
-		System.out.println("De db connector: " + db);
 		ArrayList<PersonalCompetenceLevel> competences = db.getUserCompetences(userId);
-		System.out.println("dit is het: "+ competences);
 		return competences;
 	}
 }
