@@ -7,7 +7,7 @@ angular.module("Knowl").controller("PersoonlijkProfielCtrl", ["$scope", "$routeP
 		$scope.loadData = function() {
 			$scope.allProfiles = ProfilesService.getAllProfiles();
 			$scope.profiles = ProfilesService.getProfiles();
-		}
+		};
 		
 		// Check if the data is loaded otherwise keep checking until data is loaded
 		if($rootScope.loaded) {
@@ -17,7 +17,7 @@ angular.module("Knowl").controller("PersoonlijkProfielCtrl", ["$scope", "$routeP
 				$interval(function() {
 					$scope.loadData();
 					
-				}, 100, 8);
+				}, 200, 5);
 			});
 		}
 		
