@@ -80,7 +80,6 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 				 method : 'POST', 
 				 url : "resources/saveusercompetences/",
 				 dataType : "json",
-				 //contentType : "application/json",
 				 contentType : "application/json; charset=utf-8",
 				 params : {"userid" : username },
 				 data : {data : array}

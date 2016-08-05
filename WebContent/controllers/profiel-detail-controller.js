@@ -40,7 +40,6 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 							 level : parseInt($scope.userCompetences[i].competenceLevel),
 							 id : parseInt($scope.userCompetences[i].competenceId)
 							 });
-						 
 					 }
 				 }
 			 }
