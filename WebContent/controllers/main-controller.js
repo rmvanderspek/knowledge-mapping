@@ -2,7 +2,7 @@ angular.module("Knowl").controller("MainCtrl", ["$scope", "$location", "$rootSco
 	function($scope, $location, $rootScope, $window, $ProfilesService) {
 		$scope.role = "Medewerker";
 
-		$scope.username = "hli24213";
+		$scope.username = "";
 
 		$scope.isManager = function() {
 			if($scope.role === "Manager") {

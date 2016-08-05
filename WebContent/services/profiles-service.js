@@ -12,7 +12,7 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 		
 		
 		connect = function(username){
-			if(user === "") {
+			if(user === "" || username != null) {
 				user = username;
 			}
 			$http({
@@ -98,7 +98,6 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 		};
 		
 		saveCompetence = function(object, username){
-			//console.log(array);
 			 $http({
 				 method : 'POST', 
 				 url : "resources/addcompetence/",
