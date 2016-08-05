@@ -9,7 +9,6 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 		var competences = [];
 		var profilecompetences = [];
 		var usercompetences = [];
-		var count = 0;
 		
 		
 		connect = function(username){
@@ -19,7 +18,6 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 				 url : "resources/profiles/"})
 			 	.success(function(data, status) {
 			 		allProfiles = data.profile;
-			 		count++;
 			 		return data;
 			 })
 			 	.error(function(data, status) {
@@ -32,7 +30,6 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 				 params: {"userid" : username }})
 			 	.success(function(data, status) {
 			 		profiles = data.profile;
-			 		count++;
 			 		return data;
 			 })
 			 	.error(function(data, status) {
@@ -44,7 +41,6 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 				 url : "resources/getcompetences/"})
 			 	.success(function(data, status) {
 			 		competences = data.profile;
-			 		count++;
 			 		return data;
 			 })
 			 	.error(function(data, status) {
@@ -56,7 +52,6 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 				 url : "resources/getprofilecompetences/"})
 			 	.success(function(data, status) {
 			 		profilecompetences = data.profile;
-			 		count++;
 			 		return data;
 			 })
 			 	.error(function(data, status) {
@@ -69,7 +64,6 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 				 params: {"userid" : username }})
 			 	.success(function(data, status) {
 			 		usercompetences = data.profile;
-			 		count++;
 			 		return data;
 			 })
 			 	.error(function(data, status) {
@@ -84,21 +78,20 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 
 		save = function(array, username){
 			console.log(array);
-			 $http({
+			 var promise = $http({
 				 method : 'POST', 
 				 url : "resources/saveusercompetences/",
 				 dataType : "json",
 				 contentType : "application/json; charset=utf-8",
 				 params : {"userid" : username },
 				 data : {data : array}
-				    })
-			 	.success(function(data, status) {
-			 		console.log(data);
-			 		return data;
-			 })
-			 	.error(function(data, status) {
+				    });
+			 
+			 promise.error(function(data, status) {
 			 		alert("Error");
 			 });
+			 
+			 return promise;
 		};
 			 
 		return {
