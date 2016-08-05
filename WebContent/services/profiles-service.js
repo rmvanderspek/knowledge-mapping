@@ -4,7 +4,7 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
     function($http, $rootScope) {
 		var profiles = [];
 		var allProfiles = [];
-		var user = "rsp21473";
+		var user = "";
 
 		var competences = [];
 		var profilecompetences = [];
@@ -12,7 +12,9 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 		
 		
 		connect = function(username){
-			user = username;
+			if(user === "") {
+				user = username;
+			}
 			$http({
 				 method : 'GET', 
 				 url : "resources/profiles/"})
@@ -77,7 +79,7 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 		
 
 		save = function(array, username){
-			 $rootScope.loaded = false;
+			 
 			 var promise = $http({
 
 				 method : 'POST', 
@@ -91,8 +93,10 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 			 promise.error(function(data, status) {
 			 		alert("Error");
 			 });
-			 
+			 $rootScope.loaded = false;
+			 $rootScope.$broadcast("loadedEvent", "data");
 			 return promise;
+			 
 		};
 		
 		saveCompetence = function(object, username){
