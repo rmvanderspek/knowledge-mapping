@@ -12,7 +12,6 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 		
 		
 		connect = function(username){
-			user = username;
 			$http({
 				 method : 'GET', 
 				 url : "resources/profiles/"})
