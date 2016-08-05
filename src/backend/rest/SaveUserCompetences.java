@@ -25,11 +25,11 @@ public class SaveUserCompetences{
 	@POST
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response saveUserCompetences(String jseon) {
+	public Response saveUserCompetences(String json) {
 		JSONObject obj;
 		
 		try {
-			obj = new JSONObject(jseon);
+			obj = new JSONObject(json);
 		
 			ArrayList<JSONObject> list = new ArrayList<JSONObject>();     
 			ArrayList<SaveCompetences> saveList = new ArrayList<SaveCompetences>();

@@ -13,7 +13,6 @@
 		<h4>Mijn kennisprofielen</h4>
 		<ul ng-init="getProfiles()">
 			<li ng-repeat="profile in profiles"><a href="./profiel/{{profile.id}}">{{profile.name}}</a></li>
-			<li><a href="profiel">Overige competenties</a></li>
 		</ul>
 		
 		<h4>Toevoegen</h4>
@@ -25,7 +24,7 @@
 						<div class="form-group">
 						    <label for="inputName" class="col-sm-2 control-label">Naam:</label>
 						    <div class="col-sm-10">
-						      	<input type="text" class="form-control" id="inputName" ng-model="newCompetenceName" placeholder="Java">
+						      	<input type="text" class="form-control" id="inputName" ng-model="competenceName" placeholder="Naam competentie">
 						    </div>
 						 </div>
 					</div>
@@ -33,7 +32,7 @@
 						<div class="form-group">
 						    <label for="inputDescription" class="col-sm-2 control-label" align="right">Beschrijving:</label>
 						    <div class="col-sm-10">
-						      	<input type="text" class="form-control" id="inputDescription" ng-model="newCompetenceDescription" placeholder="Beschrijf de competentie" align="left">
+						      	<input type="text" class="form-control" id="inputDescription" ng-model="competenceDescription" placeholder="Beschrijf de competentie" align="left">
 						    </div>
 						 </div>
 					</div>

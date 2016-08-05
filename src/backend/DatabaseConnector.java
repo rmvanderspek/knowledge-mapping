@@ -48,12 +48,14 @@ public class DatabaseConnector {
     public boolean addCompetence(Competence competence){
     	
     	String name = competence.getName();
+    	String description = competence.getDescription();
     	PreparedStatement pstmt = null;
-    	String query = "INSERT Competences (name) VALUES (?);";
+    	String query = "INSERT Competences (name, description) VALUES (?,?);";
     	
     	try {
     		pstmt = conn.prepareStatement(query);   		
     		pstmt.setString(1, name); 
+    		pstmt.setString(2, description);
     		pstmt.executeUpdate();
     	}
     	catch(SQLException e){
@@ -150,7 +152,7 @@ public class DatabaseConnector {
     	Profile profile = null;
     	
     	PreparedStatement pstmt = null;
-    	String query = "SELECT * FROM Profiles WHERE id LIKE ?";
+    	String query = "SELECT * FROM Profiles WHERE prof_comp_table_id LIKE ?";
     	ResultSet rs = null;
     	
     	try {
@@ -324,6 +326,46 @@ public class DatabaseConnector {
     	System.out.println("Total of " + updated + " rows updated");
     	return true;
     }
+    
+    //Method to add competence to user
+    public boolean addCompetenceToUser(SaveCompetences saveCompetences, String userid){
+    	PreparedStatement pstmt = null;
+    	String query = "INSERT Personal_comp_level (comp_id, comp_level, user_id) VALUES (?,?,?)";
+    	
+    	try {
+    		pstmt = conn.prepareStatement(query);
+    		pstmt.setInt(1,  saveCompetences.getId());
+    		pstmt.setInt(2, 0);
+    		pstmt.setString(3, userid);
+    		
+    		pstmt.executeUpdate();
+    	}
+    	catch(SQLException e){
+    		e.printStackTrace();
+    		return false;
+    	}
+    	return true;
+    }
+    
+    //Method to set new competence to profile 'overige'
+    public boolean addCompetenceToProfile(ProfileCompetences pc){
+    	PreparedStatement pstmt = null;
+    	String query = "INSERT Profile_competence_table (profile_id, competences) VALUES (?,?)";
+    	
+    	try {
+    		pstmt = conn.prepareStatement(query);
+    		pstmt.setInt(1, pc.getProfileId());
+    		pstmt.setInt(2, pc.getCompetenceId());
+    		
+    		pstmt.executeUpdate();
+    	}
+    	catch(SQLException e){
+    		e.printStackTrace();
+    		return false;
+    	}
+    	return true;
+    }
+    
     
     public static void main(String[] args) throws SQLException{
     	DatabaseConnector dbc = new DatabaseConnector();
