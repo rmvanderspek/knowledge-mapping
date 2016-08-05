@@ -12,7 +12,7 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 		
 		
 		connect = function(username){
-			
+			user = username;
 			$http({
 				 method : 'GET', 
 				 url : "resources/profiles/"})
@@ -27,7 +27,7 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 			$http({
 				 method : 'GET', 
 				 url : "resources/getuserprofile/",
-				 params: {"userid" : username }})
+				 params: {"userid" : user }})
 			 	.success(function(data, status) {
 			 		profiles = data.profile;
 			 		return data;
@@ -61,7 +61,7 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 			 $http({
 				 method : 'GET', 
 				 url : "resources/getusercompetences/",
-				 params: {"userid" : username }})
+				 params: {"userid" : user }})
 			 	.success(function(data, status) {
 			 		usercompetences = data.profile;
 			 		return data;
@@ -77,7 +77,7 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 		
 
 		save = function(array, username){
-
+			 $rootScope.loaded = false;
 			 var promise = $http({
 
 				 method : 'POST', 

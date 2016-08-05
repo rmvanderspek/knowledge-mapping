@@ -1,4 +1,4 @@
-angular.module("Knowl").controller("MainCtrl", ["$scope", "$location", "$rootScope", "$window", "ProfilesService",
+angular.module("Knowl").controller("MainCtrl", ["$scope", "$location", "$rootScope", "$window", "ProfilesService", 
 	function($scope, $location, $rootScope, $window, $ProfilesService) {
 		$scope.role = "Medewerker";
 
