@@ -35,16 +35,24 @@ public class AddCompetence{
 			obj = (JSONObject) new JSONObject(json).get("data");
 			String name = obj.getString("name");
 			String description = obj.getString("description");
+			
 			competence = new Competence(name, description);
 			db.addCompetence(competence);
 
 			ArrayList<Competence> competenceList = db.getCompetences();
 			Competence newComp = competenceList.get(competenceList.size() - 1);
+			
 			int id = newComp.getId();
-
-			db.addCompetenceToUser(new SaveCompetences(
-					name, description, 0, id), userId);
-			db.addCompetenceToProfile(new ProfileCompetences(999, id));
+			
+			db.addCompetenceToUser(
+					new SaveCompetences(
+					name, 
+					description, 
+					0, 
+					id), userId);
+			
+			db.addCompetenceToProfile(
+					new ProfileCompetences(999, id));
 		} 
 		catch (JSONException e) {
 			e.printStackTrace();

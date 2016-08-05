@@ -369,9 +369,6 @@ public class DatabaseConnector {
     
     public static void main(String[] args) throws SQLException{
     	DatabaseConnector dbc = new DatabaseConnector();
-    	//System.out.println(dbc.getUserProfiles("hli24213"));
-    	//System.out.println(dbc.getProfileCompetences());
-    	//System.out.println(dbc.getCompetences());
     	System.out.println(dbc.getUserCompetences("hli24213"));
     	ArrayList<PersonalCompetenceLevel> arr = dbc.getUserCompetences("hli24213");
     	for (int i = 0; i < arr.size(); i++){
