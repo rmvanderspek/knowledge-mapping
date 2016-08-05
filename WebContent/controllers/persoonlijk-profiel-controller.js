@@ -11,14 +11,13 @@ angular.module("Knowl").controller("PersoonlijkProfielCtrl", ["$scope", "$routeP
 		
 		// Check if the data is loaded otherwise keep checking until data is loaded
 		if($rootScope.loaded) {
-			console.log("hier");
 			$scope.loadData();
 		}else {
 			$rootScope.$on("loadedEvent", function(event, data) {
 				$interval(function() {
 					$scope.loadData();
 					
-				}, 100, 10);
+				}, 100, 8);
 			});
 		}
 		

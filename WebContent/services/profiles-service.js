@@ -93,8 +93,7 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 			 promise.error(function(data, status) {
 			 		alert("Error");
 			 });
-			 $rootScope.loaded = false;
-			 $rootScope.$broadcast("loadedEvent", "data");
+
 			 return promise;
 			 
 		};
