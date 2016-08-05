@@ -1,7 +1,6 @@
 package backend.rest;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
