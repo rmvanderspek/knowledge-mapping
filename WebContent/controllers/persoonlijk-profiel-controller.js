@@ -5,6 +5,8 @@ angular.module("Knowl").controller("PersoonlijkProfielCtrl", ["$scope", "$routeP
 		$scope.popAddKnowledgeProfile = false;
 		$scope.allProfiles = ProfilesService.getAllProfiles();
 		$scope.selected = "";
+		$scope.competenceName = "";
+		$scope.competenceDescription = "";
 		
 		$scope.select = function(index) {
 			$scope.selected = $scope.allProfiles[index].name;
@@ -22,6 +24,7 @@ angular.module("Knowl").controller("PersoonlijkProfielCtrl", ["$scope", "$routeP
 		
 		// Save a new competence --> needs to be implemented
 		$scope.save = function() {
+			saveCompetence({name : $scope.competenceName, description : $scope.competenceDescription}, $scope.username);
 			$scope.newCompetenceName = "";
 			$scope.newCompetenceDescription = "";
 			$scope.popAddCompetence = false;

@@ -75,7 +75,6 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 		};
 
 		save = function(array, username){
-			console.log(array);
 			 $http({
 				 method : 'POST', 
 				 url : "resources/saveusercompetences/",
@@ -83,6 +82,25 @@ angular.module("Knowl").service("ProfilesService", ["$http",
 				 contentType : "application/json; charset=utf-8",
 				 params : {"userid" : username },
 				 data : {data : array}
+				    })
+			 	.success(function(data, status) {
+			 		console.log(data);
+			 		return data;
+			 })
+			 	.error(function(data, status) {
+			 		alert("Error");
+			 });
+		};
+		
+		saveCompetence = function(object, username){
+			//console.log(array);
+			 $http({
+				 method : 'POST', 
+				 url : "resources/addcompetence/",
+				 dataType : "json",
+				 contentType : "application/json; charset=utf-8",
+				 params : {"userid" : username },
+				 data : {data : object}
 				    })
 			 	.success(function(data, status) {
 			 		console.log(data);

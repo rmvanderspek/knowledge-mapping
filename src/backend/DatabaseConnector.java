@@ -48,12 +48,14 @@ public class DatabaseConnector {
     public boolean addCompetence(Competence competence){
     	
     	String name = competence.getName();
+    	String description = competence.getDescription();
     	PreparedStatement pstmt = null;
-    	String query = "INSERT Competences (name) VALUES (?);";
+    	String query = "INSERT Competences (name, description) VALUES (?,?);";
     	
     	try {
     		pstmt = conn.prepareStatement(query);   		
     		pstmt.setString(1, name); 
+    		pstmt.setString(2, description);
     		pstmt.executeUpdate();
     	}
     	catch(SQLException e){
@@ -322,6 +324,26 @@ public class DatabaseConnector {
        	}
     	//TODO add logic for everything update
     	System.out.println("Total of " + updated + " rows updated");
+    	return true;
+    }
+    
+    //Method to add competence to user
+    public boolean addCompetenceToUser(SaveCompetences saveCompetences, String userid){
+    	PreparedStatement pstmt = null;
+    	String query = "INSERT Personal_comp_level (comp_id, comp_level, user_id) VALUES (?,?,?)";
+    	
+    	try {
+    		pstmt = conn.prepareStatement(query);
+    		pstmt.setInt(1,  saveCompetences.getId());
+    		pstmt.setInt(2, 0);
+    		pstmt.setString(3, userid);
+    		
+    		pstmt.executeUpdate();
+    	}
+    	catch(SQLException e){
+    		e.printStackTrace();
+    		return false;
+    	}
     	return true;
     }
     
