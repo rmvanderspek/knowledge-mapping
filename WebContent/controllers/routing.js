@@ -29,7 +29,6 @@ function routeConfig($routeProvider, $locationProvider){
 	$locationProvider.html5Mode({enabled: true, requireBase: false});
 };
 
-
 // Bind the route configuration to the app module
 app.config(routeConfig);
 
