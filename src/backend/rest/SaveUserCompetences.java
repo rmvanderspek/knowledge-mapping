@@ -54,7 +54,7 @@ public class SaveUserCompetences{
 			e.printStackTrace();
 		}
 		return Response.status(200)
-				.entity("email was successfully added!")
+				.entity("Competences have been updated!")
 				.build();
 	}
 }

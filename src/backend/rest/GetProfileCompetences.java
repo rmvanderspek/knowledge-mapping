@@ -17,9 +17,7 @@ public class GetProfileCompetences{
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<ProfileCompetences> getCompetences() {
 		DatabaseConnector db = new DatabaseConnector();
-		System.out.println("De db connector: " + db);
 		ArrayList<ProfileCompetences> competences = db.getProfileCompetences();
-		System.out.println("dit is het: "+ competences);
 		return competences;
 	}
 }
