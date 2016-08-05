@@ -1,13 +1,17 @@
-angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams", "ProfilesService", "$location",
-    function($scope, $routeParams, ProfilesService, $location) {
-		$scope.profiles = ProfilesService.getProfiles();
+angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams", "ProfilesService", "$location", "$rootScope",
+    function($scope, $routeParams, ProfilesService, $location, $rootScope) {
+		
 		$scope.id = parseInt($routeParams.id);
 		$scope.unsaved = false;
 		
-		$scope.profiles = ProfilesService.getProfiles();
-		$scope.competences = ProfilesService.getCompetences();
-		$scope.profileCompetences = ProfilesService.getProfileCompetences();
-		$scope.userCompetences = ProfilesService.getUserCompetences();
+		// Get ProfilesService variables only when they are loaded:
+		if($rootScope.loaded) {
+			$scope.profiles = ProfilesService.getProfiles();
+			$scope.profiles = ProfilesService.getProfiles();
+			$scope.competences = ProfilesService.getCompetences();
+			$scope.profileCompetences = ProfilesService.getProfileCompetences();
+			$scope.userCompetences = ProfilesService.getUserCompetences();
+		}
 
 		$scope.getProfileDetails = function() {
 			for(var i = 0; i < $scope.profiles.length; i++) {
