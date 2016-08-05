@@ -80,23 +80,22 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 
 		save = function(array, username){
 			 
-			 var promise = $http({
-
+			 $http({
 				 method : 'POST', 
 				 url : "resources/saveusercompetences/",
 				 dataType : "json",
 				 contentType : "application/json; charset=utf-8",
 				 params : {"userid" : username },
 				 data : {data : array}
-				    });
-			 
-			 promise.error(function(data, status) {
+				    })
+				 .success(function(data, status){
+				 connect();
+				 return data;
+			 })
+			 .error(function(data, status) {
 			 		alert("Error");
 			 });
-			 $rootScope.loaded = false;
-			 $rootScope.$broadcast("loadedEvent", "data");
-			 return promise;
-			 
+
 		};
 		
 		saveCompetence = function(object, username){
