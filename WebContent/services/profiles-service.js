@@ -92,10 +92,9 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 				 connect();
 				 return data;
 			 })
-			 .error(function(data, status) {
+			 	.error(function(data, status) {
 			 		alert("Error");
 			 });
-
 		};
 		
 		saveCompetence = function(object, username){
