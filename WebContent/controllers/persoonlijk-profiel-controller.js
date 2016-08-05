@@ -2,7 +2,7 @@ angular.module("Knowl").controller("PersoonlijkProfielCtrl", ["$scope", "$routeP
     function($scope, $routeParams, ProfilesService, $rootScope, $interval) {
 		$scope.allProfiles;
 		$scope.profiles;
-		
+
 		// Load data
 		$scope.loadData = function() {
 			$scope.allProfiles = ProfilesService.getAllProfiles();
@@ -11,13 +11,14 @@ angular.module("Knowl").controller("PersoonlijkProfielCtrl", ["$scope", "$routeP
 		
 		// Check if the data is loaded otherwise keep checking until data is loaded
 		if($rootScope.loaded) {
+			console.log("hier");
 			$scope.loadData();
 		}else {
 			$rootScope.$on("loadedEvent", function(event, data) {
 				$interval(function() {
 					$scope.loadData();
 					
-				}, 100, 7);
+				}, 100, 10);
 			});
 		}
 		
@@ -32,7 +33,7 @@ angular.module("Knowl").controller("PersoonlijkProfielCtrl", ["$scope", "$routeP
 		
 		$scope.select = function(index) {
 
-			if($scope.loaded) {
+			if($rootScope.loaded) {
 				$scope.selected = $scope.allProfiles[index].name;
 			}
 		};

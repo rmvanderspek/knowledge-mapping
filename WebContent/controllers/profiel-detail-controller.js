@@ -132,7 +132,7 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 				$scope.unsaved = false;
 			}
 			promise = save($scope.showCompetences, $scope.username);
-			promise.then(connect($scope.username));
+			promise.then(connect());
 		};
 		
 		$scope.reset = function() {
