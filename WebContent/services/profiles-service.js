@@ -133,6 +133,23 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 				alert("Error");
 			});
 		};
+		
+		changeCompetenceName = function(competenceid, newName){
+			$http({
+				method 	:  'POST',
+				url 	: 	"resources/changecompetencename/",
+				dataType : "json",
+				contentType : "application/json; charset = utf-8",
+				data: {"competenceid" : competenceid,
+					"competencename" : newName}
+			})
+			.success(function(data, status){
+				connect();
+			})
+			.error(function(data, status){
+				alert("Error");
+			});
+		};
 			 
 		return {
 	        getProfiles: function() {

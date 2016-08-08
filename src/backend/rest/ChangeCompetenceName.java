@@ -1,6 +1,5 @@
 package backend.rest;
 
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -9,9 +8,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import backend.DatabaseConnector;
 
-@Path("changecompetenceprofile")
-public class ChangeCompetenceProfile{
 
+@Path("changecompetencename")
+public class ChangeCompetenceName{
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -22,9 +21,9 @@ public class ChangeCompetenceProfile{
 		try {
 			obj =  new JSONObject(json);
 			int competenceId = obj.getInt("competenceid");
-			int profileId = obj.getInt("profileid");
+			String competenceName = obj.getString("competencename");
 			
-			db.changeCompetenceProfile(competenceId, profileId);
+			db.changeCompetenceName(competenceId, competenceName);
 			
 		} 
 		catch (JSONException e) {

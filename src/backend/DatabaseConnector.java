@@ -385,6 +385,25 @@ public class DatabaseConnector {
     	return true;
     }
     
+    //Method to change competence name
+    public boolean changeCompetenceName(int competenceId, String competenceName){
+    	PreparedStatement pstmt = null;
+    	String query = "UPDATE Competences SET name = ? WHERE id = ?";
+    	
+    	try {
+    		pstmt = conn.prepareStatement(query);
+    		pstmt.setString(1, competenceName);
+    		pstmt.setInt(2, competenceId);
+    		
+    		pstmt.executeUpdate();
+    	}
+    	catch (SQLException e){
+    		e.printStackTrace();
+    		return false;
+    	}
+    	return true;
+    }
+    
     public static void main(String[] args) throws SQLException{
     	DatabaseConnector dbc = new DatabaseConnector();
     	System.out.println(dbc.getUserCompetences("hli24213"));

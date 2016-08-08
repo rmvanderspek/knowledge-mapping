@@ -14,17 +14,17 @@
 	          	<h5 ng-click = "showDetails = !showDetails">{{competence.name}} </h5>
 	          		<div ng-show = "showDetails">
 	          			<div  class = "col-sm-4">
-	          			Wijzig naam:
+	          			Wijzig naam: {{competence.id}}
 	          			</div>
 	          			<div class = "col-sm-4">
 	          			<input type = "text" id="newName" ng-model="newName" placeholder="Nieuwe naam">
 	          			</div>
 	          			<div class = "col-sm-4" style = "text-align : right">
-	          			<button ng-click = "saveNewName">Opslaan</button>
+	          			<button ng-click = "saveNewName(competence.id, newName)">Opslaan</button>
 	          			<button ng-click = "showDetails = !showDetails">Annuleren</button>	          			
 	          			</div>
 	          			<div class = "col-sm-4">
-	          			Wijzig beschrijving:
+	          			Wijzig beschrijving: {{competence.id}}
 	          			</div>	       
 	          			<div class = "col-sm-4">
 	          			<input type = "text" id="newDescription" ng-model="newDescription" placeholder="Nieuwe beschrijving">

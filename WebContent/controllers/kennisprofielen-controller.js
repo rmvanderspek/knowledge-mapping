@@ -3,6 +3,7 @@ angular.module("Knowl").controller("KennisProfielenCtrl", ["$scope", "$location"
 	$scope.profiles = ProfilesService.getAllProfiles();
 	$scope.showCompetences = [];
 	$scope.selectedProfile = {};
+	$scope.newName = "";
 	
 	isLoaded = false;
 		// Forward if user is not a manager
@@ -19,14 +20,16 @@ angular.module("Knowl").controller("KennisProfielenCtrl", ["$scope", "$location"
 		
 		$scope.getCompetencesOfProfile = function(profileid){
 				showCompetences = [];
-					for (var j = 0; j < competences.length; j++){			
+				console.log(competences)
+					for (var j = 0; j < competences.length; j++){
 						for (var i = 0; i < profileCompetences.length; i++){
 							if(parseInt(competences[j].id) === parseInt(profileCompetences[i].competenceId) && parseInt(profileCompetences[i].profileId) === parseInt(profileid)){
 								showCompetences.push({
 									 name : competences[j].name,
 									 description : competences[j].description,
-									 id : parseInt(competences[i].id)
+									 id : parseInt(competences[j].id)
 									});
+								console.log(showCompetences)
 							}
 						}
 					}
@@ -36,6 +39,7 @@ angular.module("Knowl").controller("KennisProfielenCtrl", ["$scope", "$location"
 		$scope.fillShowCompetences = function(){
 			for (var i = 0; i < $scope.profiles.length; i++){
 				var id = $scope.profiles[i].profileCompetenceTableId;
+
 				$scope.showCompetences.push({id : id,
 					array : $scope.getCompetencesOfProfile(id)});
 			}
@@ -57,5 +61,10 @@ angular.module("Knowl").controller("KennisProfielenCtrl", ["$scope", "$location"
 
 			$scope.fillShowCompetences();
 		};
+		
+		$scope.saveNewName = function(competenceid, newName){
+			console.log(competenceid + " " + newName)
+			changeCompetenceName(competenceid, newName);
+		}
 	}
 ]);
