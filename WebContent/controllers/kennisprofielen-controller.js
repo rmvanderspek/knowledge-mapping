@@ -65,6 +65,11 @@ angular.module("Knowl").controller("KennisProfielenCtrl", ["$scope", "$location"
 		$scope.saveNewName = function(competenceid, newName){
 			console.log(competenceid + " " + newName)
 			changeCompetenceName(competenceid, newName);
-		}
+		};
+		
+		$scope.saveNewDescription = function(competenceid, newDescription){
+			console.log(competenceid + "  -  " + newDescription )
+			changeCompetenceDescription(competenceid, newDescription);
+		};
 	}
 ]);

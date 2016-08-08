@@ -150,6 +150,23 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 				alert("Error");
 			});
 		};
+		
+		changeCompetenceDescription = function(competenceid, newDescription){
+			$http({
+				method	:	'POST',
+				url		: 	"resources/changecompetencedescription/",
+				dataType : "json",
+				contentType : "application/json; charset = utf-8",
+				data 	: {"competenceid" : competenceid,
+					"competencedescription" : newDescription}
+			})
+			.success(function(data, status){
+				connect();
+			})
+			.error(function(data, status){
+				alert("Error");
+			});
+		};
 			 
 		return {
 	        getProfiles: function() {

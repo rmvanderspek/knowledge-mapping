@@ -13,8 +13,16 @@
 	          	<div ng-repeat = "competence in returnCompetences(profile.profileCompetenceTableId) track by competence.id" >
 	          	<h5 ng-click = "showDetails = !showDetails">{{competence.name}} </h5>
 	          		<div ng-show = "showDetails">
+	          		<div class = "col-sm-3">
+	          		<p class = descI>Omschrijving competentie: </p>
+	          		</div>
+	          		<div class = "col-sm-8">
+	          		<p class = descI>{{competence.description}}</p>
+	          		</div>
+	          		<div class = "col-sm-1"></div><br>
+	          		
 	          			<div  class = "col-sm-4">
-	          			Wijzig naam: {{competence.id}}
+	          			Wijzig naam:
 	          			</div>
 	          			<div class = "col-sm-4">
 	          			<input type = "text" id="newName" ng-model="newName" placeholder="Nieuwe naam">
@@ -24,13 +32,13 @@
 	          			<button ng-click = "showDetails = !showDetails">Annuleren</button>	          			
 	          			</div>
 	          			<div class = "col-sm-4">
-	          			Wijzig beschrijving: {{competence.id}}
+	          			Wijzig beschrijving:
 	          			</div>	       
 	          			<div class = "col-sm-4">
 	          			<input type = "text" id="newDescription" ng-model="newDescription" placeholder="Nieuwe beschrijving">
 	          			</div>   
 						<div class = "col-sm-4" style = "text-align : right">
-							<button ng-click = "saveProfile(selectedProfile.id)">Opslaan</button>
+							<button ng-click = "saveNewDescription(competence.id, newDescription)">Opslaan</button>
 	          				<button ng-click = "showDetails = !showDetails">Annuleren</button>
 						</div>	
 	          			<div class = "col-sm-4">
