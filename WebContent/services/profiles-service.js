@@ -11,6 +11,7 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 		var usercompetences = [];
 		
 		
+		
 		connect = function(username){
 			if(user === "" || username != null) {
 				user = username;
@@ -107,12 +108,30 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 				 data : {data : object}
 				    })
 			 	.success(function(data, status) {
-			 		console.log(data);
+			 		connect();
 			 		return data;
 			 })
 			 	.error(function(data, status) {
 			 		alert("Error");
 			 });
+		};
+		
+		changeCompetenceProfile = function(competenceid, profileid){
+			$http({
+				method 	: 'POST',
+				url 	: "resources/changecompetenceprofile/",
+				dataType : "json",
+				contentType : "application/json; charset = utf-8",
+				data : {"competenceid" : competenceid,
+						"profileid" : profileid}			
+			})
+			.success(function(data, status){
+				connect();
+				return true;
+			})
+			.error(function(data, status){
+				alert("Error");
+			});
 		};
 			 
 		return {

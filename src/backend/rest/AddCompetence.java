@@ -19,6 +19,9 @@ import backend.SaveCompetences;
 @Path("addcompetence")
 public class AddCompetence{
 @QueryParam("userid") String userId;
+boolean updatingDone = false;
+boolean exists = false;
+int id = 0;
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -33,12 +36,27 @@ public class AddCompetence{
 			String description = obj.getString("description");
 			
 			competence = new Competence(name, description);
-			db.addCompetence(competence);
-
 			ArrayList<Competence> competenceList = db.getCompetences();
-			Competence newComp = competenceList.get(competenceList.size() - 1);
 			
-			int id = newComp.getId();
+			for(int i = 0; i < competenceList.size(); i++){
+				Competence c = competenceList.get(i);
+				if (c.getName().equals(name)){
+					exists = true;
+					id = c.getId();
+				}
+			}
+			if (!exists){
+				updatingDone = db.addCompetence(competence);
+				while(!updatingDone){
+				
+				}
+				competenceList = db.getCompetences();
+				Competence newComp = competenceList.get(competenceList.size() - 1);
+				
+				id = newComp.getId();
+			}
+			
+
 			
 			db.addCompetenceToUser(
 					new SaveCompetences(
@@ -47,8 +65,10 @@ public class AddCompetence{
 					0, 
 					id), userId);
 			
-			db.addCompetenceToProfile(
-					new ProfileCompetences(999, id));
+			if (!exists){
+				db.addCompetenceToProfile(
+						new ProfileCompetences(999, id));
+			}
 		} 
 		catch (JSONException e) {
 			e.printStackTrace();

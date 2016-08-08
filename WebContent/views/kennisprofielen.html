@@ -1,18 +1,54 @@
 <div class="jumbotron">
-		        <h1>Kennisprofiel</h1>
-		        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+		        <h1 ng-init= "fillShowCompetences()">Kennisprofiel</h1>
+		        <p class="lead">Dit is de plek waar je als manager de kennisprofielen kan inrichten. Je kunt via deze weg competenties toevoegen aan de bestaande profielen en ze weer loskoppelen.</p>
 		        
 		    </div>
 		
 	      <div class="row marketing">
-	        <div>
-	          <h4>Subheading</h4>
-	          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-	
-	          <h4>Subheading</h4>
-	          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-	
-	          <h4>Subheading</h4>
-	          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+	        <div ng-repeat = "profile in profiles">
+	          
+	          <h4 ng-click = "showMore = !showMore">{{profile.name}}</h4>
+	          	<div ng-show = "showMore">
+	          	<p>{{profile.description}}</p>
+	          	<div ng-repeat = "competence in returnCompetences(profile.profileCompetenceTableId) track by competence.id" >
+	          	<h5 ng-click = "showDetails = !showDetails">{{competence.name}} </h5>
+	          		<div ng-show = "showDetails">
+	          			<div  class = "col-sm-4">
+	          			Wijzig naam:
+	          			</div>
+	          			<div class = "col-sm-4">
+	          			<input type = "text" id="newName" ng-model="newName" placeholder="Nieuwe naam">
+	          			</div>
+	          			<div class = "col-sm-4" style = "text-align : right">
+	          			<button ng-click = "saveNewName">Opslaan</button>
+	          			<button ng-click = "showDetails = !showDetails">Annuleren</button>	          			
+	          			</div>
+	          			<div class = "col-sm-4">
+	          			Wijzig beschrijving:
+	          			</div>	       
+	          			<div class = "col-sm-4">
+	          			<input type = "text" id="newDescription" ng-model="newDescription" placeholder="Nieuwe beschrijving">
+	          			</div>   
+						<div class = "col-sm-4" style = "text-align : right">
+							<button ng-click = "saveProfile(selectedProfile.id)">Opslaan</button>
+	          				<button ng-click = "showDetails = !showDetails">Annuleren</button>
+						</div>	
+	          			<div class = "col-sm-4">
+	          			Wijzig profiel:
+	          			</div>	       
+	          			<div class = "col-sm-4">
+	          			<select id = "changeProfile" ng-model = "selectedProfile" ng-options = "profile.name for profile in profiles">
+							</select>
+	          			</div>   
+						<div class = "col-sm-4" style = "text-align : right">
+							<button ng-click = "saveProfile(selectedProfile.profileCompetenceTableId, competence.id)">Opslaan</button>
+	          				<button ng-click = "showDetails = !showDetails">Annuleren</button>
+						</div>		
+						
+	          		</div>
+	          		
+	          	</div>
+				</div>
+				<hr></hr>
 	        </div>
 	      </div>

@@ -366,6 +366,24 @@ public class DatabaseConnector {
     	return true;
     }
     
+    //Method to change a competence profile
+    public boolean changeCompetenceProfile(int competenceid, int profileid){
+    	PreparedStatement pstmt = null;
+    	String query = "UPDATE Profile_competence_table SET profile_id = ? WHERE competences = ?";
+    	
+    	try {
+    		pstmt = conn.prepareStatement(query);
+    		pstmt.setInt(1, profileid);
+    		pstmt.setInt(2, competenceid);
+    		
+    		pstmt.executeUpdate();
+    	}
+    	catch(SQLException e){
+    		e.printStackTrace();
+    		return false;
+    	}
+    	return true;
+    }
     
     public static void main(String[] args) throws SQLException{
     	DatabaseConnector dbc = new DatabaseConnector();

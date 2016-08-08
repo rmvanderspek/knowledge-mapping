@@ -19,6 +19,21 @@
 		<ul>
 			<li><a href="" ng-click="showAddCompetence()">Competentie</a>
 				<div ng-show="popAddCompetence">
+				<hr></hr>
+				<div class = "row form-margin">
+					<div class = "form-group">
+						<label for = "knownCompetences" class = "col-sm-4 control-label">Bestaande competenties:</label>
+							<div class = col-sm-8">
+							<select class = "btn btn-warning dropdown-toggle" id = "knownCompetences" ng-model = "selectedCompetence" ng-options = "competence.name for competence in competences" >
+							</select><br></div>
+							<div class = "row form-margin" align = "center"><br>
+							<button class="btn btn-sm btn-warning" ng-click="saveExisting(selectedCompetence)" align = "center">Toevoegen</button>
+							<br><br><i>
+							Indien de competentie die je wil toevoegen niet in de lijst staat, kun je hier onder zelf een toevoegen!</i>
+							</div>
+							
+					</div>
+				</div>
 					<hr></hr>
 					<div class="row form-margin">
 						<div class="form-group">

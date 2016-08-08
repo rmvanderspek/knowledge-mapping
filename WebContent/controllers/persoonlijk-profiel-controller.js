@@ -2,11 +2,13 @@ angular.module("Knowl").controller("PersoonlijkProfielCtrl", ["$scope", "$routeP
     function($scope, $routeParams, ProfilesService, $rootScope, $interval) {
 		$scope.allProfiles;
 		$scope.profiles;
+		$scope.competences;
 
 		// Load data
 		$scope.loadData = function() {
 			$scope.allProfiles = ProfilesService.getAllProfiles();
 			$scope.profiles = ProfilesService.getProfiles();
+			$scope.competences = ProfilesService.getCompetences();
 		};
 		
 		// Check if the data is loaded otherwise keep checking until data is loaded
@@ -29,6 +31,7 @@ angular.module("Knowl").controller("PersoonlijkProfielCtrl", ["$scope", "$routeP
 		$scope.selected = "";
 		$scope.competenceName = "";
 		$scope.competenceDescription = "";
+		$scope.selectedCompetence = {};
 		
 		$scope.select = function(index) {
 
@@ -56,6 +59,10 @@ angular.module("Knowl").controller("PersoonlijkProfielCtrl", ["$scope", "$routeP
 			$scope.popAddCompetence = false;
 		};
 		
+		$scope.saveExisting = function(competence) {
+			saveCompetence(competence, $scope.username);
+			$scope.popAddCompetence = false;
+		};
 		
 	} 
 ]);
