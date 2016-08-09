@@ -4,6 +4,13 @@ angular.module("Knowl").controller("KennisProfielenCtrl", ["$scope", "$location"
 	$scope.showCompetences = [];
 	$scope.selectedProfile = {};
 	$scope.newName = "";
+	$scope.selectedOption = 0;
+	
+	$scope.showChangeName = false;
+	$scope.showChangeDesc = false;
+	$scope.moveProfile = false;
+	$scope.copyProfile = false;
+	$scope.deleteComp = false;
 	
 	isLoaded = false;
 		// Forward if user is not a manager
@@ -20,7 +27,6 @@ angular.module("Knowl").controller("KennisProfielenCtrl", ["$scope", "$location"
 		
 		$scope.getCompetencesOfProfile = function(profileid){
 				showCompetences = [];
-				console.log(competences)
 					for (var j = 0; j < competences.length; j++){
 						for (var i = 0; i < profileCompetences.length; i++){
 							if(parseInt(competences[j].id) === parseInt(profileCompetences[i].competenceId) && parseInt(profileCompetences[i].profileId) === parseInt(profileid)){
@@ -29,7 +35,6 @@ angular.module("Knowl").controller("KennisProfielenCtrl", ["$scope", "$location"
 									 description : competences[j].description,
 									 id : parseInt(competences[j].id)
 									});
-								console.log(showCompetences)
 							}
 						}
 					}
@@ -56,20 +61,61 @@ angular.module("Knowl").controller("KennisProfielenCtrl", ["$scope", "$location"
 		};
 
 		$scope.saveProfile = function(profileid, competenceid){
-			console.log(profileid + "  -  " + competenceid)
 			var success = changeCompetenceProfile(competenceid, profileid);
-
 			$scope.fillShowCompetences();
 		};
 		
 		$scope.saveNewName = function(competenceid, newName){
-			console.log(competenceid + " " + newName)
 			changeCompetenceName(competenceid, newName);
 		};
 		
 		$scope.saveNewDescription = function(competenceid, newDescription){
-			console.log(competenceid + "  -  " + newDescription )
 			changeCompetenceDescription(competenceid, newDescription);
+		};
+		
+		$scope.change = function(){
+			if(parseInt($scope.selectedOption) === 1){
+				$scope.showChangeName = true;
+				$scope.showChangeDesc = false;
+				$scope.moveProfile = false;
+				$scope.copyProfile = false;
+				$scope.deleteComp = false;
+			} 
+			else if ($scope.selectedOption === 2){
+				$scope.showChangeName = false;
+				$scope.showChangeDesc = true;
+				$scope.moveProfile = false;
+				$scope.copyProfile = false;
+				$scope.deleteComp = false;
+			} 
+			else if ($scope.selectedOption === 3){
+				$scope.showChangeName = false;
+				$scope.showChangeDesc = false;
+				$scope.moveProfile = true;
+				$scope.copyProfile = false;
+				$scope.deleteComp = false;
+			} 
+			else if ($scope.selectedOption === 4){
+				$scope.showChangeName = false;
+				$scope.showChangeDesc = false;
+				$scope.moveProfile = false;
+				$scope.copyProfile = true;
+				$scope.deleteComp = false;
+			} 
+			else if ($scope.selectedOption === 5){
+				$scope.showChangeName = false;
+				$scope.showChangeDesc = false;
+				$scope.moveProfile = false;
+				$scope.copyProfile = false;
+				$scope.deleteComp = true;
+			} 
+			else {
+				$scope.showChangeName = false;
+				$scope.showChangeDesc = false;
+				$scope.moveProfile = false;
+				$scope.copyProfile = false;
+				$scope.deleteComp = false;
+			}
 		};
 	}
 ]);

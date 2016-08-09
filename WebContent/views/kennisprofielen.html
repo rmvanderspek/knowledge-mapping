@@ -11,7 +11,7 @@
 	          	<div ng-show = "showMore">
 	          	<p>{{profile.description}}</p>
 	          	<div ng-repeat = "competence in returnCompetences(profile.profileCompetenceTableId) track by competence.id" >
-	          	<h5 ng-click = "showDetails = !showDetails">{{competence.name}} </h5>
+	          	<b ng-click = "showDetails = !showDetails">{{competence.name}}</b>
 	          		<div ng-show = "showDetails">
 	          		<div class = "col-sm-3">
 	          		<p class = descI>Omschrijving competentie: </p>
@@ -52,7 +52,7 @@
 							<button ng-click = "saveProfile(selectedProfile.profileCompetenceTableId, competence.id)">Opslaan</button>
 	          				<button ng-click = "showDetails = !showDetails">Annuleren</button>
 						</div>		
-						
+
 	          		</div>
 	          		
 	          	</div>
