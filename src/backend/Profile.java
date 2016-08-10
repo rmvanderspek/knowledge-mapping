@@ -61,7 +61,19 @@ public class Profile {
 		this.description = description;
 	}
 
+	public boolean equals(Object object){
+		if(object instanceof Profile){
+			Profile p = (Profile) object;
+			if (p.getId() == this.id){
+				return true;
+			}
+		}
+		return false;	
+	}
 	
+	public int hashCode(){
+		return id;
+	}
 }
 	
 

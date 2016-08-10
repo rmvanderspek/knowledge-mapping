@@ -1,0 +1,27 @@
+<div class="jumbotron">
+		        <h1>Medewerkersprofielen</h1>
+		        <p class="lead">Hieronder zie je het overzicht van alle medewerkers en kun je gemakkelijk inzicht krijgen in hun verschillende skills.</p>
+		        
+		    </div>
+		    
+		    <div class = "row marketing">
+		    	<div ng-repeat = "user in usersWithProfiles">
+		    		<h4 ng-click = "showMore = !showMore">{{user.firstname}} {{user.lastname}}</h4>
+		    			<div ng-show = "showMore">
+		    				<div ng-repeat = "profile in user.profiles">
+		    					<h5 ng-click = "showProfileDetails = !showProfileDetails">{{profile.profilename}} test</h5>
+									<div ng-show = "showProfileDetails">
+										<div class = "col-sm-1">
+										
+										</div>
+										<div class = "col-sm-11">
+											<div ng-repeat = "competence in profile.competences">
+												{{competence.name}} 
+											</div>
+	
+										</div>
+									</div>
+		    				</div>
+		    			</div><hr>
+		    	</div>
+		    </div>

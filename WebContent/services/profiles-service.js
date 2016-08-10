@@ -9,7 +9,9 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 		var competences = [];
 		var profilecompetences = [];
 		var usercompetences = [];
-		
+		var users = [];
+		var usersWithProfiles = [];
+		var allUserCompetneces = [];
 		
 		
 		connect = function(username){
@@ -73,9 +75,44 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 			 		alert("Error");
 			 });
 			 
+			 $http({
+				 method : 'GET',
+				 url : "resources/getusers/",
+			 })
+			 .success(function(data, status){
+				 users = data.profile;
+				 console.log(users)
+				 return data;
+			 })
+			 .error(function(data, status){
+				 alert("Error");
+			 });
+			 
+			 $http({
+				 method : 'GET',
+				 url : "resources/getuserswithprofiles"
+			 })
+			 .success(function(data, status){
+				 usersWithProfiles = data;
+				 return data;
+			 })
+			 .error(function(data, status){
+				 alert("Error")
+			 });
+			 
 			 $rootScope.loaded = true;
 			 $rootScope.$broadcast("loadedEvent", "data");
 
+			 $http({
+				 method: 'GET',
+				 url : "resources/getallusercompetences"
+			 })
+			 .success(function(data, status){
+				 allUserCompetences = data.profile;
+			 })
+			 .error(function(data, status){
+				 alert("Error")
+			 });
 		};
 		
 
@@ -167,7 +204,7 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 				alert("Error");
 			});
 		};
-			 
+				 
 		return {
 	        getProfiles: function() {
 	        	return profiles;
@@ -183,7 +220,16 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 			},
 			getAllProfiles: function() {
 				return allProfiles;
+			},
+			getUsers: function(){
+				return users;
+			},
+			getUsersWithProfiles: function(){
+				return usersWithProfiles;
+			},
+			getAllUserCompetences: function(){
+				return allUserCompetences;
 			}
-	    };
+		};
 	}
 ]);

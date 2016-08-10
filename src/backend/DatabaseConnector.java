@@ -182,7 +182,7 @@ public class DatabaseConnector {
     	for(int i = 0; i < personalProfiles.size(); i++){
     		PersonalProfile pp = personalProfiles.get(i);
     		if(pp.getUserId().equals(userId)){
-    			System.out.println(pp.getUserId());
+   // 			System.out.println(pp.getUserId());
     			personProfiles.add(getProfile(pp.getProfileId()));
     		}
     	}
@@ -421,6 +421,59 @@ public class DatabaseConnector {
     		return false;
     	}
     	return true;
+    }
+    
+    //Method to get all users
+    public ArrayList<Person> getUsers(){
+    	ArrayList<Person> userlist = new ArrayList<Person>();
+    	PreparedStatement pstmt = null;
+    	String query = "SELECT * FROM Persons";
+    	ResultSet rs = null;
+    	
+    	try {
+    		pstmt = conn.prepareStatement(query);
+    		rs = pstmt.executeQuery();
+    		
+    		while (rs.next()){
+    			int id = rs.getInt("id");
+    			String firstname = rs.getString("firstname");
+    			String lastname = rs.getString("lastname");
+    			String userId = rs.getString("userid");
+    			int profileId = rs.getInt("profile_id");
+    			
+    			userlist.add(new Person(id, userId, firstname, lastname, profileId));
+    		}
+    	}
+    	catch (SQLException e){
+    		return userlist;
+    	}
+    	return userlist;
+    }
+    
+    public ArrayList<PersonalCompetenceLevel> getAllUserCompetences(){
+    	ArrayList<PersonalCompetenceLevel> usercomplist = new ArrayList<PersonalCompetenceLevel>();
+    	PreparedStatement pstmt = null;
+    	String query = "SELECT * FROM Personal_comp_level";
+    	ResultSet rs = null;
+    	
+    	try {
+    		pstmt = conn.prepareStatement(query);
+    		rs = pstmt.executeQuery();
+    		
+    		while (rs.next()){
+    			int id = rs.getInt("id");
+    			int profileId = rs.getInt("comp_id");
+    			int level = rs.getInt("comp_level");
+    			String userId = rs.getString("user_id");
+    			
+    			usercomplist.add(new PersonalCompetenceLevel(
+    					id, profileId, level, userId));
+    		}
+    	}
+    	catch(SQLException e){
+    		e.printStackTrace();
+    	}
+    	return usercomplist;
     }
     
     public static void main(String[] args) throws SQLException{

@@ -3,6 +3,7 @@ angular.module("Knowl").controller("NavCtrl", ["$scope", "$rootScope",
 		$scope.link0 = "active";
 		$scope.link1 = "";
 		$scope.link2 = "";
+		$scope.link3 = "";
 		
 		
 		$scope.managerNavigation = "";
@@ -16,9 +17,10 @@ angular.module("Knowl").controller("NavCtrl", ["$scope", "$rootScope",
 		$scope.setManagerMenu = function() {
 			if($scope.$parent.isManager()) {
 				$scope.managerNavigation = 'Kennisprofielen';
-				
+				$scope.managerNavigation2 = 'Medewerkesprofielen';
 			} else {
 				$scope.managerNavigation = "";
+				$scope.managerNavigation2 = "";
 			}
 		}
 	
@@ -27,6 +29,7 @@ angular.module("Knowl").controller("NavCtrl", ["$scope", "$rootScope",
 			$scope.link0 = "";
 			$scope.link1 = "";
 			$scope.link2 = "";
+			$scope.link3 = "";
 			
 			if(option === 0) {
 				$scope.link0 = "active";
@@ -34,6 +37,8 @@ angular.module("Knowl").controller("NavCtrl", ["$scope", "$rootScope",
 				$scope.link1 = "active";
 			} else if(option === 2) {
 				$scope.link2 = "active";
+			} else if(option === 3) {
+				$scope.link3 = "active";
 			}
 			
 			

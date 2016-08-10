@@ -18,11 +18,18 @@ public class Person {
 	}
 	
 	public Person(int id, String userId, String firstName, String lastName, int personalProfileId){
-		
+		this.id = id;
+		this.userId = userId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.personalProfileId = personalProfileId;
 	}
 	
 	public Person(String userId, String firstName, String lastName, int personalProfileId){
-		
+		this.userId = userId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.personalProfileId = personalProfileId;
 	}
 	
 	public int getId() {

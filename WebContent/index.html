@@ -20,8 +20,9 @@
 		        <nav ng-controller="NavCtrl">
 		          <ul class="nav nav-pills pull-right">
 		          	<li role="presentation" ng-class="link0" ng-click="activate(0)"><a href="./">Home</a></li>
-		            <li role="presentation" ng-class="link1" ng-click="activate(1)"><a href="./persoonlijk-profiel">Persoonlijk Profiel</a></li>
+		            <li role="presentation" ng-class="link1" ng-click="activate(1)" ng-show="!$parent.isManager()"><a href="./persoonlijk-profiel">Profiel</a></li>
 		            <li role="presentation" ng-class="link2" ng-click="activate(2)" ng-show="$parent.isManager()"><a href="./kennisprofielen"><span ng-bind="managerNavigation"></span></a></li>
+		            <li role="presentation" ng-class="link3" ng-click="activate(3)" ng-show="$parent.isManager()"><a href="./medewerkersprofielen"><span ng-bind="managerNavigation2"></span></a></li>
 		            <li class="dropdown">
 					  	<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 					    	<span ng-bind="$parent.role"></span>
@@ -68,7 +69,7 @@
 	 	<script src = "controllers/persoonlijk-profiel-controller.js"></script>
 	 	<script src = "controllers/profiel-detail-controller.js"></script>
 	 	<script src = "controllers/kennisprofielen-controller.js"></script>
-	 	
+	 	<script src = "controllers/medewerkersprofielen-controller.js"></script>
 	 	
 	 	
     
