@@ -11,7 +11,7 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 		var usercompetences = [];
 		var users = [];
 		var usersWithProfiles = [];
-		var allUserCompetneces = [];
+		var allUserCompetences = [];
 		
 		
 		connect = function(username){
@@ -81,7 +81,6 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 			 })
 			 .success(function(data, status){
 				 users = data.profile;
-				 console.log(users)
 				 return data;
 			 })
 			 .error(function(data, status){
@@ -97,12 +96,9 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 				 return data;
 			 })
 			 .error(function(data, status){
-				 alert("Error")
+				 alert("Error");
 			 });
 			 
-			 $rootScope.loaded = true;
-			 $rootScope.$broadcast("loadedEvent", "data");
-
 			 $http({
 				 method: 'GET',
 				 url : "resources/getallusercompetences"
@@ -111,8 +107,12 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 				 allUserCompetences = data.profile;
 			 })
 			 .error(function(data, status){
-				 alert("Error")
+				 alert("Error");
 			 });
+			 
+		
+			 $rootScope.loaded = true;
+			 $rootScope.$broadcast("loadedEvent", "data");
 		};
 		
 

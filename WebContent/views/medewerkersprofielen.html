@@ -9,16 +9,29 @@
 		    		<h4 ng-click = "showMore = !showMore">{{user.firstname}} {{user.lastname}}</h4>
 		    			<div ng-show = "showMore">
 		    				<div ng-repeat = "profile in user.profiles">
-		    					<h5 ng-click = "showProfileDetails = !showProfileDetails">{{profile.profilename}} test</h5>
+		    					<h5 ng-click = "showProfileDetails = !showProfileDetails">{{profile.profilename}}</h5>
 									<div ng-show = "showProfileDetails">
-										<div class = "col-sm-1">
-										
+										<div class = "col-sm-1">								
 										</div>
 										<div class = "col-sm-11">
 											<div ng-repeat = "competence in profile.competences">
-												{{competence.name}} 
+												<div class="frame" title="{{competence.description}}">
+													<div class="progress progress-color">
+														<div class="input-group">
+														    <span class="input-group-btn">
+														        <button class="btn btn-xs btn-default" type="button"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+														    </span>
+												  			<div ng-class="getBarClass(competence.level)" role="progressbar" aria-valuenow="{{competence.level}}" aria-valuemin="0" aria-valuemax="100" ng-attr-style="min-width: 0; width: {{competence.level}}%;">
+												    			&#160;
+												  			</div>
+												  			<span class="input-group-btn">
+														        <button  class="btn btn-xs btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+														    </span>
+											  			</div>
+											  			<div class="title"><span class="title-white">{{competence.name}}: {{competence.level}}%</span></div>
+											  		</div>
+											  	</div>
 											</div>
-	
 										</div>
 									</div>
 		    				</div>

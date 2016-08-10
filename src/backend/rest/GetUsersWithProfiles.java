@@ -10,7 +10,6 @@ import javax.ws.rs.core.MediaType;
 import com.google.gson.Gson;
 import backend.DatabaseConnector;
 import backend.Person;
-import backend.PersonalCompetenceLevel;
 import backend.Profile;
 
 @Path("getuserswithprofiles")
