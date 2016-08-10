@@ -30,12 +30,7 @@ public class GetUsersWithProfiles{
 			usersWithProfiles.put(list.get(i).getUserId(), userProfiles);
 			
 			j  = obj.toJson(usersWithProfiles);
-			//obj.put(list.get(i).getUserId(), userProfiles);
-
 		}
-		
-		System.out.println(j);	
-
 		return j;
 	}
 }

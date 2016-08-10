@@ -56,8 +56,6 @@ int id = 0;
 				id = newComp.getId();
 			}
 			
-
-			
 			db.addCompetenceToUser(
 					new SaveCompetences(
 					name, 

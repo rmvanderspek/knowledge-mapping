@@ -23,8 +23,7 @@ public class ChangeCompetenceDescription{
 			int competenceId = obj.getInt("competenceid");
 			String competenceDescription = obj.getString("competencedescription");
 			
-			db.changeCompetenceDescription(competenceId, competenceDescription);
-			
+			db.changeCompetenceDescription(competenceId, competenceDescription);	
 		} 
 		catch (JSONException e) {
 			e.printStackTrace();

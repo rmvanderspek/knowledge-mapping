@@ -15,11 +15,7 @@ angular.module("Knowl").controller("MainCtrl", ["$scope", "$location", "$rootSco
 		$scope.connect = function(){
 			connect($scope.username);
 		};
-		
-		$scope.connect = function(username){
-			connect(username);
-			getUserProfiles();
-		}
+
 		
 		
 	}

@@ -34,7 +34,9 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 				 url : "resources/getuserprofile/",
 				 params: {"userid" : user }})
 			 	.success(function(data, status) {
-			 		profiles = data.profile;
+			 		if(data != null){
+			 			profiles = data.profile;
+			 		}
 			 		return data;
 			 })
 			 	.error(function(data, status) {
@@ -68,7 +70,9 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 				 url : "resources/getusercompetences/",
 				 params: {"userid" : user }})
 			 	.success(function(data, status) {
-			 		usercompetences = data.profile;
+			 		if (data != null){
+				 		usercompetences = data.profile;
+			 		}
 			 		return data;
 			 })
 			 	.error(function(data, status) {

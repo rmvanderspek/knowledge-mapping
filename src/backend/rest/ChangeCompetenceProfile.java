@@ -25,7 +25,6 @@ public class ChangeCompetenceProfile{
 			int profileId = obj.getInt("profileid");
 			
 			db.changeCompetenceProfile(competenceId, profileId);
-			
 		} 
 		catch (JSONException e) {
 			e.printStackTrace();

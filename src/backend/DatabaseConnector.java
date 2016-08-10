@@ -23,10 +23,8 @@ public class DatabaseConnector {
     public DatabaseConnector() {
     	try {
     		conn = getConnection();
-    		//System.out.println(conn);
     	} catch (SQLException ex) {
     		ex.printStackTrace();
-    		//System.out.println("Connection is: " +conn);
     	}
     }
     
@@ -38,8 +36,6 @@ public class DatabaseConnector {
             connectionProps.put("password", "!H4Nz3lT0@");
 
             conn = DriverManager.getConnection(serverName);
-
-            //System.out.println("Connected to database");
         }
         return conn;
     }
@@ -179,10 +175,11 @@ public class DatabaseConnector {
     public ArrayList<Profile> getUserProfiles(String userId){
     	ArrayList<PersonalProfile> personalProfiles = getPersonalProfiles();
     	ArrayList<Profile> personProfiles = new ArrayList<Profile>();
+    	
     	for(int i = 0; i < personalProfiles.size(); i++){
     		PersonalProfile pp = personalProfiles.get(i);
+    		
     		if(pp.getUserId().equals(userId)){
-   // 			System.out.println(pp.getUserId());
     			personProfiles.add(getProfile(pp.getProfileId()));
     		}
     	}
@@ -207,9 +204,7 @@ public class DatabaseConnector {
     			int profileCompetenceId = rs.getInt(3);
     			String description = rs.getString(4);
     			
-    			profiles.add(new Profile(id, name, profileCompetenceId, description));
-    			System.out.println(profiles);
-    			
+    			profiles.add(new Profile(id, name, profileCompetenceId, description));    			
     		}
     	}
     	catch(SQLException e){
@@ -292,6 +287,7 @@ public class DatabaseConnector {
     			String name = rs.getString(2);
     			String description = rs.getString(3);
     			System.out.println(description + name);
+
     			competences.add(new Competence(id, name, description));
     		}
     	}
@@ -307,8 +303,10 @@ public class DatabaseConnector {
     	PreparedStatement pstmt = null;
     	String query = "UPDATE Personal_comp_level SET comp_level = ? WHERE user_id LIKE ? and comp_id = ?";
     	int updated = 0;
+    	
     	for(int i = 0; i < list.size(); i++){
     		SaveCompetences sc = list.get(i);
+    		
     		try {
     			pstmt = conn.prepareStatement(query);
     			pstmt.setInt(1, sc.getLevel());
@@ -322,8 +320,6 @@ public class DatabaseConnector {
     			return false;
     		}
        	}
-    	//TODO add logic for everything update
-    	System.out.println("Total of " + updated + " rows updated");
     	return true;
     }
     
@@ -449,7 +445,8 @@ public class DatabaseConnector {
     	}
     	return userlist;
     }
-    
+   
+    //Method to get all user competences for manager dashboard
     public ArrayList<PersonalCompetenceLevel> getAllUserCompetences(){
     	ArrayList<PersonalCompetenceLevel> usercomplist = new ArrayList<PersonalCompetenceLevel>();
     	PreparedStatement pstmt = null;
@@ -478,8 +475,8 @@ public class DatabaseConnector {
     
     public static void main(String[] args) throws SQLException{
     	DatabaseConnector dbc = new DatabaseConnector();
-    	System.out.println(dbc.getUserCompetences("hli24213"));
     	ArrayList<PersonalCompetenceLevel> arr = dbc.getUserCompetences("hli24213");
+    	
     	for (int i = 0; i < arr.size(); i++){
     		System.out.println(arr.get(i).getCompetenceLevel() + arr.get(i).getPersonId() + arr.get(i).getCompetenceId());
     	}
