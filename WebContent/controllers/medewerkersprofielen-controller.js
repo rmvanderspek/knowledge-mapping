@@ -84,10 +84,6 @@ angular.module("Knowl").controller("MedewerkersProfielenCtrl", ["$scope", "$loca
 				});
 		};
 		
-		
-			
-		
-		
 		$scope.getBarClass = function(level) {
 			if(level < 30) {
 				return "progress-bar progress-bar-danger progress-bar-striped";
