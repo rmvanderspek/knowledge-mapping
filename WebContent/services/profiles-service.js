@@ -12,6 +12,7 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 		var users = [];
 		var usersWithProfiles = [];
 		var allUserCompetences = [];
+		var allUserAvailability = [];
 		
 		
 		connect = function(username){
@@ -114,6 +115,18 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 				 alert("Error");
 			 });
 			 
+			 $http({
+				 method: 'GET',
+				 url : "resources/getallavailability"
+			 })
+			 .success(function(data, status){
+				 allUserAvailability = data.profile;
+				 console.log(allUserAvailability)
+			 })
+			 .error(function(data, status){
+				 alert("Error");
+			 });
+			 
 		
 			 $rootScope.loaded = true;
 			 $rootScope.$broadcast("loadedEvent", "data");
@@ -209,6 +222,24 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 			});
 		};
 				 
+		saveDate = function(date){
+			$http({
+				method : 'POST',
+				url	: "resources/savedate/",
+				dataType : "json",
+				contentType : "application/json; charset = utf-8",
+				 data : {"userid" : user,
+					 "date" : date}
+
+			})
+			.success(function(data, status){
+				connect();
+			})
+			.error(function(data, status){
+				alert("Error");
+			});
+		};
+		
 		return {
 	        getProfiles: function() {
 	        	return profiles;
@@ -233,7 +264,11 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 			},
 			getAllUserCompetences: function(){
 				return allUserCompetences;
+			},
+			getUserAvailability: function(){
+				return allUserAvailability;
 			}
+		
 		};
 	}
 ]);

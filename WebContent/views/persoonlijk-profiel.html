@@ -9,6 +9,11 @@
 
 <div class="row marketing">
 	<div>
+		<h4>Mijn beschikbaarheid</h4>
+		<p>Geef hier aan vanaf wanneer je weer beschikbaar bent!</p>
+		<div class = col-sm-8><input type="text" class = "form-control" id = "inputDate" ng-model = "date" placeholder = "dd/mm/yyyy"></div>
+		<div class = col-sm-4><button class="btn btn-sm btn-warning" ng-click="saveDate()" align = "center">Opslaan beschikbaarheid</button></div>
+		<br><br>
 		<h4>Mijn kennisprofielen</h4>
 		<ul ng-init="getProfiles()">
 			<li ng-repeat="profile in profiles"><a href="./profiel/{{profile.id}}">{{profile.name}}</a></li>

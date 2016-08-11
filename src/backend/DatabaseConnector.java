@@ -1,7 +1,12 @@
 package backend;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Properties;
 
 
@@ -471,6 +476,54 @@ public class DatabaseConnector {
     		e.printStackTrace();
     	}
     	return usercomplist;
+    }
+    
+    public boolean setAvailable(String date, String userid){  
+    	
+    	String dateString = date.toString();
+    	
+    	PreparedStatement pstmt = null;
+    	String query = "UPDATE Person_available SET available = ?, available_date = ? WHERE user_id LIKE ?";
+    	
+    	try {
+    		pstmt = conn.prepareStatement(query);
+    		pstmt.setInt(1, 1);
+    		pstmt.setString(2, dateString);
+    		pstmt.setString(3, userid);
+    		System.out.println(userid + dateString);
+    		pstmt.executeUpdate();
+    	}
+    	catch(SQLException e){
+    		e.printStackTrace();
+    	}
+    	return true;
+    }
+    
+    public ArrayList<Available> getAllAvailable(){
+    	ArrayList<Available> list = new ArrayList<Available>();
+    	
+    	PreparedStatement pstmt = null;
+    	ResultSet rs = null;
+    	String query = "SELECT * FROM Person_available";
+    	
+    	try {
+    		pstmt = conn.prepareStatement(query);
+    		rs = pstmt.executeQuery();
+    		
+    		while (rs.next()){
+    			int id = rs.getInt("id");
+    			int available = rs.getInt("available");
+    			String userId = rs.getString("user_id");
+    			String dateString = rs.getString("available_date");
+    			
+    			list.add(new Available(id, available, userId, dateString));
+    		}
+    	}
+    	catch(SQLException e){
+    		e.printStackTrace();
+    	}
+    	
+    	return list;
     }
     
     public static void main(String[] args) throws SQLException{

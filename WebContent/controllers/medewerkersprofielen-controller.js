@@ -7,6 +7,7 @@ angular.module("Knowl").controller("MedewerkersProfielenCtrl", ["$scope", "$loca
 		$scope.userCompetences = ProfilesService.getAllUserCompetences();
 		$scope.profileCompetences = ProfilesService.getProfileCompetences();
 		$scope.competences = ProfilesService.getCompetences();
+		$scope.availability = ProfilesService.getUserAvailability();
 
 		$scope.selectCompetence = function(id){
 			for(var i = 0; i < $scope.competences.length; i++){
@@ -37,6 +38,7 @@ angular.module("Knowl").controller("MedewerkersProfielenCtrl", ["$scope", "$loca
 			 }
 			 return showcompetences;
 		};
+	
 		
 		for(var i = 0; i < $scope.users.length; i++){
 			userid = $scope.users[i].userId;
@@ -45,19 +47,46 @@ angular.module("Knowl").controller("MedewerkersProfielenCtrl", ["$scope", "$loca
 			profileswithcompetences = [];
 			
 			for(var j = 0; j < $scope.profiles[userid].length; j++){
+				competences = $scope.getCompetences($scope.profiles[userid][j].profileCompetenceTableId, userid);
+				total = competences.length;
+				levelTotal = 0;
+				
+				for(var y = 0; y < competences.length; y++){
+					levelTotal = levelTotal + competences[y].level;
+				}
+				
 				profileswithcompetences.push({
-					profilename : profiles[j].name, 
-					competences : $scope.getCompetences($scope.profiles[userid][j].profileCompetenceTableId, userid)
+					profilename : profiles[j].name,
+					profileLevel : (levelTotal / total).toFixed(0),
+					competences : competences
 				});
 			}		
+			
+			availableDate = "";
+			for(var k = 0; k < $scope.availability.length; k++){
+				if($scope.availability[k].userid === userid){
+					availableDate = $scope.availability[k].dateString;
+					var dateParts = availableDate.split("/");
+					var date = new Date(dateParts[2], (dateParts[1] -1), dateParts[0]);
+					
+					if(new Date > date){
+						console.log(true)
+						availableDate = "Beschikbaar!";
+					} 
+				}
+			}
 			
 			$scope.usersWithProfiles.push({
 					firstname : $scope.users[i].firstName,
 					lastname : $scope.users[i].lastName,
-				
+					available:	availableDate,
 					profiles : profileswithcompetences						
 				});
-		}
+		};
+		
+		
+			
+		
 		
 		$scope.getBarClass = function(level) {
 			if(level < 30) {

@@ -3,7 +3,8 @@ angular.module("Knowl").controller("PersoonlijkProfielCtrl", ["$scope", "$routeP
 		$scope.allProfiles;
 		$scope.profiles;
 		$scope.competences;
-
+		$scope.date;
+		
 		// Load data
 		$scope.loadData = function() {
 			$scope.allProfiles = ProfilesService.getAllProfiles();
@@ -23,7 +24,9 @@ angular.module("Knowl").controller("PersoonlijkProfielCtrl", ["$scope", "$routeP
 			});
 		}
 		
-		
+		$scope.saveDate = function(){
+			saveDate($scope.date);
+		};
 		
 		$scope.popAddCompetence = false;
 		$scope.popAddKnowledgeProfile = false;
