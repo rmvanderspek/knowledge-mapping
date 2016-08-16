@@ -9,16 +9,16 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import backend.DatabaseConnector;
-import backend.Profile;
+import backend.Profiles;
 
 @Path("profiles")
 public class GetProfiles{
     
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Profile> getProfiles() {
+	public Collection<Profiles> getProfiles() {
 		DatabaseConnector db = new DatabaseConnector();
-		ArrayList<Profile> list = db.getProfiles();
+		ArrayList<Profiles> list = db.getProfiles();
 		return list;
 	}
 }

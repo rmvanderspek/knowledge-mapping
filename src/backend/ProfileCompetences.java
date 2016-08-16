@@ -1,12 +1,18 @@
 package backend;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "profile")
 @XmlAccessorType(XmlAccessType.FIELD)
 
+@Entity
 public class ProfileCompetences {
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
 	private int profileId;
 	private int competenceId;

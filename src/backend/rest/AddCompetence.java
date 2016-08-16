@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import backend.Competence;
+import backend.Competences;
 import backend.DatabaseConnector;
 import backend.ProfileCompetences;
 import backend.SaveCompetences;
@@ -27,7 +27,7 @@ int id = 0;
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addCompetences(String json) {
 		JSONObject obj;
-		Competence competence = null;
+		Competences competence = null;
 		DatabaseConnector db = new DatabaseConnector();
 
 		try {
@@ -35,11 +35,11 @@ int id = 0;
 			String name = obj.getString("name");
 			String description = obj.getString("description");
 			
-			competence = new Competence(name, description);
-			ArrayList<Competence> competenceList = db.getCompetences();
+			competence = new Competences(name, description);
+			ArrayList<Competences> competenceList = (ArrayList<Competences>) db.getCompetences();
 			
 			for(int i = 0; i < competenceList.size(); i++){
-				Competence c = competenceList.get(i);
+				Competences c = competenceList.get(i);
 				if (c.getName().equals(name)){
 					exists = true;
 					id = c.getId();
@@ -50,8 +50,8 @@ int id = 0;
 				while(!updatingDone){
 				
 				}
-				competenceList = db.getCompetences();
-				Competence newComp = competenceList.get(competenceList.size() - 1);
+				competenceList = (ArrayList<Competences>) db.getCompetences();
+				Competences newComp = competenceList.get(competenceList.size() - 1);
 				
 				id = newComp.getId();
 			}

@@ -2,15 +2,19 @@ package backend.rest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
 import com.google.gson.Gson;
+
 import backend.DatabaseConnector;
-import backend.Person;
-import backend.Profile;
+import backend.Persons;
+import backend.Profiles;
 
 @Path("getuserswithprofiles")
 public class GetUsersWithProfiles{
@@ -19,9 +23,9 @@ public class GetUsersWithProfiles{
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getUsers() {
 		DatabaseConnector db = new DatabaseConnector();
-		ArrayList<Person> list = db.getUsers();
-		ArrayList<Profile> userProfiles = null;
-		Map<String, ArrayList<Profile>> usersWithProfiles = new HashMap<String, ArrayList<Profile>>();
+		ArrayList<Persons> list = db.getUsers();
+		List<Profiles> userProfiles = null;
+		Map<String, List<Profiles>> usersWithProfiles = new HashMap<String, List<Profiles>>();
 		Gson obj = new Gson();
 		String j = null;
 		

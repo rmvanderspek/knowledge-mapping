@@ -6,8 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
+
+import javax.persistence.*;
+
 
 
 public class DatabaseConnector {
@@ -19,10 +23,12 @@ public class DatabaseConnector {
     static {
     	try {
     		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+    		Class.forName("org.eclipse.persistence.jpa.PersistenceProvider");
     	} catch(ClassNotFoundException ex) {
     		ex.printStackTrace();
     	}
     }
+
     
     //Constructor for database Connector
     public DatabaseConnector() {
@@ -46,145 +52,98 @@ public class DatabaseConnector {
     }
     
     //Method to add competence to competences table
-    public boolean addCompetence(Competence competence){
+    public boolean addCompetence(Competences competence){
+    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("testDataBase");
+    	EntityManager em = emf.createEntityManager();
+    	EntityTransaction tx = em.getTransaction();
+    	tx.begin();
     	
-    	String name = competence.getName();
-    	String description = competence.getDescription();
-    	PreparedStatement pstmt = null;
-    	String query = "INSERT Competences (name, description) VALUES (?,?);";
-    	
-    	try {
-    		pstmt = conn.prepareStatement(query);   		
-    		pstmt.setString(1, name); 
-    		pstmt.setString(2, description);
-    		pstmt.executeUpdate();
-    	}
-    	catch(SQLException e){
-    		e.printStackTrace();
-    		return false;
-    	}    	
+    	em.persist(competence);
+    	tx.commit();
+    	em.close();
+ 	
     	return true;    	
     }
     
     //Method to add person to persons table
-    public boolean addPerson(Person person){
+    public boolean addPerson(Persons person){
     	
-    	String userId = person.getUserId();
-    	String firstName = person.getFirstName();
-    	String lastName = person.getLastName();
-    	int personalProfileId = person.getPersonalProfileId();
+    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("testDataBase");
+    	EntityManager em = emf.createEntityManager();
+    	EntityTransaction tx = em.getTransaction();
+    	tx.begin();
     	
-    	PreparedStatement pstmt = null;
-    	String query = "INSERT Persons (userId, firstname, lastname, personalprofileid) VALUES (?,?,?,?)";
-    	
-    	try {
-    		pstmt = conn.prepareStatement(query);
-    		pstmt.setString(1, userId);
-    		pstmt.setString(2, firstName);
-    		pstmt.setString(3, lastName);
-    		pstmt.setInt(4, personalProfileId);
-    		pstmt.executeUpdate();
-    	}
-    	catch(SQLException e){
-    		e.printStackTrace();
-    		return false;
-    	}
+    	em.persist(person);
+    	tx.commit();
+    	em.close();
+
     	return true;
     }
 
     //Method to get Person from table by user id
-    public Person getPerson(String userId){
-    	Person person = null;
+    public Persons getPerson(String userId){
     	
-    	PreparedStatement pstmt = null;
-    	String query = "SELECT * FROM Persons WHERE userId LIKE ?";
-    	ResultSet rs = null;
-    	try {
-    		pstmt = conn.prepareStatement(query);
-    		pstmt.setString(1,  userId);
-    		rs = pstmt.executeQuery();
-    		
-    		while(rs.next()){
-    			int id = rs.getInt(1);
-    			String firstname = rs.getString(2);
-    			String lastname = rs.getString(3);
-    			String userid = rs.getString(4);
-    			int profileId = rs.getInt(5);
-    			
-    			person = new Person(id, firstname, lastname, userid, profileId);
-    		}
-    	}
-    	catch(SQLException e){
-    		e.printStackTrace();
-    		return person;
-    	}
+    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("testDataBase");
+    	EntityManager em = emf.createEntityManager();
+    	EntityTransaction tx = em.getTransaction();
+    	tx.begin();
+    	System.out.println("GO");
+    	@SuppressWarnings("unchecked")
+    	Persons person = (Persons) em.createQuery("SELECT p FROM Persons p WHERE p.user_id =:userId")
+    												.setParameter("userId", userId)
+    												.getSingleResult();
+    	System.out.println(person.getFirstName());
+    	tx.commit();
+    	em.close();
+
     	return person;
     }
     
     //Method to get personal profiles from table
-    public ArrayList<PersonalProfile> getPersonalProfiles(){
-    	ArrayList<PersonalProfile> personalProfiles = new ArrayList<PersonalProfile>();
+    public List<Personal_profile> getPersonalProfiles(){
     	
-    	PreparedStatement pstmt = null;
-    	String query = "SELECT * FROM Personal_profile";
-    	ResultSet rs = null;
-    	
-    	try {
-    		pstmt = conn.prepareStatement(query);
-    		rs = pstmt.executeQuery();
-    		
-    		while (rs.next()){
-    			int id = rs.getInt(1);
-    			int profileId = rs.getInt(2);
-    			String userId = rs.getString(3);
-    			
-    			personalProfiles.add(new PersonalProfile(id, profileId, userId));
-    		}
-    	} 
-    	catch(SQLException e){
-    		e.printStackTrace();
-    		return personalProfiles;
-    	}
+    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("testDataBase");
+    	EntityManager em = emf.createEntityManager();
+    	EntityTransaction tx = em.getTransaction();
+    	tx.begin();
+    	@SuppressWarnings("unchecked")
+    	List<Personal_profile> personalProfiles = (List<Personal_profile>) em.createQuery("SELECT p FROM Personal_profile p").getResultList();
+
+    	tx.commit();
+    	em.close();
+
     	return personalProfiles;
     }
     
     //Method to get Profile from table by id
-    public Profile getProfile(int id){
-    	Profile profile = null;
+    public Profiles getProfile(int id){
     	
-    	PreparedStatement pstmt = null;
-    	String query = "SELECT * FROM Profiles WHERE prof_comp_table_id LIKE ?";
-    	ResultSet rs = null;
-    	
-    	try {
-    		pstmt = conn.prepareStatement(query);
-    		pstmt.setInt(1, id);
-    		rs = pstmt.executeQuery();
-    		
-    		while (rs.next()){
-    			String name = rs.getString(2);
-    			int profileCompetenceId = rs.getInt(3);
-    			String description = rs.getString(4);
-    			
-    			profile = new Profile(id, name, profileCompetenceId, description);
-    		}
-    	}
-    	catch(SQLException e){
-    		e.printStackTrace();
-    		return profile;
-    	}
+    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("testDataBase");
+    	EntityManager em = emf.createEntityManager();
+    	EntityTransaction tx = em.getTransaction();
+    	tx.begin();
+
+    	@SuppressWarnings("unchecked")
+    	Profiles profile = (Profiles) em.createQuery("SELECT p FROM Profiles p WHERE p.prof_comp_table_id =:id")
+    												.setParameter("id", id)
+    												.getSingleResult();
+    	tx.commit();
+    	em.close();
+    	System.out.println(profile.getName());
+
     	return profile;
     }
     
     //Method to get profiles from user
-    public ArrayList<Profile> getUserProfiles(String userId){
-    	ArrayList<PersonalProfile> personalProfiles = getPersonalProfiles();
-    	ArrayList<Profile> personProfiles = new ArrayList<Profile>();
-    	
-    	for(int i = 0; i < personalProfiles.size(); i++){
-    		PersonalProfile pp = personalProfiles.get(i);
-    		
+    public List<Profiles> getUserProfiles(String userId){
+    	List<Personal_profile> personalProfiles = getPersonalProfiles();
+    	List<Profiles> personProfiles = new ArrayList<Profiles>();
+    	Iterator<Personal_profile> i = personalProfiles.iterator();
+    	while(i.hasNext()){
+    		Personal_profile pp = (Personal_profile) i.next();
+    		System.out.println(pp.getUserId());
     		if(pp.getUserId().equals(userId)){
+    			System.out.println(pp.getProfileId());
     			personProfiles.add(getProfile(pp.getProfileId()));
     		}
     	}
@@ -192,8 +151,8 @@ public class DatabaseConnector {
     }
     
     //Method to get list of all Profiles
-    public ArrayList<Profile> getProfiles(){
-    	ArrayList<Profile> profiles = new ArrayList<Profile>();
+    public ArrayList<Profiles> getProfiles(){
+    	ArrayList<Profiles> profiles = new ArrayList<Profiles>();
     	
     	PreparedStatement pstmt = null;
     	String query = "SELECT * FROM Profiles";
@@ -209,7 +168,7 @@ public class DatabaseConnector {
     			int profileCompetenceId = rs.getInt(3);
     			String description = rs.getString(4);
     			
-    			profiles.add(new Profile(id, name, profileCompetenceId, description));    			
+    			profiles.add(new Profiles(id, name, profileCompetenceId, description));    			
     		}
     	}
     	catch(SQLException e){
@@ -276,30 +235,18 @@ public class DatabaseConnector {
     }
     
     //Method to get all competences
-    public ArrayList<Competence> getCompetences(){
-    	ArrayList<Competence> competences = new ArrayList<Competence>();
+    public List<Competences> getCompetences(){
     	
-    	PreparedStatement pstmt = null;
-    	String query = "SELECT * FROM Competences";
-    	ResultSet rs = null;
+    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("testDataBase");
+    	EntityManager em = emf.createEntityManager();
+    	EntityTransaction tx = em.getTransaction();
+    	tx.begin();
     	
-    	try {
-    		pstmt = conn.prepareStatement(query);
-    		rs = pstmt.executeQuery();
-    		
-    		while (rs.next()){
-    			int id = rs.getInt(1);
-    			String name = rs.getString(2);
-    			String description = rs.getString(3);
-    			System.out.println(description + name);
+    	@SuppressWarnings("unchecked")
+		List<Competences> competences = (List<Competences>) em.createQuery("SELECT c FROM Competences c").getResultList();
+    	tx.commit();
+    	em.close();
 
-    			competences.add(new Competence(id, name, description));
-    		}
-    	}
-    	catch(SQLException e){
-    		e.printStackTrace();
-    		return competences;
-    	}
     	return competences;
     }
     
@@ -425,8 +372,8 @@ public class DatabaseConnector {
     }
     
     //Method to get all users
-    public ArrayList<Person> getUsers(){
-    	ArrayList<Person> userlist = new ArrayList<Person>();
+    public ArrayList<Persons> getUsers(){
+    	ArrayList<Persons> userlist = new ArrayList<Persons>();
     	PreparedStatement pstmt = null;
     	String query = "SELECT * FROM Persons";
     	ResultSet rs = null;
@@ -442,7 +389,7 @@ public class DatabaseConnector {
     			String userId = rs.getString("userid");
     			int profileId = rs.getInt("profile_id");
     			
-    			userlist.add(new Person(id, userId, firstname, lastname, profileId));
+    			userlist.add(new Persons(id, userId, firstname, lastname, profileId));
     		}
     	}
     	catch (SQLException e){

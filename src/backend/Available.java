@@ -1,5 +1,6 @@
 package backend;
 
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -7,7 +8,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "profile")
 @XmlAccessorType(XmlAccessType.FIELD)
 
+@Entity
 public class Available {
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
 	private int available;
 	private String userid;
