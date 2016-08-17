@@ -21,17 +21,17 @@ angular.module("Knowl").controller("MedewerkersProfielenCtrl", ["$scope", "$loca
 			var showcompetences = [];
 			 for(var i = 0; i < $scope.userCompetences.length; i++){
 				 for(var j = 0; j < $scope.profileCompetences.length; j++){
-					 if(parseInt($scope.userCompetences[i].competenceId) === parseInt($scope.profileCompetences[j].competenceId) 
-							 && parseInt($scope.profileCompetences[j].profileId) === profileid 
-							 && $scope.userCompetences[i].personId === userid){
+					 if(parseInt($scope.userCompetences[i].comp_id) === parseInt($scope.profileCompetences[j].competences) 
+							 && parseInt($scope.profileCompetences[j].profile_id) === profileid 
+							 && $scope.userCompetences[i].user_id === userid){
 						 
-						 var competence = $scope.selectCompetence($scope.userCompetences[i].competenceId);
+						 var competence = $scope.selectCompetence($scope.userCompetences[i].comp_id);
 						 
 						 showcompetences.push({
 							 name : competence.name,
 							 description : competence.description,
-							 level : parseInt($scope.userCompetences[i].competenceLevel),
-							 id : parseInt($scope.userCompetences[i].competenceId)
+							 level : parseInt($scope.userCompetences[i].comp_level),
+							 id : parseInt($scope.userCompetences[i].comp_id)
 							 });
 					 }
 				 }
@@ -41,16 +41,16 @@ angular.module("Knowl").controller("MedewerkersProfielenCtrl", ["$scope", "$loca
 	
 		
 		for(var i = 0; i < $scope.users.length; i++){
-			userid = $scope.users[i].userId;
-
+			userid = $scope.users[i].userid;
 			profiles = $scope.profiles[userid];
+			
 			profileswithcompetences = [];
 			
 			for(var j = 0; j < $scope.profiles[userid].length; j++){
-				competences = $scope.getCompetences($scope.profiles[userid][j].profileCompetenceTableId, userid);
+				competences = $scope.getCompetences($scope.profiles[userid][j].prof_comp_table_id, userid);
 				total = competences.length;
 				levelTotal = 0;
-				
+					
 				for(var y = 0; y < competences.length; y++){
 					levelTotal = levelTotal + competences[y].level;
 				}
@@ -64,21 +64,20 @@ angular.module("Knowl").controller("MedewerkersProfielenCtrl", ["$scope", "$loca
 			
 			availableDate = "";
 			for(var k = 0; k < $scope.availability.length; k++){
-				if($scope.availability[k].userid === userid){
-					availableDate = $scope.availability[k].dateString;
-					var dateParts = availableDate.split("/");
+				if($scope.availability[k].user_id === userid){
+					availableDate = $scope.availability[k].available_date;
+					var dateParts = availableDate.split("/", "-");
 					var date = new Date(dateParts[2], (dateParts[1] -1), dateParts[0]);
 					
 					if(new Date > date){
-						console.log(true)
 						availableDate = "Beschikbaar!";
 					} 
 				}
 			}
 			
 			$scope.usersWithProfiles.push({
-					firstname : $scope.users[i].firstName,
-					lastname : $scope.users[i].lastName,
+					firstname : $scope.users[i].firstname,
+					lastname : $scope.users[i].lastname,
 					available:	availableDate,
 					profiles : profileswithcompetences						
 				});

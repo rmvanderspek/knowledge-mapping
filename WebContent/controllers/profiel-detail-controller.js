@@ -14,7 +14,7 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 
 		$scope.getProfileDetails = function() {
 			for(var i = 0; i < $scope.profiles.length; i++) {
-				if(parseInt($scope.profiles[i].profileCompetenceTableId) === $scope.id) {
+				if(parseInt($scope.profiles[i].prof_comp_table_id) === $scope.id) {
 					return $scope.profiles[i];
 				}
 			}
@@ -34,14 +34,14 @@ angular.module("Knowl").controller("ProfielDetailCtrl", ["$scope", "$routeParams
 			 for(var i = 0; i < $scope.userCompetences.length; i++){
 				 
 				 for(var j = 0; j < $scope.profileCompetences.length; j++){
-					 if(parseInt($scope.userCompetences[i].competenceId) === parseInt($scope.profileCompetences[j].competenceId) && parseInt($scope.profileCompetences[j].profileId) === $scope.id){
-						 var competence = $scope.selectCompetence($scope.userCompetences[i].competenceId);
+					 if(parseInt($scope.userCompetences[i].comp_id) === parseInt($scope.profileCompetences[j].competences) && parseInt($scope.profileCompetences[j].profile_id) === $scope.id){
+						 var competence = $scope.selectCompetence($scope.userCompetences[i].comp_id);
 						 
 						 showcompetences.push({
 							 name : competence.name,
 							 description : competence.description,
-							 level : parseInt($scope.userCompetences[i].competenceLevel),
-							 id : parseInt($scope.userCompetences[i].competenceId)
+							 level : parseInt($scope.userCompetences[i].comp_level),
+							 id : parseInt($scope.userCompetences[i].comp_id)
 							 });
 					 }
 				 }

@@ -20,14 +20,11 @@ public class GetProfileFromUser{
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<Profiles> getUserProfiles() {
-		System.out.println("test" + userId);
 		ArrayList<Profiles> arr = new ArrayList<Profiles>();
 		DatabaseConnector db = new DatabaseConnector();
 		List<Profiles> profiles = db.getUserProfiles(userId);
-		System.out.println(profiles.size() + "size ");
 		Iterator<Profiles> i = profiles.iterator();
 		while(i.hasNext()){
-			System.out.println((i) + "test");
 			arr.add((Profiles)i.next());
 		}
 		return arr;

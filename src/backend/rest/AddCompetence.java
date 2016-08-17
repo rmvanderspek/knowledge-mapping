@@ -1,6 +1,8 @@
 package backend.rest;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -13,7 +15,7 @@ import org.json.JSONObject;
 
 import backend.Competences;
 import backend.DatabaseConnector;
-import backend.ProfileCompetences;
+import backend.Profile_competence_table;
 import backend.SaveCompetences;
 
 @Path("addcompetence")
@@ -36,10 +38,11 @@ int id = 0;
 			String description = obj.getString("description");
 			
 			competence = new Competences(name, description);
-			ArrayList<Competences> competenceList = (ArrayList<Competences>) db.getCompetences();
+			List<Competences> competenceList = (List<Competences>) db.getCompetences();
+			Iterator i = competenceList.iterator();
 			
-			for(int i = 0; i < competenceList.size(); i++){
-				Competences c = competenceList.get(i);
+			while(i.hasNext()){
+				Competences c = (Competences)i.next();
 				if (c.getName().equals(name)){
 					exists = true;
 					id = c.getId();
@@ -48,10 +51,15 @@ int id = 0;
 			if (!exists){
 				updatingDone = db.addCompetence(competence);
 				while(!updatingDone){
-				
+					
 				}
-				competenceList = (ArrayList<Competences>) db.getCompetences();
-				Competences newComp = competenceList.get(competenceList.size() - 1);
+				competenceList = (List<Competences>)db.getCompetences();
+				Competences newComp = null;
+				
+				Iterator i2 = competenceList.iterator();
+				while (i2.hasNext()){
+					newComp = (Competences)i2.next();
+				}
 				
 				id = newComp.getId();
 			}
@@ -65,7 +73,7 @@ int id = 0;
 			
 			if (!exists){
 				db.addCompetenceToProfile(
-						new ProfileCompetences(999, id));
+						new Profile_competence_table(999, id));
 			}
 		} 
 		catch (JSONException e) {

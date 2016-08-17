@@ -9,29 +9,29 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 
 @Entity
-public class Available {
+public class Person_available {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
+	private String user_id;
 	private int available;
-	private String userid;
-	private String dateString;
+	private String available_date;
 	
-	public Available(){
+	public Person_available(){
 		
 	}
 	
-	public Available(int id, int available, String userid, String dateString){
+	public Person_available(int id, int available, String userid, String dateString){
 		this.id = id;
 		this.available = available;
-		this.userid = userid;
-		this.dateString = dateString;
+		this.user_id = userid;
+		this.available_date = dateString;
 	}
 	
-	public Available(int available, String userid, String dateString){
+	public Person_available(int available, String userid, String dateString){
 		this.available = available;
-		this.userid = userid;
-		this.dateString = dateString;
+		this.user_id = userid;
+		this.available_date = dateString;
 	}
 
 	public int getId() {
@@ -51,19 +51,19 @@ public class Available {
 	}
 
 	public String getUserid() {
-		return userid;
+		return user_id;
 	}
 
 	public void setUserid(String userid) {
-		this.userid = userid;
+		this.user_id = userid;
 	}
 
 	public String getDateString() {
-		return dateString;
+		return available_date;
 	}
 
 	public void setDateString(String dateString) {
-		this.dateString = dateString;
+		this.available_date = dateString;
 	}
 	
 	

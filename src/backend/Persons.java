@@ -14,10 +14,10 @@ public class Persons {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
-	private String userId;
-	private String firstName;
-	private String lastName;
-	private int personalProfileId;
+	private String firstname;
+	private String lastname;
+	private String userid;
+	private int profile_id;
 	
 	public Persons(){
 		
@@ -25,17 +25,17 @@ public class Persons {
 	
 	public Persons(int id, String userId, String firstName, String lastName, int personalProfileId){
 		this.id = id;
-		this.userId = userId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.personalProfileId = personalProfileId;
+		this.firstname = firstName;
+		this.lastname = lastName;
+		this.userid = userId;
+		this.profile_id = personalProfileId;
 	}
 	
 	public Persons(String userId, String firstName, String lastName, int personalProfileId){
-		this.userId = userId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.personalProfileId = personalProfileId;
+		this.firstname = firstName;
+		this.lastname = lastName;
+		this.userid = userId;
+		this.profile_id = personalProfileId;
 	}
 	
 	public int getId() {
@@ -46,36 +46,36 @@ public class Persons {
 		this.id = id;
 	}
 
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
 	public String getFirstName() {
-		return firstName;
+		return firstname;
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.firstname = firstName;
 	}
 
 	public String getLastName() {
-		return lastName;
+		return lastname;
 	}
 
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastname = lastName;
+	}
+	
+	public String getUserId() {
+		return userid;
 	}
 
+	public void setUserId(String userId) {
+		this.userid = userId;
+	}
+	
 	public int getPersonalProfileId() {
-		return personalProfileId;
+		return profile_id;
 	}
 
 	public void setPersonalProfileId(int personalProfileId) {
-		this.personalProfileId = personalProfileId;
+		this.profile_id = personalProfileId;
 	}
 	
 }

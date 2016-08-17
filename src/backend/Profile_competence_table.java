@@ -10,26 +10,26 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 
 @Entity
-public class ProfileCompetences {
+public class Profile_competence_table {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
-	private int profileId;
-	private int competenceId;
+	private int profile_id;
+	private int competences;
 	
-	public ProfileCompetences(){
+	public Profile_competence_table(){
 		
 	}
 	
-	public ProfileCompetences(int id, int profileId, int competenceId){
+	public Profile_competence_table(int id, int profileId, int competenceId){
 		this.id = id;
-		this.profileId = profileId;
-		this.competenceId = competenceId;
+		this.profile_id = profileId;
+		this.competences = competenceId;
 	}
 	
-	public ProfileCompetences(int profileId, int competenceId){
-		this.profileId = profileId;
-		this.competenceId = competenceId;
+	public Profile_competence_table(int profileId, int competenceId){
+		this.profile_id = profileId;
+		this.competences = competenceId;
 	}
 
 	public int getId() {
@@ -41,19 +41,19 @@ public class ProfileCompetences {
 	}
 
 	public int getProfileId() {
-		return profileId;
+		return profile_id;
 	}
 
 	public void setProfileId(int profileId) {
-		this.profileId = profileId;
+		this.profile_id = profileId;
 	}
 
 	public int getCompetenceId() {
-		return competenceId;
+		return competences;
 	}
 
 	public void setCompetenceId(int competenceId) {
-		this.competenceId = competenceId;
+		this.competences = competenceId;
 	}
 	
 }

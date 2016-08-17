@@ -29,7 +29,7 @@ angular.module("Knowl").controller("KennisProfielenCtrl", ["$scope", "$location"
 				showCompetences = [];
 					for (var j = 0; j < competences.length; j++){
 						for (var i = 0; i < profileCompetences.length; i++){
-							if(parseInt(competences[j].id) === parseInt(profileCompetences[i].competenceId) && parseInt(profileCompetences[i].profileId) === parseInt(profileid)){
+							if(parseInt(competences[j].id) === parseInt(profileCompetences[i].competences) && parseInt(profileCompetences[i].profile_id) === parseInt(profileid)){
 								showCompetences.push({
 									 name : competences[j].name,
 									 description : competences[j].description,
@@ -43,7 +43,7 @@ angular.module("Knowl").controller("KennisProfielenCtrl", ["$scope", "$location"
 		
 		$scope.fillShowCompetences = function(){
 			for (var i = 0; i < $scope.profiles.length; i++){
-				var id = $scope.profiles[i].profileCompetenceTableId;
+				var id = $scope.profiles[i].prof_comp_table_id;
 
 				$scope.showCompetences.push({id : id,
 					array : $scope.getCompetencesOfProfile(id)});
@@ -61,7 +61,6 @@ angular.module("Knowl").controller("KennisProfielenCtrl", ["$scope", "$location"
 		};
 
 		$scope.saveProfile = function(profileid, competenceid){
-			var success = changeCompetenceProfile(competenceid, profileid);
 			$scope.fillShowCompetences();
 		};
 		

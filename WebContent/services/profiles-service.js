@@ -121,7 +121,6 @@ angular.module("Knowl").service("ProfilesService", ["$http", "$rootScope",
 			 })
 			 .success(function(data, status){
 				 allUserAvailability = data.profile;
-				 console.log(allUserAvailability)
 			 })
 			 .error(function(data, status){
 				 alert("Error");

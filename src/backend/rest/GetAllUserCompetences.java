@@ -1,6 +1,6 @@
 package backend.rest;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -8,16 +8,16 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import backend.DatabaseConnector;
-import backend.PersonalCompetenceLevel;
+import backend.Personal_comp_level;
 
 @Path("getallusercompetences")
 public class GetAllUserCompetences{
     
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<PersonalCompetenceLevel> getUserCompetences() {
+	public List<Personal_comp_level> getUserCompetences() {
 		DatabaseConnector db = new DatabaseConnector();
-		ArrayList<PersonalCompetenceLevel> competences = db.getAllUserCompetences();
+		List<Personal_comp_level> competences = db.getAllUserCompetences();
 		return competences;
 	}
 }

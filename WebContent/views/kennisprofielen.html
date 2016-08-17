@@ -10,7 +10,7 @@
 	          <h4 ng-click = "showMore = !showMore">{{profile.name}}</h4>
 	          	<div ng-show = "showMore">
 	          	<p>{{profile.description}}</p>
-	          	<div ng-repeat = "competence in returnCompetences(profile.profileCompetenceTableId) track by competence.id" >
+	          	<div ng-repeat = "competence in returnCompetences(profile.prof_comp_table_id) track by competence.id" >
 	          	<b ng-click = "showDetails = !showDetails">{{competence.name}}</b>
 	          		<div ng-show = "showDetails">
 	          		<div class = "col-sm-3">

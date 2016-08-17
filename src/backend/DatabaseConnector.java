@@ -3,7 +3,6 @@ package backend;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -88,11 +87,10 @@ public class DatabaseConnector {
     	EntityTransaction tx = em.getTransaction();
     	tx.begin();
     	System.out.println("GO");
-    	@SuppressWarnings("unchecked")
+    	
     	Persons person = (Persons) em.createQuery("SELECT p FROM Persons p WHERE p.user_id =:userId")
     												.setParameter("userId", userId)
     												.getSingleResult();
-    	System.out.println(person.getFirstName());
     	tx.commit();
     	em.close();
 
@@ -123,13 +121,11 @@ public class DatabaseConnector {
     	EntityTransaction tx = em.getTransaction();
     	tx.begin();
 
-    	@SuppressWarnings("unchecked")
     	Profiles profile = (Profiles) em.createQuery("SELECT p FROM Profiles p WHERE p.prof_comp_table_id =:id")
     												.setParameter("id", id)
     												.getSingleResult();
     	tx.commit();
     	em.close();
-    	System.out.println(profile.getName());
 
     	return profile;
     }
@@ -141,9 +137,7 @@ public class DatabaseConnector {
     	Iterator<Personal_profile> i = personalProfiles.iterator();
     	while(i.hasNext()){
     		Personal_profile pp = (Personal_profile) i.next();
-    		System.out.println(pp.getUserId());
     		if(pp.getUserId().equals(userId)){
-    			System.out.println(pp.getProfileId());
     			personProfiles.add(getProfile(pp.getProfileId()));
     		}
     	}
@@ -151,86 +145,51 @@ public class DatabaseConnector {
     }
     
     //Method to get list of all Profiles
-    public ArrayList<Profiles> getProfiles(){
-    	ArrayList<Profiles> profiles = new ArrayList<Profiles>();
-    	
-    	PreparedStatement pstmt = null;
-    	String query = "SELECT * FROM Profiles";
-    	ResultSet rs = null;
-    	
-    	try {
-    		pstmt = conn.prepareStatement(query);
-    		rs = pstmt.executeQuery();
-    		
-    		while (rs.next()){
-    			int id = rs.getInt(1);
-    			String name = rs.getString(2);
-    			int profileCompetenceId = rs.getInt(3);
-    			String description = rs.getString(4);
-    			
-    			profiles.add(new Profiles(id, name, profileCompetenceId, description));    			
-    		}
-    	}
-    	catch(SQLException e){
-    		e.printStackTrace();
-    		return profiles;
-    	}
+    public List<Profiles> getProfiles(){
+    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("testDataBase");
+    	EntityManager em = emf.createEntityManager();
+    	EntityTransaction tx = em.getTransaction();
+    	tx.begin();
+
+    	@SuppressWarnings("unchecked")
+    	List<Profiles> profiles = (List<Profiles>) em.createQuery("SELECT p FROM Profiles p")
+    												.getResultList();
+    	tx.commit();
+    	em.close();
+
     	return profiles;
     }
     
     //Method to get competences from user
-    public ArrayList<PersonalCompetenceLevel> getUserCompetences(String userId){
-    	ArrayList<PersonalCompetenceLevel> competences = new ArrayList<PersonalCompetenceLevel>();
-    	
-    	PreparedStatement pstmt = null;
-    	String query = "SELECT * FROM Personal_comp_level where user_id LIKE ?";
-    	ResultSet rs = null;
-    	
-    	try {
-    		pstmt = conn.prepareStatement(query);
-    		pstmt.setString(1, userId);
-    		rs = pstmt.executeQuery();
-    		
-    		while (rs.next()){
-    			int id = rs.getInt(1);
-    			int competenceId = rs.getInt(2);
-    			int competenceLevel = rs.getInt(3);
-    			String personId = rs.getString(4);
-    			
-    			competences.add(new PersonalCompetenceLevel(id, competenceId, competenceLevel, personId));
-    		}
-    	}
-    	catch(SQLException e){
-    		e.printStackTrace();
-    		return competences;
-    	}
-    	return competences;
+    public List<Personal_comp_level> getUserCompetences(String userId){
+    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("testDataBase");
+    	EntityManager em = emf.createEntityManager();
+    	EntityTransaction tx = em.getTransaction();
+    	tx.begin();
+
+    	@SuppressWarnings("unchecked")
+    	List<Personal_comp_level> personalCopmetenceLevel = (List<Personal_comp_level>) em.createQuery("SELECT p FROM Personal_comp_level p WHERE p.user_id LIKE :id")
+    												.setParameter("id", userId)
+    												.getResultList();
+    	tx.commit();
+    	em.close();
+
+    	return personalCopmetenceLevel;
     }
     
     //Method to get all profile competences
-    public ArrayList<ProfileCompetences> getProfileCompetences(){
-    	ArrayList<ProfileCompetences> profileCompetences = new ArrayList<ProfileCompetences>();
+    public List<Profile_competence_table> getProfileCompetences(){
+    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("testDataBase");
+    	EntityManager em = emf.createEntityManager();
+    	EntityTransaction tx = em.getTransaction();
+    	tx.begin();
+
+    	@SuppressWarnings("unchecked")
+    	List<Profile_competence_table> profileCompetences = (List<Profile_competence_table>) em.createQuery("SELECT p FROM Profile_competence_table p")
+    												.getResultList();
+    	tx.commit();
+    	em.close();
     	
-    	PreparedStatement pstmt = null;
-    	String query = "SELECT * FROM Profile_competence_table";
-    	ResultSet rs = null;
-    	
-    	try {
-    		pstmt = conn.prepareStatement(query);
-    		rs = pstmt.executeQuery();
-    		
-    		while (rs.next()){
-    			int id = rs.getInt(1);
-    			int profileId = rs.getInt(2);
-    			int competence = rs.getInt(3);
-    			
-    			profileCompetences.add(new ProfileCompetences(id, profileId, competence));
-    		}
-    	} 
-    	catch(SQLException e){
-    		e.printStackTrace();
-    		return profileCompetences;
-    	}
     	return profileCompetences;
     }
     
@@ -250,53 +209,49 @@ public class DatabaseConnector {
     	return competences;
     }
     
-    //Method for updating the copmetences in the database
+    //Method for updating the competences in the database
     public boolean updateCompetences(ArrayList<SaveCompetences> list, String userid){
-    	PreparedStatement pstmt = null;
-    	String query = "UPDATE Personal_comp_level SET comp_level = ? WHERE user_id LIKE ? and comp_id = ?";
-    	int updated = 0;
+    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("testDataBase");
+    	EntityManager em = emf.createEntityManager();
+    	EntityTransaction tx = em.getTransaction();
+    	tx.begin();
     	
-    	for(int i = 0; i < list.size(); i++){
-    		SaveCompetences sc = list.get(i);
+    	@SuppressWarnings("unchecked")
+		List<Personal_comp_level> results = em.createQuery("SELECT p FROM Personal_comp_level p")
+    															.getResultList();
+    	for(Personal_comp_level pcl : results){
+    		for(int i = 0; i < list.size(); i++){
+    			if(((Personal_comp_level)pcl).getPersonId().equals(userid) && ((Personal_comp_level)pcl).getCompetenceId() == list.get(i).getId()){
+        			((Personal_comp_level)pcl).setCompetenceLevel(list.get(i).getLevel());
+        			em.persist(pcl);
+        		}
+    		}
     		
-    		try {
-    			pstmt = conn.prepareStatement(query);
-    			pstmt.setInt(1, sc.getLevel());
-    			pstmt.setString(2, userid);
-    			pstmt.setInt(3, sc.getId());
-    			
-    			updated = updated + pstmt.executeUpdate();
-    		}
-    		catch(SQLException e){
-    			e.printStackTrace();
-    			return false;
-    		}
-       	}
+    	}
+    	tx.commit();
+    	em.close();
+    	
     	return true;
     }
     
     //Method to add competence to user
     public boolean addCompetenceToUser(SaveCompetences saveCompetences, String userid){
-    	PreparedStatement pstmt = null;
-    	String query = "INSERT Personal_comp_level (comp_id, comp_level, user_id) VALUES (?,?,?)";
+    	Personal_comp_level pcl = new Personal_comp_level(saveCompetences.getId(), 0, userid);
     	
-    	try {
-    		pstmt = conn.prepareStatement(query);
-    		pstmt.setInt(1,  saveCompetences.getId());
-    		pstmt.setInt(2, 0);
-    		pstmt.setString(3, userid);
-    		
-    		pstmt.executeUpdate();
-    	}
-    	catch(SQLException e){
-    		e.printStackTrace();
-    		return false;
-    	}
+    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("testDataBase");
+    	EntityManager em = emf.createEntityManager();
+    	EntityTransaction tx = em.getTransaction();
+    	tx.begin();
+    	
+    	em.persist(pcl);
+    	tx.commit();
+    	em.close();
+    	
     	return true;
     }
     
     //Method to set new competence to profile 'overige'
-    public boolean addCompetenceToProfile(ProfileCompetences pc){
+    public boolean addCompetenceToProfile(Profile_competence_table pc){
     	PreparedStatement pstmt = null;
     	String query = "INSERT Profile_competence_table (profile_id, competences) VALUES (?,?)";
     	
@@ -372,56 +327,33 @@ public class DatabaseConnector {
     }
     
     //Method to get all users
-    public ArrayList<Persons> getUsers(){
-    	ArrayList<Persons> userlist = new ArrayList<Persons>();
-    	PreparedStatement pstmt = null;
-    	String query = "SELECT * FROM Persons";
-    	ResultSet rs = null;
+    public List<Persons> getUsers(){
     	
-    	try {
-    		pstmt = conn.prepareStatement(query);
-    		rs = pstmt.executeQuery();
-    		
-    		while (rs.next()){
-    			int id = rs.getInt("id");
-    			String firstname = rs.getString("firstname");
-    			String lastname = rs.getString("lastname");
-    			String userId = rs.getString("userid");
-    			int profileId = rs.getInt("profile_id");
-    			
-    			userlist.add(new Persons(id, userId, firstname, lastname, profileId));
-    		}
-    	}
-    	catch (SQLException e){
-    		return userlist;
-    	}
+    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("testDataBase");
+    	EntityManager em = emf.createEntityManager();
+    	EntityTransaction tx = em.getTransaction();
+    	tx.begin();
+    	
+    	@SuppressWarnings("unchecked")
+		List<Persons> userlist = (List<Persons>) em.createQuery("SELECT p FROM Persons p").getResultList();
+    	tx.commit();
+    	em.close();
+    	
     	return userlist;
     }
    
     //Method to get all user competences for manager dashboard
-    public ArrayList<PersonalCompetenceLevel> getAllUserCompetences(){
-    	ArrayList<PersonalCompetenceLevel> usercomplist = new ArrayList<PersonalCompetenceLevel>();
-    	PreparedStatement pstmt = null;
-    	String query = "SELECT * FROM Personal_comp_level";
-    	ResultSet rs = null;
+    public List<Personal_comp_level> getAllUserCompetences(){
+    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("testDataBase");
+    	EntityManager em = emf.createEntityManager();
+    	EntityTransaction tx = em.getTransaction();
+    	tx.begin();
     	
-    	try {
-    		pstmt = conn.prepareStatement(query);
-    		rs = pstmt.executeQuery();
-    		
-    		while (rs.next()){
-    			int id = rs.getInt("id");
-    			int profileId = rs.getInt("comp_id");
-    			int level = rs.getInt("comp_level");
-    			String userId = rs.getString("user_id");
-    			
-    			usercomplist.add(new PersonalCompetenceLevel(
-    					id, profileId, level, userId));
-    		}
-    	}
-    	catch(SQLException e){
-    		e.printStackTrace();
-    	}
+    	@SuppressWarnings("unchecked")
+    	List<Personal_comp_level> usercomplist = (List<Personal_comp_level>) em.createQuery("SELECT p FROM Personal_comp_level p").getResultList();
+    	tx.commit();
+    	em.close();
+
     	return usercomplist;
     }
     
@@ -446,36 +378,23 @@ public class DatabaseConnector {
     	return true;
     }
     
-    public ArrayList<Available> getAllAvailable(){
-    	ArrayList<Available> list = new ArrayList<Available>();
+    public List<Person_available> getAllAvailable(){
+    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("testDataBase");
+    	EntityManager em = emf.createEntityManager();
+    	EntityTransaction tx = em.getTransaction();
+    	tx.begin();
     	
-    	PreparedStatement pstmt = null;
-    	ResultSet rs = null;
-    	String query = "SELECT * FROM Person_available";
-    	
-    	try {
-    		pstmt = conn.prepareStatement(query);
-    		rs = pstmt.executeQuery();
-    		
-    		while (rs.next()){
-    			int id = rs.getInt("id");
-    			int available = rs.getInt("available");
-    			String userId = rs.getString("user_id");
-    			String dateString = rs.getString("available_date");
-    			
-    			list.add(new Available(id, available, userId, dateString));
-    		}
-    	}
-    	catch(SQLException e){
-    		e.printStackTrace();
-    	}
+    	@SuppressWarnings("unchecked")
+    	List<Person_available> list = (List<Person_available>) em.createQuery("SELECT p FROM Person_available p").getResultList();
+    	tx.commit();
+    	em.close();
     	
     	return list;
     }
     
     public static void main(String[] args) throws SQLException{
     	DatabaseConnector dbc = new DatabaseConnector();
-    	ArrayList<PersonalCompetenceLevel> arr = dbc.getUserCompetences("hli24213");
+    	List<Personal_comp_level> arr = dbc.getUserCompetences("hli24213");
     	
     	for (int i = 0; i < arr.size(); i++){
     		System.out.println(arr.get(i).getCompetenceLevel() + arr.get(i).getPersonId() + arr.get(i).getCompetenceId());
