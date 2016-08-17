@@ -1,6 +1,5 @@
 package backend.rest;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -39,7 +38,7 @@ int id = 0;
 			
 			competence = new Competences(name, description);
 			List<Competences> competenceList = (List<Competences>) db.getCompetences();
-			Iterator i = competenceList.iterator();
+			Iterator<Competences> i = competenceList.iterator();
 			
 			while(i.hasNext()){
 				Competences c = (Competences)i.next();
@@ -56,7 +55,7 @@ int id = 0;
 				competenceList = (List<Competences>)db.getCompetences();
 				Competences newComp = null;
 				
-				Iterator i2 = competenceList.iterator();
+				Iterator<Competences> i2 = competenceList.iterator();
 				while (i2.hasNext()){
 					newComp = (Competences)i2.next();
 				}
