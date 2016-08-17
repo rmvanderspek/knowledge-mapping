@@ -61,6 +61,7 @@ angular.module("Knowl").controller("KennisProfielenCtrl", ["$scope", "$location"
 		};
 
 		$scope.saveProfile = function(profileid, competenceid){
+			var success = changeCompetenceProfile(competenceid, profileid);
 			$scope.fillShowCompetences();
 		};
 		

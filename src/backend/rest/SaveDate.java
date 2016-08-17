@@ -22,6 +22,8 @@ public class SaveDate{
 		try {
 			JSONObject obj = new JSONObject(json);
 			date = obj.getString("date");
+			String[] dates = date.split("\\D");
+			date = dates[0] + "/" + dates[1] + "/" + dates[2];
 			userId = obj.getString("userid");
 		}
 		catch(JSONException e){
@@ -29,6 +31,6 @@ public class SaveDate{
 		}
 		
 		DatabaseConnector db = new DatabaseConnector();
-		System.out.println(db.setAvailable(date, userId));		
+		db.setAvailable(date, userId);		
 	}	
 }

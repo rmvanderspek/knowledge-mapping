@@ -18,7 +18,6 @@ public class ChangeCompetenceProfile{
 	public void changeCompetenceProfile(String json) {
 		JSONObject obj;
 		DatabaseConnector db = new DatabaseConnector();
-
 		try {
 			obj =  new JSONObject(json);
 			int competenceId = obj.getInt("competenceid");

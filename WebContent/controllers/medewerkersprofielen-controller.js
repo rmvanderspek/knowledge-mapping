@@ -66,7 +66,7 @@ angular.module("Knowl").controller("MedewerkersProfielenCtrl", ["$scope", "$loca
 			for(var k = 0; k < $scope.availability.length; k++){
 				if($scope.availability[k].user_id === userid){
 					availableDate = $scope.availability[k].available_date;
-					var dateParts = availableDate.split("/", "-");
+					var dateParts = availableDate.split("/");
 					var date = new Date(dateParts[2], (dateParts[1] -1), dateParts[0]);
 					
 					if(new Date > date){

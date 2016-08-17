@@ -252,77 +252,70 @@ public class DatabaseConnector {
     
     //Method to set new competence to profile 'overige'
     public boolean addCompetenceToProfile(Profile_competence_table pc){
-    	PreparedStatement pstmt = null;
-    	String query = "INSERT Profile_competence_table (profile_id, competences) VALUES (?,?)";
+    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("testDataBase");
+    	EntityManager em = emf.createEntityManager();
+    	EntityTransaction tx = em.getTransaction();
+    	tx.begin();
     	
-    	try {
-    		pstmt = conn.prepareStatement(query);
-    		pstmt.setInt(1, pc.getProfileId());
-    		pstmt.setInt(2, pc.getCompetenceId());
-    		
-    		pstmt.executeUpdate();
-    	}
-    	catch(SQLException e){
-    		e.printStackTrace();
-    		return false;
-    	}
+    	em.persist(pc);
+    	tx.commit();
+    	em.close();
+
     	return true;
     }
     
     //Method to change a competence profile
     public boolean changeCompetenceProfile(int competenceid, int profileid){
-    	PreparedStatement pstmt = null;
-    	String query = "UPDATE Profile_competence_table SET profile_id = ? WHERE competences = ?";
-    	
-    	try {
-    		pstmt = conn.prepareStatement(query);
-    		pstmt.setInt(1, profileid);
-    		pstmt.setInt(2, competenceid);
-    		
-    		pstmt.executeUpdate();
-    	}
-    	catch(SQLException e){
-    		e.printStackTrace();
-    		return false;
-    	}
+
+    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("testDataBase");
+    	EntityManager em = emf.createEntityManager();
+    	EntityTransaction tx = em.getTransaction();
+    	tx.begin();
+    	Profile_competence_table pct = (Profile_competence_table) em.createQuery("SELECT p FROM Profile_competence_table p where p.competences =:competenceid")
+    			.setParameter("competenceid", competenceid)
+    			.getSingleResult();
+
+    	pct.setProfileId(profileid);
+    	em.persist(pct);
+    	tx.commit();
+    	em.close();
+
     	return true;
     }
     
     //Method to change competence name
     public boolean changeCompetenceName(int competenceId, String competenceName){
-    	PreparedStatement pstmt = null;
-    	String query = "UPDATE Competences SET name = ? WHERE id = ?";
-    	
-    	try {
-    		pstmt = conn.prepareStatement(query);
-    		pstmt.setString(1, competenceName);
-    		pstmt.setInt(2, competenceId);
-    		
-    		pstmt.executeUpdate();
-    	}
-    	catch (SQLException e){
-    		e.printStackTrace();
-    		return false;
-    	}
+    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("testDataBase");
+    	EntityManager em = emf.createEntityManager();
+    	EntityTransaction tx = em.getTransaction();
+    	tx.begin();
+    	Competences c = (Competences) em.createQuery("SELECT c FROM Competences c where c.id =:id")
+    			.setParameter("id", competenceId)
+    			.getSingleResult();
+
+    	c.setName(competenceName);
+    	em.persist(c);
+    	tx.commit();
+    	em.close();
+
     	return true;
     }
     
     //Method to change competence description
     public boolean changeCompetenceDescription(int competenceId, String competenceDescription){
-    	PreparedStatement pstmt = null;
-    	String query = "UPDATE Competences SET description = ? WHERE id = ?";
-    	
-    	try {
-    		pstmt = conn.prepareStatement(query);
-    		pstmt.setString(1, competenceDescription);
-    		pstmt.setInt(2, competenceId);
-    		
-    		pstmt.executeUpdate();
-    	}
-    	catch (SQLException e){
-    		e.printStackTrace();
-    		return false;
-    	}
+    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("testDataBase");
+    	EntityManager em = emf.createEntityManager();
+    	EntityTransaction tx = em.getTransaction();
+    	tx.begin();
+    	Competences c = (Competences) em.createQuery("SELECT c FROM Competences c where c.id =:id")
+    			.setParameter("id", competenceId)
+    			.getSingleResult();
+
+    	c.setDescription(competenceDescription);
+    	em.persist(c);
+    	tx.commit();
+    	em.close();
+
     	return true;
     }
     
@@ -358,23 +351,19 @@ public class DatabaseConnector {
     }
     
     public boolean setAvailable(String date, String userid){  
-    	
-    	String dateString = date.toString();
-    	
-    	PreparedStatement pstmt = null;
-    	String query = "UPDATE Person_available SET available = ?, available_date = ? WHERE user_id LIKE ?";
-    	
-    	try {
-    		pstmt = conn.prepareStatement(query);
-    		pstmt.setInt(1, 1);
-    		pstmt.setString(2, dateString);
-    		pstmt.setString(3, userid);
-    		System.out.println(userid + dateString);
-    		pstmt.executeUpdate();
-    	}
-    	catch(SQLException e){
-    		e.printStackTrace();
-    	}
+    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("testDataBase");
+    	EntityManager em = emf.createEntityManager();
+    	EntityTransaction tx = em.getTransaction();
+    	tx.begin();
+    	Person_available pa = (Person_available) em.createQuery("SELECT p FROM Person_available p where p.user_id LIKE :id")
+    			.setParameter("id", userid)
+    			.getSingleResult();
+
+    	pa.setDateString(date.toString());
+    	em.persist(pa);
+    	tx.commit();
+    	em.close();
+
     	return true;
     }
     
